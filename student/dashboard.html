@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - EduPortal</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/student.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/mock-data.js"></script>
+    <script src="../js/student.js"></script>
+</head>
+<body data-page="dashboard">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <h1 class="dashboard-welcome">Welcome back!</h1>
+                
+                <div class="grid-dashboard">
+                    <!-- Main Area -->
+                    <div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h3 class="card-title">Recent Doubts</h3>
+                                <a href="doubts.html" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-card">
+                                    <div class="list-card-header">
+                                        <div>
+                                            <h4>How do I solve 2x + 5 = 15?</h4>
+                                            <p class="text-muted" style="font-size: 0.85rem;">Mathematics &middot; Algebra</p>
+                                        </div>
+                                        <span class="badge badge-info">Under Review</span>
+                                    </div>
+                                </div>
+                                <div class="list-card">
+                                    <div class="list-card-header">
+                                        <div>
+                                            <h4>Why does velocity change?</h4>
+                                            <p class="text-muted" style="font-size: 0.85rem;">Physics &middot; Kinematics</p>
+                                        </div>
+                                        <span class="badge badge-success">Answered</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Panel -->
+                    <div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h3 class="card-title">Announcements</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-card">
+                                    <h4>Math Unit Test Notice</h4>
+                                    <p class="text-muted" style="font-size: 0.85rem;">Scheduled for next Monday.</p>
+                                </div>
+                                <div class="list-card">
+                                    <h4>New Science Material</h4>
+                                    <p class="text-muted" style="font-size: 0.85rem;">Check digital library for chapter 4.</p>
+                                </div>
+                                <a href="announcements.html" class="btn btn-secondary" style="width: 100%;">All Announcements</a>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Quick Links</h3>
+                            </div>
+                            <div class="card-body" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                <a href="library.html" class="btn btn-secondary" style="justify-content: flex-start;"><i class="ph ph-books"></i> Open Digital Library</a>
+                                <a href="community.html" class="btn btn-secondary" style="justify-content: flex-start;"><i class="ph ph-users"></i> Open Student Community</a>
+                                <a href="ask-doubt.html" class="btn btn-primary" style="justify-content: flex-start;"><i class="ph ph-question"></i> Ask a Doubt</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

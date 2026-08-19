@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Settings - EduPortal</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <link rel="stylesheet" href="../css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/admin-core.js"></script>
+    <script src="../js/admin-layout.js"></script>
+</head>
+<body data-admin-page="settings">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                <div class="mb-4">
+                    <h1>Platform Settings</h1>
+                    <p class="text-muted">Manage your admin profile and system preferences.</p>
+                </div>
+
+                <div class="grid-dashboard">
+                    <div>
+                        <div class="card mb-4">
+                            <div class="card-header"><h3 class="card-title">Admin Profile</h3></div>
+                            <div class="card-body">
+                                <form onsubmit="event.preventDefault(); AdminCore.showToast('Profile updated', 'success');">
+                                    <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-control" value="System Administrator"></div>
+                                    <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-control" value="admin@eduportal.com"></div>
+                                    <button class="btn btn-primary" type="submit">Save Profile</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="card mb-4">
+                            <div class="card-header"><h3 class="card-title">System Preferences</h3></div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">Interface Theme</label>
+                                    <select class="form-control" onchange="if(this.value === 'dark'){ document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); } else { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme', 'light'); }">
+                                        <option value="light">Light Mode</option>
+                                        <option value="dark">Dark Mode</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-check" style="display:flex; align-items:center; gap:0.5rem; cursor:pointer;">
+                                        <input type="checkbox" checked> Receive email alerts for mentor applications
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

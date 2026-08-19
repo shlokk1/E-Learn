@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Community - EduPortal</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <link rel="stylesheet" href="../css/student.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/mock-data.js"></script>
+    <script src="../js/student.js"></script>
+</head>
+<body data-page="community">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <div>
+                        <h1>Student Community</h1>
+                        <p class="text-muted">Discuss topics, ask questions, and help your peers.</p>
+                    </div>
+                    <button class="btn btn-primary"><i class="ph ph-chat-text"></i> Ask Community Question</button>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body" style="padding: 1rem 1.5rem;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <input type="text" class="form-control" placeholder="Search discussions...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        
+                        <a href="discussion.html" class="list-card" style="display: block; text-decoration: none; color: inherit;">
+                            <div class="list-card-header">
+                                <div>
+                                    <h4 style="color: var(--primary-color);">How can I understand quadratic equations easily?</h4>
+                                    <p class="text-muted mt-1" style="font-size: 0.9rem;">I'm struggling with the quadratic formula. Does anyone have a trick to memorize it?</p>
+                                    <div class="mt-2" style="font-size: 0.85rem; color: var(--text-muted);">
+                                        <span style="margin-right: 1rem;"><i class="ph ph-chat-circle"></i> 23 Replies</span>
+                                        <span><i class="ph ph-thumbs-up"></i> 12 Helpful</span>
+                                    </div>
+                                </div>
+                                <span class="badge badge-info">Mathematics</span>
+                            </div>
+                        </a>
+
+                        <a href="#" class="list-card" style="display: block; text-decoration: none; color: inherit;">
+                            <div class="list-card-header">
+                                <div>
+                                    <h4 style="color: var(--primary-color);">Can someone explain Newton's third law?</h4>
+                                    <p class="text-muted mt-1" style="font-size: 0.9rem;">With a real life example if possible!</p>
+                                    <div class="mt-2" style="font-size: 0.85rem; color: var(--text-muted);">
+                                        <span style="margin-right: 1rem;"><i class="ph ph-chat-circle"></i> 14 Replies</span>
+                                        <span><i class="ph ph-thumbs-up"></i> 8 Helpful</span>
+                                    </div>
+                                </div>
+                                <span class="badge badge-success">Science</span>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - EduPortal Admin</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/admin-core.js"></script>
+    <script src="../js/admin-layout.js"></script>
+</head>
+<body data-admin-page="dashboard">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                <div class="mb-4" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h1>System Notifications</h1>
+                        <p class="text-muted">Recent alerts, warnings, and system events.</p>
+                    </div>
+                    <button class="btn btn-secondary" onclick="AdminCore.showToast('All marked as read', 'success')">Mark all as read</button>
+                </div>
+
+                <div class="card">
+                    <div class="card-body" style="padding: 0;">
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="padding: 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; gap: 1rem; background: var(--status-warning-bg);">
+                                <i class="ph ph-file-text" style="color: var(--status-warning); font-size: 1.5rem;"></i>
+                                <div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem;">New mentor application received.</div>
+                                    <div class="text-muted" style="font-size: 0.85rem;">Ravi Patel (History) has applied to become a mentor.</div>
+                                    <div class="text-muted" style="font-size: 0.75rem; margin-top: 0.5rem;">10 minutes ago</div>
+                                </div>
+                            </li>
+                            <li style="padding: 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; gap: 1rem;">
+                                <i class="ph ph-shield-warning" style="color: var(--status-danger); font-size: 1.5rem;"></i>
+                                <div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem;">12 community posts require review.</div>
+                                    <div class="text-muted" style="font-size: 0.85rem;">The automated moderation system has flagged recent activity.</div>
+                                    <div class="text-muted" style="font-size: 0.75rem; margin-top: 0.5rem;">2 hours ago</div>
+                                </div>
+                            </li>
+                            <li style="padding: 1.5rem; display: flex; gap: 1rem;">
+                                <i class="ph ph-books" style="color: var(--primary-color); font-size: 1.5rem;"></i>
+                                <div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem;">New resource uploaded.</div>
+                                    <div class="text-muted" style="font-size: 0.85rem;">"Mathematics NCERT" was added to the digital library.</div>
+                                    <div class="text-muted" style="font-size: 0.75rem; margin-top: 0.5rem;">Yesterday</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

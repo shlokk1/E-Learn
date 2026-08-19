@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students - EduPortal Admin</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <link rel="stylesheet" href="../css/admin-tables.css">
+    <link rel="stylesheet" href="../css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/admin-core.js"></script>
+    <script src="../js/admin-layout.js"></script>
+</head>
+<body data-admin-page="students">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                <div class="mb-4" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h1>Student Management</h1>
+                        <p class="text-muted">Manage all registered students.</p>
+                    </div>
+                    <button class="btn btn-primary"><i class="ph ph-plus"></i> Add Student</button>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header-bar">
+                        <div class="form-group" style="margin: 0;">
+                            <input type="text" class="form-control" placeholder="Search students..." style="width: 250px;">
+                        </div>
+                        <div class="table-filters">
+                            <select class="form-control"><option>Class 9</option><option selected>Class 10</option></select>
+                            <select class="form-control"><option>Div A</option><option>Div B</option></select>
+                            <select class="form-control"><option>Active</option><option>Inactive</option></select>
+                            <button class="btn btn-secondary"><i class="ph ph-funnel"></i> Filter</button>
+                        </div>
+                    </div>
+                    
+                    <table class="admin-table">
+                        <thead><tr><th>Name</th><th>Class</th><th>Division</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Rahul Sharma</strong><br><span class="text-muted" style="font-size:0.85rem">rahul@example.com</span></td>
+                                <td>10</td><td>A</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td><div class="table-actions">
+                                    <a href="student-details.html" class="btn-icon"><i class="ph ph-eye"></i></a>
+                                    <button class="btn-icon"><i class="ph ph-pencil-simple"></i></button>
+                                </div></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Priya Singh</strong><br><span class="text-muted" style="font-size:0.85rem">priya@example.com</span></td>
+                                <td>10</td><td>A</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td><div class="table-actions">
+                                    <a href="student-details.html" class="btn-icon"><i class="ph ph-eye"></i></a>
+                                    <button class="btn-icon"><i class="ph ph-pencil-simple"></i></button>
+                                </div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

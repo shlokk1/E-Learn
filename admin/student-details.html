@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details - EduPortal Admin</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <link rel="stylesheet" href="../css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/admin-core.js"></script>
+    <script src="../js/admin-layout.js"></script>
+</head>
+<body data-admin-page="students">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                <a href="students.html" class="btn btn-secondary mb-4" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;"><i class="ph ph-arrow-left"></i> Back to Students</a>
+                
+                <div class="grid-dashboard">
+                    <div>
+                        <div class="card mb-4">
+                            <div class="card-body" style="display: flex; gap: 2rem; align-items: center;">
+                                <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 600;">R</div>
+                                <div>
+                                    <h1 style="margin-bottom: 0.25rem;">Rahul Sharma</h1>
+                                    <p class="text-muted mb-2">rahul@example.com</p>
+                                    <span class="badge badge-success">Active</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header"><h3 class="card-title">Recent Activity</h3></div>
+                            <div class="card-body">
+                                <p><strong>Submitted Mathematics doubt</strong> - <span class="text-muted">Today</span></p>
+                                <p><strong>Posted community question</strong> - <span class="text-muted">Yesterday</span></p>
+                                <p><strong>Viewed Science textbook</strong> - <span class="text-muted">2 days ago</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="card mb-4">
+                            <div class="card-header"><h3 class="card-title">Academic Info</h3></div>
+                            <div class="card-body">
+                                <p><strong>Class:</strong> 10</p>
+                                <p><strong>Division:</strong> A</p>
+                                <p><strong>Registration Date:</strong> Aug 1, 2026</p>
+                                <hr style="border:none; border-top: 1px solid var(--border-color); margin: 1rem 0;">
+                                <p><strong>Doubts Asked:</strong> 12</p>
+                                <p><strong>Doubts Resolved:</strong> 10</p>
+                                <p><strong>Community Posts:</strong> 18</p>
+                                <p><strong>Warnings:</strong> <span style="color:var(--status-danger); font-weight:bold;">1</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header"><h3 class="card-title">Management Actions</h3></div>
+                            <div class="card-body" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                <button class="btn btn-secondary">Edit Student Profile</button>
+                                <button class="btn btn-secondary">Reset Password</button>
+                                <button class="btn btn-danger" onclick="AdminCore.showModal('deactivateModal')">Deactivate Account</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="deactivateModal">
+        <div class="modal-content">
+            <div class="modal-header"><h3 class="modal-title">Deactivate Student</h3><button class="btn-icon" data-close-modal><i class="ph ph-x"></i></button></div>
+            <div class="modal-body">
+                <p>Are you sure you want to deactivate Rahul Sharma? They will lose access to the portal.</p>
+                <textarea class="form-control mt-2" placeholder="Reason (Optional)"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close-modal>Cancel</button>
+                <button class="btn btn-danger" onclick="AdminCore.closeModal('deactivateModal'); AdminCore.showToast('Student deactivated.');">Confirm</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

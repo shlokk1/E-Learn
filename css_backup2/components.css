@@ -1,0 +1,110 @@
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    border: 1px solid transparent;
+    gap: 0.5rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border-color: var(--border-color);
+    color: var(--text-main);
+}
+
+.btn-secondary:hover {
+    background-color: var(--border-color);
+    text-decoration: none;
+}
+
+.btn-danger {
+    background-color: var(--status-danger);
+    color: #ffffff;
+}
+
+.btn-danger:hover {
+    opacity: 0.9;
+    text-decoration: none;
+}
+
+.btn-icon {
+    padding: 0.5rem;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-icon:hover {
+    background-color: var(--border-color);
+    color: var(--text-main);
+}
+
+/* Cards */
+.card {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition-speed), transform var(--transition-speed);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.card-header {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title {
+    font-size: 1.125rem;
+    margin: 0;
+    color: var(--text-main);
+}
+
+/* Badges */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-info { background-color: var(--status-info-bg); color: var(--status-info); }
+.badge-success { background-color: var(--status-success-bg); color: var(--status-success); }
+.badge-warning { background-color: var(--status-warning-bg); color: var(--status-warning); }
+.badge-danger { background-color: var(--status-danger-bg); color: var(--status-danger); }

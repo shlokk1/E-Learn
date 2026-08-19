@@ -1,0 +1,69 @@
+/* Light Theme Variables */
+:root {
+    /* Brand Colors */
+    --primary-color: #2563eb; /* Blue 600 */
+    --primary-hover: #1d4ed8; /* Blue 700 */
+    
+    /* Surface & Background (Minimal 2/3 Tone off-white/gray instead of pure white) */
+    --bg-color: #f3f4f6; /* Soft minimal gray background */
+    --surface-color: #f9fafb; /* Soft off-white surface instead of pure white */
+    
+    /* Typography */
+    --text-main: #111827; /* Deep charcoal for elegant contrast */
+    --text-muted: #4b5563; /* Medium gray */
+    
+    /* Borders */
+    --border-color: #e5e7eb; /* Soft border */
+
+    /* Semantic Status Colors */
+    --status-info: #3b82f6; /* Blue 500 - Under Review */
+    --status-success: #10b981; /* Emerald 500 - Resolved/Approved */
+    --status-warning: #f59e0b; /* Amber 500 - Progress */
+    --status-danger: #ef4444; /* Red 500 - Rejected/Warning */
+
+    /* Semantic Status Backgrounds (Light) */
+    --status-info-bg: #eff6ff;
+    --status-success-bg: #ecfdf5;
+    --status-warning-bg: #fffbeb;
+    --status-danger-bg: #fef2f2;
+
+    /* Utilities */
+    --border-radius: 8px;
+    --border-radius-sm: 4px;
+    --border-radius-lg: 12px;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    
+    /* Layout */
+    --transition-speed: 0.3s;
+    --sidebar-width: 260px;
+    --header-height: 64px;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+    /* Brand Colors */
+    --primary-color: #3b82f6; /* Lighter blue for better contrast */
+    --primary-hover: #60a5fa; 
+    
+    /* Surface & Background */
+    --bg-color: #0f172a; /* Slate 900 */
+    --surface-color: #1e293b; /* Slate 800 */
+    
+    /* Typography */
+    --text-main: #f8fafc; /* Slate 50 */
+    --text-muted: #94a3b8; /* Slate 400 */
+    
+    /* Borders */
+    --border-color: #334155; /* Slate 700 */
+
+    /* Semantic Status Colors (Same base, different backgrounds) */
+    --status-info-bg: rgba(59, 130, 246, 0.15);
+    --status-success-bg: rgba(16, 185, 129, 0.15);
+    --status-warning-bg: rgba(245, 158, 11, 0.15);
+    --status-danger-bg: rgba(239, 68, 68, 0.15);
+
+    /* Utilities - stronger shadows for dark mode */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor Applications - EduPortal Admin</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <link rel="stylesheet" href="../css/admin-tables.css">
+    <link rel="stylesheet" href="../css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/admin-core.js"></script>
+    <script src="../js/admin-layout.js"></script>
+</head>
+<body data-admin-page="mentor-apps">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                <div class="mb-4">
+                    <h1>Mentor Applications</h1>
+                    <p class="text-muted">Review and approve applications for teacher/mentor access.</p>
+                </div>
+
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead><tr><th>Applicant Name</th><th>Requested Subject</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Ravi Patel</strong><br><span class="text-muted" style="font-size:0.85rem">ravi@example.com</span></td>
+                                <td>History</td><td>Today</td>
+                                <td><span class="badge badge-info">Pending</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-success" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;" onclick="AdminCore.showToast('Application Approved', 'success')">Approve</button>
+                                        <button class="btn btn-danger" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;" onclick="AdminCore.showModal('rejectModal')">Reject</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Neelam Joshi</strong><br><span class="text-muted" style="font-size:0.85rem">neelam@example.com</span></td>
+                                <td>English</td><td>Yesterday</td>
+                                <td><span class="badge badge-success">Approved</span></td>
+                                <td><button class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;">View Profile</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Suresh Menon</strong><br><span class="text-muted" style="font-size:0.85rem">suresh@example.com</span></td>
+                                <td>Physics</td><td>2 days ago</td>
+                                <td><span class="badge badge-danger">Rejected</span></td>
+                                <td><button class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;">View Reason</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Reject Modal -->
+    <div class="modal-overlay" id="rejectModal">
+        <div class="modal-content">
+            <div class="modal-header"><h3 class="modal-title">Reject Application</h3><button class="btn-icon" data-close-modal><i class="ph ph-x"></i></button></div>
+            <div class="modal-body">
+                <p>Provide a reason for rejecting Ravi Patel's mentor application. This will be sent to the applicant.</p>
+                <textarea class="form-control mt-2" placeholder="Rejection reason..." required></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close-modal>Cancel</button>
+                <button class="btn btn-danger" onclick="AdminCore.closeModal('rejectModal'); AdminCore.showToast('Application rejected.', 'error');">Reject</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

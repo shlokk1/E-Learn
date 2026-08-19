@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doubt Management - Admin</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <link rel="stylesheet" href="../css/admin-tables.css">
+    <link rel="stylesheet" href="../css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/admin-core.js"></script>
+    <script src="../js/admin-layout.js"></script>
+</head>
+<body data-admin-page="doubts">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                <div class="mb-4">
+                    <h1>Doubt Management Oversight</h1>
+                    <p class="text-muted">Monitor doubt resolution flow. Assign stuck doubts or review rejected queries.</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem;">
+                    <div class="card" style="padding:1rem; border-left:4px solid var(--status-info)"><div class="text-muted" style="font-size:0.8rem;text-transform:uppercase;font-weight:600">Under Review</div><div style="font-size:1.5rem;font-weight:bold;">24</div></div>
+                    <div class="card" style="padding:1rem; border-left:4px solid var(--status-danger)"><div class="text-muted" style="font-size:0.8rem;text-transform:uppercase;font-weight:600">Unassigned (>24h)</div><div style="font-size:1.5rem;font-weight:bold;color:var(--status-danger)">8</div></div>
+                    <div class="card" style="padding:1rem; border-left:4px solid var(--status-warning)"><div class="text-muted" style="font-size:0.8rem;text-transform:uppercase;font-weight:600">In Progress</div><div style="font-size:1.5rem;font-weight:bold;">15</div></div>
+                    <div class="card" style="padding:1rem; border-left:4px solid var(--status-success)"><div class="text-muted" style="font-size:0.8rem;text-transform:uppercase;font-weight:600">Resolved Today</div><div style="font-size:1.5rem;font-weight:bold;">120</div></div>
+                </div>
+
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead><tr><th>Student</th><th>Subject</th><th>Question Preview</th><th>Status</th><th>Assigned To</th><th>Actions</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td>Rahul Sharma</td><td>Mathematics</td><td>"How do I solve 2x + 5..."</td>
+                                <td><span class="badge badge-info">Under Review</span></td><td>-</td>
+                                <td><button class="btn btn-secondary" style="font-size:0.85rem; padding:0.3rem 0.6rem;">Assign Mentor</button></td>
+                            </tr>
+                            <tr>
+                                <td>Priya Singh</td><td>Science</td><td>"Why does velocity..."</td>
+                                <td><span class="badge badge-danger">Unassigned</span> <br><small class="text-muted">Waiting 48h</small></td><td>-</td>
+                                <td><button class="btn btn-primary" style="font-size:0.85rem; padding:0.3rem 0.6rem;">Escalate</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

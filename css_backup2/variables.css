@@ -1,0 +1,71 @@
+/* Light Theme Variables */
+:root {
+    /* Brand Colors (Sophisticated, Muted Slate) */
+    --primary-color: #475569; /* Slate 600 - Elegant, subtle blue/gray */
+    --primary-hover: #334155; /* Slate 700 */
+    
+    /* Surface & Background (Minimal 2/3 Tone off-white/gray instead of pure white) */
+    --bg-color: #f3f4f6; /* Soft minimal gray background */
+    --surface-color: #f9fafb; /* Soft off-white surface instead of pure white */
+    
+    /* Typography */
+    --text-main: #111827; /* Deep charcoal for elegant contrast */
+    --text-muted: #6b7280; /* Refined medium gray */
+    
+    /* Borders */
+    --border-color: #e5e7eb; /* Soft border */
+
+    /* Semantic Status Colors (Desaturated & Professional) */
+    --status-info: #64748b; /* Slate 500 */
+    --status-success: #059669; /* Emerald 600 */
+    --status-warning: #d97706; /* Amber 600 */
+    --status-danger: #dc2626; /* Red 600 */
+
+    /* Semantic Status Backgrounds (Light, Complementary tints) */
+    --status-info-bg: #f1f5f9;
+    --status-success-bg: #ecfdf5;
+    --status-warning-bg: #fffbeb;
+    --status-danger-bg: #fef2f2;
+
+    /* Utilities (Premium Polish) */
+    --border-radius: 12px;
+    --border-radius-sm: 6px;
+    --border-radius-lg: 16px;
+    --shadow-sm: 0 2px 4px rgba(17, 24, 39, 0.04);
+    --shadow-md: 0 8px 16px rgba(17, 24, 39, 0.06), 0 2px 6px rgba(17, 24, 39, 0.04);
+    --ring-color: rgba(71, 85, 105, 0.15); /* Soft slate ring for focus states */
+    
+    /* Layout */
+    --transition-speed: 0.25s;
+    --sidebar-width: 260px;
+    --header-height: 64px;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+    /* Brand Colors */
+    --primary-color: #94a3b8; /* Slate 400 */
+    --primary-hover: #cbd5e1; /* Slate 300 */ 
+    
+    /* Surface & Background */
+    --bg-color: #0f172a; /* Slate 900 */
+    --surface-color: #1e293b; /* Slate 800 */
+    
+    /* Typography */
+    --text-main: #f8fafc; /* Slate 50 */
+    --text-muted: #94a3b8; /* Slate 400 */
+    
+    /* Borders */
+    --border-color: #334155; /* Slate 700 */
+
+    /* Semantic Status Colors (Same base, different backgrounds) */
+    --status-info-bg: rgba(59, 130, 246, 0.15);
+    --status-success-bg: rgba(16, 185, 129, 0.15);
+    --status-warning-bg: rgba(245, 158, 11, 0.15);
+    --status-danger-bg: rgba(239, 68, 68, 0.15);
+
+    /* Utilities - stronger shadows for dark mode */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3);
+    --ring-color: rgba(148, 163, 184, 0.25);
+}

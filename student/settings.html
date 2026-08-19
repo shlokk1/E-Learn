@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - EduPortal</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <link rel="stylesheet" href="../css/student.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/mock-data.js"></script>
+    <script src="../js/student.js"></script>
+</head>
+<body data-page="settings">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <div class="mb-4">
+                    <h1>Settings</h1>
+                    <p class="text-muted">Manage your preferences and account security.</p>
+                </div>
+
+                <div class="card mb-4" style="max-width: 600px;">
+                    <div class="card-header">
+                        <h3 class="card-title">Preferences</h3>
+                    </div>
+                    <div class="card-body">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <div>
+                                <h4 style="margin-bottom: 0.25rem;">App Theme</h4>
+                                <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0;">Toggle between Light and Dark mode.</p>
+                            </div>
+                            <button class="btn btn-secondary theme-toggle" onclick="toggleTheme()"><i class="ph ph-moon"></i> Toggle Theme</button>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h4 style="margin-bottom: 0.25rem;">Email Notifications</h4>
+                                <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0;">Receive emails when your doubts are answered.</p>
+                            </div>
+                            <label style="display: flex; align-items: center;">
+                                <input type="checkbox" checked style="width: 1.25rem; height: 1.25rem;">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="max-width: 600px;">
+                    <div class="card-header">
+                        <h3 class="card-title">Change Password</h3>
+                    </div>
+                    <div class="card-body">
+                        <form onsubmit="event.preventDefault(); alert('Password updated (Prototype)!');">
+                            <div class="form-group">
+                                <label class="form-label">Current Password</label>
+                                <input type="password" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">New Password</label>
+                                <input type="password" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Confirm New Password</label>
+                                <input type="password" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Password</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>
