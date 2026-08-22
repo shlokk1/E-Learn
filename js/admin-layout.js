@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div style="padding: 1rem 1.5rem 0.5rem; font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase;">System</div>
                 <a href="reports.html" class="nav-item ${page==='reports'?'active':''}"><i class="ph ph-chart-bar"></i> Reports</a>
                 <a href="settings.html" class="nav-item ${page==='settings'?'active':''}"><i class="ph ph-gear"></i> Settings</a>
-                <a href="login.html" class="nav-item mt-4"><i class="ph ph-sign-out"></i> Logout</a>
+                <a href="../login.html" class="nav-item mt-4" onclick="localStorage.removeItem('currentUser')"><i class="ph ph-sign-out"></i> Logout</a>
             </nav>
         `;
     }

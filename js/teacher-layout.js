@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div style="padding: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
                 <a href="profile.html" class="nav-item ${activePage === 'profile' ? 'active' : ''}"><i class="ph ph-user"></i> Profile</a>
                 <a href="settings.html" class="nav-item ${activePage === 'settings' ? 'active' : ''}"><i class="ph ph-gear"></i> Settings</a>
-                <a href="../login.html" class="nav-item"><i class="ph ph-sign-out"></i> Logout</a>
+                <a href="../login.html" class="nav-item" onclick="localStorage.removeItem('currentUser')"><i class="ph ph-sign-out"></i> Logout</a>
             </div>
         `;
     }
