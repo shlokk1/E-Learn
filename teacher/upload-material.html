@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Material - Teacher Portal</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <link rel="stylesheet" href="../css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/teacher-core.js"></script>
+    <script src="../js/teacher-layout.js"></script>
+</head>
+<body data-teacher-page="materials">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <a href="materials.html" class="btn btn-secondary mb-4" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;"><i class="ph ph-arrow-left"></i> Back to Materials</a>
+                
+                <div class="card" style="max-width: 800px;">
+                    <h1 class="card-title mb-4">Upload Class Material</h1>
+                    <form onsubmit="event.preventDefault(); TeacherCore.showToast('Material Published to Digital Library!', 'success'); setTimeout(()=>window.location.href='materials.html', 1500);">
+                        <div class="form-group">
+                            <label class="form-label">Material Title</label>
+                            <input type="text" class="form-control" placeholder="e.g. Algebra Chapter 2 Notes" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Description (Optional)</label>
+                            <textarea class="form-control" placeholder="Brief description of the material..." style="min-height: 80px;"></textarea>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">Class</label>
+                                <select class="form-control" required>
+                                    <option value="">Select Class...</option>
+                                    <option>Class 9</option>
+                                    <option>Class 10</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Division (Optional)</label>
+                                <select class="form-control">
+                                    <option value="">All Divisions</option>
+                                    <option>A</option>
+                                    <option>B</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">Subject</label>
+                                <select class="form-control" required>
+                                    <option value="">Select Subject...</option>
+                                    <option>Mathematics</option>
+                                    <option>Science</option>
+                                    <option>English</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Chapter / Topic</label>
+                                <input type="text" class="form-control" placeholder="e.g. Linear Equations" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Material Type</label>
+                            <select class="form-control" required>
+                                <option value="">Select Type...</option>
+                                <option>PDF</option>
+                                <option>PPT</option>
+                                <option>Video</option>
+                                <option>Notes</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Upload File</label>
+                            <div style="border: 2px dashed var(--border-color); border-radius: var(--border-radius); padding: 2rem; text-align: center; background: var(--bg-color);">
+                                <i class="ph ph-upload-simple text-muted" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                                <div style="font-weight: 500;">Click to upload or drag and drop</div>
+                                <div class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">PDF, PPT, MP4 up to 50MB</div>
+                                <input type="file" style="display: none;" id="file-upload">
+                                <button type="button" class="btn btn-secondary mt-3" onclick="document.getElementById('file-upload').click()">Browse Files</button>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                            <button type="submit" class="btn btn-primary" style="flex: 1;">Publish Material</button>
+                            <button type="button" class="btn btn-secondary" onclick="TeacherCore.showToast('Draft Saved.', 'info')">Save as Draft</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

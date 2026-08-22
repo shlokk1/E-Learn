@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Activity - Teacher Portal</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/teacher-core.js"></script>
+    <script src="../js/teacher-layout.js"></script>
+</head>
+<body data-teacher-page="activity">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <div class="mb-4">
+                    <h1>My Activity</h1>
+                    <p class="text-muted">An overview of your academic contributions and support history.</p>
+                </div>
+
+                <div class="grid-cards mb-4">
+                    <div class="card" style="text-align: center; border-top: 4px solid var(--primary-color);">
+                        <i class="ph ph-magnifying-glass text-muted" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <h3 class="text-muted" style="font-size: 0.85rem; text-transform: uppercase;">Doubts Reviewed</h3>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--text-main);">48</div>
+                    </div>
+                    
+                    <div class="card" style="text-align: center; border-top: 4px solid var(--status-info);">
+                        <i class="ph ph-chat-teardrop-text text-muted" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <h3 class="text-muted" style="font-size: 0.85rem; text-transform: uppercase;">Doubts Answered</h3>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--text-main);">37</div>
+                    </div>
+
+                    <div class="card" style="text-align: center; border-top: 4px solid var(--status-success);">
+                        <i class="ph ph-check-circle text-muted" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <h3 class="text-muted" style="font-size: 0.85rem; text-transform: uppercase;">Doubts Resolved</h3>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--text-main);">31</div>
+                    </div>
+
+                    <div class="card" style="text-align: center; border-top: 4px solid var(--status-warning);">
+                        <i class="ph ph-books text-muted" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <h3 class="text-muted" style="font-size: 0.85rem; text-transform: uppercase;">Resources Uploaded</h3>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--text-main);">12</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title mb-4">Impact Summary</h3>
+                    <p style="color: var(--text-main); line-height: 1.6; max-width: 600px;">
+                        You have successfully supported <strong>28 unique students</strong> across your assigned classes. Your prompt doubt resolution helps maintain a healthy academic environment in the platform. Keep up the great work!
+                    </p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

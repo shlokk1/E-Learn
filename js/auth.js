@@ -34,8 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (role === 'admin') {
                 window.location.href = 'admin/dashboard.html';
             } else if (role === 'mentor') {
-                alert('Teacher/Mentor portal is pending Phase 10 implementation. Redirecting to student view for now.');
-                window.location.href = 'student/dashboard.html';
+                window.location.href = 'teacher/dashboard.html';
             } else {
                 window.location.href = 'student/dashboard.html';
             }

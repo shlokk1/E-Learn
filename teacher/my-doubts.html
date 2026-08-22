@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Doubts - Teacher Portal</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <link rel="stylesheet" href="../css/admin-tables.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/teacher-core.js"></script>
+    <script src="../js/teacher-layout.js"></script>
+</head>
+<body data-teacher-page="my-doubts">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <div class="mb-4">
+                    <h1>My Assigned Doubts</h1>
+                    <p class="text-muted">Manage and answer doubts that have been approved and assigned to you.</p>
+                </div>
+
+                <!-- Tabs -->
+                <div style="display: flex; gap: 1rem; border-bottom: 1px solid var(--border-color); margin-bottom: 1.5rem; padding-bottom: 0.5rem;">
+                    <a href="#" style="font-weight: 600; color: var(--primary-color); border-bottom: 2px solid var(--primary-color); padding-bottom: 0.5rem; text-decoration: none;">Needs Answer (7)</a>
+                    <a href="#" style="font-weight: 500; color: var(--text-muted); text-decoration: none;">In Progress (5)</a>
+                    <a href="#" style="font-weight: 500; color: var(--text-muted); text-decoration: none;">Resolved</a>
+                </div>
+
+                <div class="table-container card" style="padding: 0;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Subject</th>
+                                <th>Topic</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><div style="font-weight: 500;">Student A</div><div class="text-muted" style="font-size: 0.8rem;">Class 10-A</div></td>
+                                <td>Mathematics</td>
+                                <td>Algebra: 2x + 5 = 15</td>
+                                <td><span class="badge badge-info">Approved</span></td>
+                                <td><a href="answer-doubt.html" class="btn btn-primary" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">Answer</a></td>
+                            </tr>
+                            <tr>
+                                <td><div style="font-weight: 500;">Student D</div><div class="text-muted" style="font-size: 0.8rem;">Class 10-B</div></td>
+                                <td>Science</td>
+                                <td>Chemical Reactions</td>
+                                <td><span class="badge badge-info">Approved</span></td>
+                                <td><a href="#" class="btn btn-primary" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">Answer</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
