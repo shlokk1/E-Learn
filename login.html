@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - EduPortal</title>
+    <title>Login / Sign Up - EduPortal</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +26,7 @@
 </head>
 <body>
 
-    <div class="auth-page">
+    <div class="auth-page" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: var(--bg-color);">
         <!-- Theme Toggle -->
         <div class="auth-theme-toggle">
             <button class="btn-icon theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
@@ -34,51 +34,84 @@
             </button>
         </div>
 
-        <div class="auth-card">
-            <div class="auth-header">
-                <a href="index.html" class="auth-brand">
-                    <i class="ph ph-book-open"></i>
-                    <span>EduPortal</span>
-                </a>
-                <h1 class="auth-title">Welcome Back</h1>
-                <p class="auth-subtitle">Log in to access your educational resources.</p>
-            </div>
-
-            <form id="loginForm">
-                <div class="form-group">
-                    <label class="form-label" for="role">Login As</label>
-                    <select id="role" class="form-control" required>
+        <div class="slider-container" id="slider-container">
+            <div class="form-container sign-up-container">
+                <form id="registerForm">
+                    <h1>Create Account</h1>
+                    <div class="social-container">
+                        <a href="#" class="social"><i class="ph ph-google-logo"></i></a>
+                        <a href="#" class="social"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="#" class="social"><i class="ph ph-github-logo"></i></a>
+                        <a href="#" class="social"><i class="ph ph-linkedin-logo"></i></a>
+                    </div>
+                    <span>or use your email for registration</span>
+                    <input type="text" id="regName" class="form-control" placeholder="Name" required />
+                    <input type="email" id="regEmail" class="form-control" placeholder="Email" required />
+                    <input type="password" id="regPassword" class="form-control" placeholder="Password" required />
+                    <select id="regRole" class="form-control" style="margin-bottom: 15px;" required>
                         <option value="student">Student</option>
                         <option value="mentor">Teacher / Mentor</option>
                         <option value="admin">Administrator</option>
                     </select>
+                    <!-- Hidden fields for compatibility with auth.js -->
+                    <input type="hidden" id="regClass" value="10">
+                    <input type="hidden" id="regDiv" value="A">
+                    
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+            
+            <div class="form-container sign-in-container">
+                <form id="loginForm">
+                    <h1>Sign In</h1>
+                    <div class="social-container">
+                        <a href="#" class="social"><i class="ph ph-google-logo"></i></a>
+                        <a href="#" class="social"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="#" class="social"><i class="ph ph-github-logo"></i></a>
+                        <a href="#" class="social"><i class="ph ph-linkedin-logo"></i></a>
+                    </div>
+                    <span>or use your email password</span>
+                    <input type="email" id="email" class="form-control" placeholder="Email" required />
+                    <input type="password" id="password" class="form-control" placeholder="Password" required />
+                    <select id="role" class="form-control" style="margin-bottom: 10px;" required>
+                        <option value="student">Student</option>
+                        <option value="mentor">Teacher / Mentor</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                    <a href="#">Forget Your Password?</a>
+                    <button type="submit">Sign In</button>
+                </form>
+            </div>
+            
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>Welcome Back!</h1>
+                        <p>To keep connected with us please login with your personal info</p>
+                        <button class="ghost" id="signIn">Sign In</button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>Hello, Friend!</h1>
+                        <p>Register with your personal details to use all of site features</p>
+                        <button class="ghost" id="signUp">Sign Up</button>
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="email">Email Address</label>
-                    <input type="email" id="email" class="form-control" placeholder="student@example.com" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="password">Password</label>
-                    <input type="password" id="password" class="form-control" placeholder="••••••••" required>
-                </div>
-
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                    <label class="remember-me">
-                        <input type="checkbox"> Remember me
-                    </label>
-                    <a href="#" class="forgot-password" style="margin-bottom: 0;">Forgot Password?</a>
-                </div>
-
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
-            </form>
-
-            <div class="auth-footer">
-                Don't have an account? <a href="register.html">Sign Up</a>
             </div>
         </div>
     </div>
 
+    <script>
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const container = document.getElementById('slider-container');
+
+        signUpButton.addEventListener('click', () => {
+            container.classList.add("right-panel-active");
+        });
+
+        signInButton.addEventListener('click', () => {
+            container.classList.remove("right-panel-active");
+        });
+    </script>
 </body>
 </html>
