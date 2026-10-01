@@ -278,28 +278,61 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .slider-container {
-        min-height: 700px;
+        min-height: 800px;
         flex-direction: column;
+    }
+    .slider-container form {
+        padding: 0 25px;
+        justify-content: flex-start;
+        padding-top: 25px;
+        padding-bottom: 25px;
     }
     .form-container {
         width: 100%;
         height: 50%;
+        overflow-y: auto;
+    }
+    /* Compact social icons to save vertical space */
+    .social-container {
+        margin: 10px 0;
+    }
+    .social-container a {
+        height: 38px;
+        width: 38px;
+        font-size: 1.1rem;
+    }
+    .slider-container h1 {
+        font-size: 1.5rem;
+    }
+    .slider-container p {
+        margin: 10px 0 20px;
     }
     .sign-in-container {
-        top: 0;
+        top: 50%;
+        left: 0;
+        transform: translateX(0) translateY(0);
+    }
+    .slider-container.right-panel-active .sign-in-container {
+        transform: translateY(100%) translateX(0);
     }
     .sign-up-container {
-        top: 0;
+        top: 50%;
+        left: 0;
+        transform: translateX(0) translateY(100%);
+    }
+    .slider-container.right-panel-active .sign-up-container {
+        transform: translateY(0) translateX(0);
     }
     .overlay-container {
-        top: 50%;
+        top: 0;
         left: 0;
         width: 100%;
         height: 50%;
-        border-radius: 120px 120px 0 0;
+        border-radius: 0 0 120px 120px;
+        transform: translateX(0) translateY(0);
     }
     .slider-container.right-panel-active .overlay-container {
-        transform: translateY(-100%);
+        transform: translateY(0) translateX(0);
         border-radius: 0 0 120px 120px;
     }
     .overlay {
@@ -307,28 +340,30 @@
         top: -100%;
         height: 200%;
         width: 100%;
+        transform: translateY(0) translateX(0);
     }
     .slider-container.right-panel-active .overlay {
-        transform: translateY(50%);
-        translateX: 0;
+        transform: translateY(50%) translateX(0);
     }
     .overlay-panel {
         width: 100%;
         height: 50%;
         padding: 0 20px;
+        transform: translateX(0);
     }
     .overlay-right {
         top: 50%;
-        transform: translateY(0);
+        transform: translateY(0) translateX(0);
     }
     .slider-container.right-panel-active .overlay-right {
-        transform: translateY(20%);
+        transform: translateY(20%) translateX(0);
     }
     .overlay-left {
-        transform: translateY(-20%);
+        top: 0;
+        transform: translateY(-20%) translateX(0);
     }
     .slider-container.right-panel-active .overlay-left {
-        transform: translateY(0);
+        transform: translateY(0) translateX(0);
     }
 }
 

@@ -123,6 +123,41 @@
                             </div>
                         </div>
 
+                        <!-- Upcoming 1:1 Sessions -->
+                        <div class="card mb-4" id="dashboard-teacher-upcoming">
+                            <h3 class="card-title" style="margin-bottom: 1rem;">Upcoming 1:1 Sessions</h3>
+                            <div id="teacher-upcoming-content">
+                                <script>
+                                    function renderTeacherDashboardUpcoming() {
+                                        const sessions = MOCK_DATA.getSessions();
+                                        const upcoming = sessions.filter(s => (s.status === 'Booked' || s.status === 'Upcoming'));
+                                        const container = document.getElementById('teacher-upcoming-content');
+                                        if(upcoming.length > 0) {
+                                            const next = upcoming[0];
+                                            container.innerHTML = `
+                                                <p style="margin: 0 0 1rem 0; font-weight: 500;">Today's Sessions: ${upcoming.length}</p>
+                                                <div style="background: var(--bg-color); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+                                                    <div style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.5rem;">Next Session</div>
+                                                    <div style="font-weight: 600;">${next.startTime} - ${next.endTime}</div>
+                                                    <div style="font-size: 0.9rem;">${next.studentName || 'Student'} &middot; ${next.subject}</div>
+                                                </div>
+                                                <a href="sessions.html" class="btn btn-primary w-100" style="justify-content: center;">View Sessions</a>
+                                            `;
+                                        } else {
+                                            container.innerHTML = '<p class="text-muted" style="font-size: 0.9rem;">No upcoming sessions.</p><a href="sessions.html" class="btn btn-secondary w-100" style="justify-content: center; margin-top:1rem;">Manage Availability</a>';
+                                        }
+                                    }
+                                    document.addEventListener('DOMContentLoaded', renderTeacherDashboardUpcoming);
+                                    window.addEventListener('storage', function(e) {
+                                        if (e.key === 'mockSessions') {
+                                            renderTeacherDashboardUpcoming();
+                                        }
+                                    });
+                                    window.addEventListener('storage-local', renderTeacherDashboardUpcoming);
+                                </script>
+                            </div>
+                        </div>
+
                         <!-- Quick Actions -->
                         <div class="card">
                             <h3 class="card-title" style="margin-bottom: 1rem;">Quick Actions</h3>

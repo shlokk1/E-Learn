@@ -1,0 +1,2577 @@
+============================================================
+PROJECT: RURAL E-LEARNING & DOUBT RESOLUTION PORTAL
+============================================================
+
+You are working as the UI/UX architect and frontend development
+assistant for our academic project:
+
+"Rural E-Learning & Doubt Resolution Portal"
+
+This is a Community Engagement Project for an educational
+institution.
+
+IMPORTANT:
+At this stage, we are designing and developing ONLY the
+FRONTEND PROTOTYPE.
+
+Do NOT implement any backend.
+
+Do NOT implement Spring Boot.
+
+Do NOT implement JPA/Hibernate.
+
+Do NOT implement MySQL.
+
+Do NOT create REST APIs yet.
+
+The backend will be developed later, AFTER the frontend
+prototype has been completely finalized and approved.
+
+For now, the application should work using frontend dummy/static
+data and JavaScript interactions.
+
+
+============================================================
+1. VERY IMPORTANT WORKFLOW INSTRUCTION
+============================================================
+
+DO NOT START CODING IMMEDIATELY.
+
+First:
+
+1. Read this entire specification.
+2. Understand the project.
+3. Analyze the requirements.
+4. Identify the complete frontend architecture.
+5. Identify the screens required.
+6. Identify reusable components.
+7. Identify the navigation structure.
+8. Identify the student workflow.
+9. Identify the doubt-resolution workflow.
+10. Identify the community/moderation workflow.
+11. Identify the announcement/notification workflow.
+12. Propose the folder structure.
+13. Propose the implementation order.
+14. Identify any conflicts, missing decisions, or ambiguities.
+
+Then present the proposed plan to me.
+
+STOP.
+
+DO NOT CREATE OR MODIFY THE APPLICATION YET.
+
+Wait for my explicit instruction:
+
+"START WORKING"
+
+Only after I say "START WORKING" should you begin
+implementing the frontend.
+
+If I say:
+
+"START WORKING ON PHASE 1"
+
+then only work on Phase 1.
+
+Do not automatically implement later phases.
+
+We want to build the project ITERATIVELY.
+
+
+============================================================
+2. TECHNOLOGY — FRONTEND ONLY
+============================================================
+
+The frontend should primarily use:
+
+- HTML5
+- CSS3
+- Vanilla JavaScript
+
+Tailwind CSS MAY be used if it genuinely improves the
+development process.
+
+However:
+
+DO NOT use React.
+
+DO NOT use Next.js.
+
+DO NOT use Vue.
+
+DO NOT use Angular.
+
+DO NOT introduce a frontend framework unnecessarily.
+
+We want the code to remain understandable to students
+working on an academic project.
+
+The final code should be easy to explain during:
+
+- Project presentation
+- Viva
+- Faculty review
+- Demonstration
+
+
+============================================================
+3. CORE DESIGN PHILOSOPHY
+============================================================
+
+This is an EDUCATIONAL PLATFORM.
+
+It is NOT:
+
+- A gaming website
+- A social-media-heavy website
+- A flashy startup landing page
+- A cryptocurrency dashboard
+- A high-end marketing website
+
+The visual design must communicate:
+
+- Education
+- Trust
+- Simplicity
+- Accessibility
+- Professionalism
+- Community
+- Reliability
+
+
+============================================================
+4. UI STYLE — VERY IMPORTANT
+============================================================
+
+Use a SIMPLE, INDUSTRY-STANDARD interface.
+
+The CSS must NOT be unnecessarily complicated.
+
+Avoid excessive:
+
+- Gradients
+- Neon colors
+- Glassmorphism
+- Huge shadows
+- Decorative animations
+- Excessive rounded cards
+- Floating elements everywhere
+- Complex visual effects
+- Overly colorful backgrounds
+
+Do NOT make the application look like a gaming platform.
+
+Do NOT use high-fidelity gradient-heavy UI merely to make it
+look "modern."
+
+Instead prefer:
+
+- Solid colors
+- White/light surfaces
+- Neutral gray backgrounds
+- One primary brand color
+- Semantic colors for statuses
+- Simple borders
+- Subtle shadows
+- Moderate border radius
+- Consistent spacing
+- Clear typography
+- Strong visual hierarchy
+
+
+============================================================
+5. DESIGN REFERENCE
+============================================================
+
+There are two visual references provided with this project.
+
+REFERENCE 1:
+A student dashboard showing:
+
+- Left sidebar
+- Dashboard navigation
+- Header/search
+- Student profile
+- Information cards
+- Main content area
+- Recent activity
+- Right-side information
+- Progress information
+
+Use this as a REFERENCE FOR STRUCTURE AND INFORMATION
+ORGANIZATION.
+
+Do NOT blindly copy the exact colors or content.
+
+REFERENCE 2:
+A landing page with:
+
+- Clean navbar
+- Large educational hero
+- Simple typography
+- Login/Sign Up actions
+
+Use this as a general reference for the landing page,
+but make the final design more practical, educational and
+institutional.
+
+The two references should be combined into a consistent
+design system.
+
+The dashboard should feel like a real educational portal,
+not a marketing website.
+
+
+============================================================
+6. LIGHT MODE + DARK MODE
+============================================================
+
+The application MUST support:
+
+LIGHT MODE
+DARK MODE
+
+This should be designed into the application from the
+beginning.
+
+Do NOT implement dark mode as an afterthought.
+
+Use CSS variables/design tokens so the theme can switch
+cleanly.
+
+For example conceptually:
+
+Light:
+
+--primary
+--background
+--surface
+--text
+--muted-text
+--border
+--success
+--warning
+--danger
+
+Dark:
+
+The same variables should receive dark-compatible values.
+
+The theme toggle should be available in an appropriate
+location, preferably the global header or settings.
+
+Use JavaScript localStorage so the user's selected theme
+can persist after page refresh.
+
+Respect the user's system theme if appropriate on first visit.
+
+The dark theme must remain accessible and readable.
+
+Do not simply invert colors.
+
+
+============================================================
+7. RESPONSIVE DESIGN
+============================================================
+
+The application must be responsive.
+
+It should work on:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+The sidebar should collapse appropriately on smaller screens.
+
+Cards should stack naturally.
+
+Tables/lists should remain usable on mobile.
+
+Forms should be mobile-friendly.
+
+Do not design only for a 1920px desktop screen.
+
+
+============================================================
+8. ACCESSIBILITY
+============================================================
+
+Use reasonable accessibility practices.
+
+Examples:
+
+- Semantic HTML
+- Proper labels for form fields
+- Keyboard-accessible buttons
+- Visible focus states
+- Sufficient color contrast
+- Meaningful button labels
+- Alt text for meaningful images
+- Do not rely only on color to communicate status
+
+The platform is intended for students, so usability is
+more important than visual complexity.
+
+
+============================================================
+9. PROJECT PURPOSE
+============================================================
+
+The main purpose of this portal is:
+
+1. Help students access official educational materials.
+2. Allow students to raise academic doubts.
+3. Ensure doubts are reviewed before mentors answer them.
+4. Allow teachers/mentors to approve or reject doubts.
+5. Allow mentors to answer approved doubts.
+6. Allow students to continue the discussion.
+7. Provide a digital library containing textbooks and guide books.
+8. Provide a student community for peer-to-peer learning.
+9. Monitor community conversations for inappropriate language.
+10. Allow teachers to take action when necessary.
+11. Provide announcements and notifications.
+12. Help students stay connected with educational content.
+
+
+============================================================
+10. IMPORTANT PRODUCT DIRECTION
+============================================================
+
+This is NOT primarily a "course enrollment" platform.
+
+The platform's PRIMARY PURPOSE is:
+
+DOUBT RESOLUTION
++
+DIGITAL LIBRARY
++
+STUDENT COMMUNITY
+
+Learning materials support these features.
+
+Therefore, do NOT make the dashboard dominated by:
+
+- Course enrollment statistics
+- Course completion percentages
+- "Continue Learning"
+- Course marketing cards
+
+Those should NOT be the primary focus.
+
+The application is centered around students studying their
+regular school material and getting help when they have doubts.
+
+
+============================================================
+11. STUDENT CLASS STRUCTURE
+============================================================
+
+Students do NOT enroll in courses.
+
+Instead, a student belongs to:
+
+CLASS + DIVISION
+
+For example:
+
+Class 10
+Division A
+
+The frontend should reflect this.
+
+Do NOT use:
+
+"3 Courses Enrolled"
+
+as a primary student dashboard statistic.
+
+Instead the student's class/division can appear in the profile/header:
+
+Class 10 - Division A
+
+Materials and content should be relevant to the student's
+class and division.
+
+
+============================================================
+12. PRIMARY USER ROLES
+============================================================
+
+There are three roles in the overall application:
+
+1. STUDENT
+2. TEACHER / MENTOR
+3. ADMIN
+
+At the current stage, the MAIN FOCUS is:
+
+STUDENT FRONTEND
+
+The teacher and admin interfaces can be planned, but the
+student experience should be developed first.
+
+
+============================================================
+13. STUDENT MODULE — COMPLETE FEATURE SET
+============================================================
+
+The Student module contains:
+
+A. Account
+   - Registration
+   - Login
+   - Profile
+   - Settings
+
+B. Dashboard
+   - Student information
+   - Class + Division
+   - Recent doubts
+   - Doubt status
+   - Digital library shortcuts
+   - Community activity
+   - Announcements
+   - Notifications
+
+C. Doubt Resolution
+   - Ask a Doubt
+   - Doubt Review
+   - My Doubts
+   - Approved doubts
+   - Rejected doubts
+   - Rejection reason
+   - Mentor response
+   - Follow-up discussion
+   - Resolve doubt
+
+D. Digital Library
+   - Textbooks
+   - Guide/Answer Books
+   - Teacher-uploaded materials
+   - Notes
+   - PPTs
+   - PDFs
+   - Practice material
+   - Search
+   - Filters
+   - Resource viewer
+
+E. Student Community
+   - Community home
+   - Ask community question
+   - Reply
+   - Search
+   - Helpful/upvote
+   - Moderation notifications
+
+F. Communication
+   - Announcements
+   - Notifications
+   - Teacher warnings
+
+G. Basic Progress / Activity
+   - Doubts asked
+   - Doubts resolved
+   - Community activity
+   - Material access/activity
+
+
+============================================================
+14. STUDENT DASHBOARD
+============================================================
+
+The dashboard is the student's main home screen.
+
+It should be clean and information-focused.
+
+Suggested structure:
+
+------------------------------------------------------------
+HEADER
+------------------------------------------------------------
+
+Logo / Portal Name
+
+Search
+
+Theme Toggle
+
+Notifications
+
+Student Profile
+
+------------------------------------------------------------
+LEFT SIDEBAR
+------------------------------------------------------------
+
+Dashboard
+
+My Doubts
+
+Digital Library
+
+Student Community
+
+Announcements
+
+Notifications
+
+My Activity / Progress
+
+Profile
+
+Settings
+
+Logout
+
+
+------------------------------------------------------------
+MAIN CONTENT
+------------------------------------------------------------
+
+Welcome message.
+
+Example:
+
+"Welcome back!"
+
+Do NOT use a fixed demo name such as "Anjali."
+
+The UI should be generic enough for any logged-in student.
+
+Show:
+
+Class 10 · Division A
+
+
+------------------------------------------------------------
+SUMMARY CARDS
+------------------------------------------------------------
+
+Useful statistics could include:
+
+My Doubts
+Pending Doubts
+Resolved Doubts
+Community Contributions
+
+
+Do NOT make course enrollment the main statistic.
+
+
+------------------------------------------------------------
+MAIN CONTENT GRID
+------------------------------------------------------------
+
+LEFT / MAIN AREA:
+
+Recent Doubts
+
+Example:
+
+How do I solve this algebra problem?
+Mathematics
+Status: Under Review
+
+
+Why does velocity change?
+Physics
+Status: Answered
+
+
+RIGHT SIDE:
+
+Announcements
+
+Example:
+
+Mathematics Unit Test Notice
+
+New Science Study Material
+
+Important School Notice
+
+
+------------------------------------------------------------
+SECOND ROW
+------------------------------------------------------------
+
+LEFT:
+
+Digital Library
+
+- Textbooks
+- Guide Books
+- Class Notes
+- Presentations
+
+Button:
+"Open Digital Library"
+
+
+RIGHT:
+
+Student Community
+
+- Recent discussions
+- Questions
+- Replies
+
+Button:
+"Open Community"
+
+
+------------------------------------------------------------
+IMPORTANT:
+------------------------------------------------------------
+
+Do NOT make the dashboard look like a course marketplace.
+
+The student should immediately understand:
+
+"I can ask my doubt here."
+
+"I can find my textbooks here."
+
+"I can communicate with other students here."
+
+"I can see important announcements here."
+
+
+============================================================
+15. STUDENT SIDEBAR
+============================================================
+
+Use a persistent left sidebar on desktop.
+
+Suggested navigation:
+
+Dashboard
+
+My Doubts
+
+Digital Library
+
+Student Community
+
+Announcements
+
+Notifications
+
+My Activity
+
+Profile
+
+Settings
+
+Logout
+
+
+The sidebar should be visually simple.
+
+Avoid unnecessary icons everywhere.
+
+Icons may be used where they genuinely improve recognition.
+
+The sidebar should support dark mode.
+
+
+============================================================
+16. DOUBT RESOLUTION — CORE FEATURE
+============================================================
+
+This is one of the MOST IMPORTANT parts of the project.
+
+Students should be allowed to ask any doubt.
+
+The doubt could be:
+
+- Academic
+- Relevant
+- Irrelevant
+- Bogus
+- Incomplete
+- Inappropriate
+
+Therefore, a doubt should NOT immediately reach a teacher/mentor
+for answering.
+
+There must be a REVIEW CHECKPOINT.
+
+
+============================================================
+17. DOUBT WORKFLOW
+============================================================
+
+The correct workflow is:
+
+STUDENT
+   ↓
+Submit Doubt
+   ↓
+PENDING / UNDER REVIEW
+   ↓
+Teacher/Mentor Reviews
+   ↓
+     ┌───────────────────┐
+     │                   │
+     ↓                   ↓
+  APPROVE              REJECT
+     │                   │
+     ↓                   ↓
+Mentor Answers       Rejection Reason
+     │                   │
+     ↓                   ↓
+Follow-up             Student Notification
+     │
+     ↓
+RESOLVED
+
+
+The frontend must visually represent this lifecycle.
+
+
+============================================================
+18. ASK A DOUBT PAGE
+============================================================
+
+Create a clear form.
+
+Fields:
+
+Subject
+
+Topic
+
+Question Title
+
+Detailed Question
+
+Optional Attachment
+
+Optional Reference:
+- Textbook
+- Chapter
+- Page number
+
+
+Example:
+
+Subject:
+Mathematics
+
+Topic:
+Algebra
+
+Question:
+How do I solve 2x + 5 = 15?
+
+Description:
+I don't understand why we subtract 5 first.
+
+
+Button:
+
+[ Submit Doubt ]
+
+
+After submission:
+
+Show confirmation.
+
+Example:
+
+"Doubt submitted successfully."
+
+Status:
+
+"Under Review"
+
+
+============================================================
+19. MY DOUBTS PAGE
+============================================================
+
+Students should see all doubts they have submitted.
+
+Each doubt should show:
+
+- Title
+- Subject
+- Date
+- Status
+- Last updated
+- Mentor/teacher if assigned
+
+
+Statuses:
+
+UNDER REVIEW
+
+APPROVED
+
+REJECTED
+
+IN PROGRESS
+
+ANSWERED
+
+RESOLVED
+
+
+Use semantic status indicators.
+
+For example:
+
+Blue = Under Review
+
+Green = Resolved
+
+Yellow = Waiting / In Progress
+
+Red = Rejected
+
+Do not rely only on color.
+Also include text labels.
+
+
+============================================================
+20. REJECTED DOUBTS
+============================================================
+
+If a teacher/mentor rejects a doubt, the student must see:
+
+Status:
+Rejected
+
+Reason:
+
+"This question is outside the academic scope
+of the platform."
+
+The student should not simply see:
+
+"Rejected"
+
+without explanation.
+
+
+============================================================
+21. DOUBT DETAILS / DISCUSSION
+============================================================
+
+Approved doubts can be opened.
+
+The page should show:
+
+Question
+
+Student's description
+
+Attachments
+
+Teacher/Mentor status
+
+Conversation
+
+
+Example:
+
+STUDENT:
+
+"I don't understand how to isolate x."
+
+
+MENTOR:
+
+"First subtract 5 from both sides..."
+
+
+STUDENT:
+
+"Why do we subtract 5?"
+
+
+MENTOR:
+
+"Because we want to isolate the term containing x."
+
+
+The student can:
+
+- Reply
+- Attach image
+- Continue discussion
+- Mark as resolved
+
+
+============================================================
+22. DIGITAL LIBRARY
+============================================================
+
+This is a MAJOR module.
+
+The digital library contains official educational materials.
+
+
+Types of material:
+
+1. Textbooks
+2. Guide / Answer Books
+3. Teacher Notes
+4. PDFs
+5. PPTs
+6. Worksheets
+7. Practice Papers
+8. Question Papers
+9. Videos
+10. Other educational resources
+
+
+The teacher/admin will eventually upload these materials.
+
+For now, use dummy frontend content.
+
+
+============================================================
+23. DIGITAL LIBRARY ORGANIZATION
+============================================================
+
+The library should be organized by:
+
+Class
+
+Division if required
+
+Subject
+
+Chapter
+
+Material Type
+
+
+Example:
+
+Class 10
+Division A
+
+Mathematics
+
+    Chapter 1
+       Textbook
+       Guide
+       Notes
+       PPT
+       Practice Questions
+
+    Chapter 2
+       Textbook
+       Guide
+       Notes
+
+
+Students should have:
+
+Search
+
+Filter
+
+Sort
+
+
+Possible filters:
+
+Subject
+
+Material Type
+
+Chapter
+
+Recently Added
+
+
+============================================================
+24. RESOURCE VIEWER
+============================================================
+
+Do not create a separate "Course/Lesson" system.
+
+Instead, clicking a library resource can open a resource viewer.
+
+For example:
+
+--------------------------------------------------
+Mathematics — Chapter 2
+Textbook
+--------------------------------------------------
+
+[ PDF VIEWER PLACEHOLDER ]
+
+Page controls
+
+Zoom
+
+Download
+
+
+For PPT:
+
+Show presentation information and slides placeholder.
+
+For video:
+
+Show video player placeholder.
+
+The exact file rendering can be implemented later.
+
+
+============================================================
+25. NO SEPARATE COURSE / LESSON PAGE
+============================================================
+
+Do NOT create a traditional:
+
+Course
+→ Course Details
+→ Lesson
+
+structure.
+
+This project does not primarily revolve around course enrollment.
+
+Information such as:
+
+- Subject
+- Chapter
+- Topic
+- Lesson title
+- Video
+- Description
+- Study material
+- PDF
+- Practice questions
+
+can be presented inside the student's class-material/resource
+experience.
+
+Keep the user flow simple.
+
+
+============================================================
+26. STUDENT COMMUNITY
+============================================================
+
+Create a separate Student Community section.
+
+Purpose:
+
+Students can help each other academically.
+
+
+Community is different from Doubt Tickets.
+
+DOUBT TICKET:
+
+Student → Teacher/Mentor
+
+COMMUNITY:
+
+Student ↔ Student
+Student ↔ Mentor
+
+
+The community can contain:
+
+- Questions
+- Discussions
+- Answers
+- Replies
+- Helpful votes
+
+
+============================================================
+27. COMMUNITY HOME
+============================================================
+
+Example:
+
+Student Community
+
+Search discussions...
+
+Categories:
+
+Mathematics
+Science
+English
+General
+
+
+Discussion:
+
+"How can I understand quadratic equations?"
+
+23 replies
+
+👍 12 Helpful
+
+
+Another:
+
+"Can someone explain Newton's third law?"
+
+14 replies
+
+👍 8 Helpful
+
+
+Buttons:
+
+[Ask Community Question]
+
+
+============================================================
+28. COMMUNITY MODERATION
+============================================================
+
+The platform will have a chatbot/moderation system that
+monitors community conversations.
+
+The chatbot's purpose is to detect potentially inappropriate
+content such as:
+
+- Foul language
+- Abusive language
+- Harassment
+- Offensive content
+- Spam
+
+
+IMPORTANT:
+
+The chatbot should NOT automatically punish students.
+
+The workflow should be:
+
+Student posts
+    ↓
+Moderation check
+    ↓
+Potential violation?
+    ↓
+Teacher review
+    ↓
+Teacher decision
+    ↓
+Warning if necessary
+
+
+The teacher has final authority.
+
+
+============================================================
+29. TEACHER WARNING SYSTEM
+============================================================
+
+If a teacher determines that a student violated community
+guidelines, the teacher can issue a warning.
+
+The student should receive this through the Notification Center.
+
+
+Example:
+
+--------------------------------------------------
+⚠ Warning from Teacher
+
+Your recent community post was found to contain
+inappropriate language.
+
+Please follow the community guidelines.
+
+Issued by:
+Teacher
+
+Date:
+Today
+--------------------------------------------------
+
+
+The student should be able to view previous warnings.
+
+
+============================================================
+30. ANNOUNCEMENT CENTER
+============================================================
+
+Teachers and admins can publish announcements.
+
+Examples:
+
+- Exam notices
+- Assignment notices
+- School notices
+- Class updates
+- New study material
+- Holiday announcements
+- Important academic information
+
+
+Students should have:
+
+Announcements page
+
+
+Each announcement can contain:
+
+Title
+
+Description
+
+Author
+
+Date
+
+Category
+
+Attachment if necessary
+
+
+============================================================
+31. NOTIFICATION CENTER
+============================================================
+
+Create a separate Notification Center.
+
+Notifications may include:
+
+1. Mentor answered your doubt
+2. Your doubt was approved
+3. Your doubt was rejected
+4. Your doubt was resolved
+5. New library material
+6. New announcement
+7. Teacher warning
+8. Community activity
+
+
+Example:
+
+🔔 Mentor replied to your doubt.
+
+📚 New Mathematics textbook uploaded.
+
+📢 New announcement from teacher.
+
+⚠ Warning issued by teacher.
+
+
+Use unread/read states.
+
+
+============================================================
+32. RIGHT-SIDE INFORMATION DESIGN
+============================================================
+
+Do NOT place every feature into a huge horizontal navigation bar.
+
+The application should primarily use:
+
+LEFT SIDEBAR
++
+MAIN CONTENT
++
+RIGHT-SIDE INFORMATION PANELS
+
+
+Example:
+
+┌──────────────┬─────────────────────────────┬─────────────────┐
+│              │                             │                 │
+│   Sidebar    │        Main Content         │  Right Panel    │
+│              │                             │                 │
+│ Dashboard    │ Recent Doubts              │ Announcements   │
+│ My Doubts    │                             │                 │
+│ Library      │ Digital Library             │ Notifications   │
+│ Community    │                             │                 │
+│ Announcements│ Student Community           │ Quick Links     │
+│ Notifications│                             │                 │
+│ Activity     │                             │                 │
+│ Profile      │                             │                 │
+│ Settings     │                             │                 │
+│ Logout       │                             │                 │
+│              │                             │                 │
+└──────────────┴─────────────────────────────┴─────────────────┘
+
+
+The right side should contain contextual information,
+not duplicate navigation.
+
+
+============================================================
+33. STUDENT PROGRESS / ACTIVITY
+============================================================
+
+Do not make progress the primary feature.
+
+Instead, create a simple:
+
+"My Activity"
+
+or
+
+"My Progress"
+
+section.
+
+It can show:
+
+- Doubts submitted
+- Doubts resolved
+- Community contributions
+- Resources accessed
+- Recent activity
+
+
+This is more appropriate than a course-completion dashboard.
+
+
+============================================================
+34. PROFILE
+============================================================
+
+Student profile should contain:
+
+Name
+
+Email
+
+Class
+
+Division
+
+School / Institution if applicable
+
+Profile picture
+
+Basic account information
+
+
+Allow:
+
+Edit Profile
+
+
+Do not overcomplicate the profile page.
+
+
+============================================================
+35. SETTINGS
+============================================================
+
+Settings should include:
+
+Theme:
+
+Light / Dark / System
+
+
+Notification preferences
+
+
+Password/account settings
+
+
+Logout
+
+
+Keep it simple.
+
+
+============================================================
+36. NAVIGATION STRUCTURE
+============================================================
+
+The main student navigation should be approximately:
+
+Dashboard
+
+My Doubts
+
+Digital Library
+
+Student Community
+
+Announcements
+
+Notifications
+
+My Activity
+
+Profile
+
+Settings
+
+Logout
+
+
+Do not add unnecessary navigation items.
+
+
+============================================================
+37. LANDING PAGE
+============================================================
+
+The landing page should introduce the project clearly.
+
+It should explain:
+
+What the platform does
+
+Who it is for
+
+Why it exists
+
+How doubt resolution works
+
+Digital library
+
+Student community
+
+Mentor support
+
+
+Suggested structure:
+
+NAVBAR
+
+Logo / Portal Name
+
+Home
+
+Features
+
+About
+
+Announcements
+
+Login
+
+Sign Up
+
+
+HERO
+
+"Empowering Rural Education Through Mentorship"
+
+or another simple educational message.
+
+
+Supporting text should explain:
+
+Students can access educational resources,
+ask doubts and connect with mentors.
+
+
+CTA:
+
+Get Started
+
+Login
+
+
+FEATURES
+
+Doubt Resolution
+
+Digital Library
+
+Student Community
+
+Mentor Support
+
+
+HOW IT WORKS
+
+Student asks doubt
+
+Teacher reviews
+
+Mentor answers
+
+Student learns
+
+
+COMMUNITY / EDUCATION SECTION
+
+
+ANNOUNCEMENT PREVIEW
+
+
+FOOTER
+
+
+Keep the landing page simple and professional.
+
+Do not use excessive gradients or huge decorative animations.
+
+
+============================================================
+38. AUTHENTICATION SCREENS
+============================================================
+
+Create:
+
+Login
+
+Registration
+
+
+Login should include:
+
+Email / Username
+
+Password
+
+Remember me if appropriate
+
+Forgot password
+
+Login button
+
+
+Registration should include appropriate fields.
+
+For student:
+
+Name
+
+Email
+
+Password
+
+Class
+
+Division
+
+Other required information
+
+
+Role selection can be used during prototype if needed,
+but do not assume the frontend role selector represents
+real authentication.
+
+The backend will eventually determine the user's role.
+
+
+============================================================
+39. TEACHER / MENTOR FRONTEND
+============================================================
+
+The teacher/mentor interface will eventually need:
+
+Dashboard
+
+Pending Doubts
+
+Approved Doubts
+
+Rejected Doubts
+
+Doubt Details
+
+Answer Doubt
+
+Community Moderation
+
+Student Warnings
+
+Announcements
+
+Resource Upload
+
+Profile
+
+
+The teacher's most important workflow is:
+
+Review Doubt
+     ↓
+Approve / Reject
+     ↓
+If Approved:
+Answer
+     ↓
+Continue Discussion
+     ↓
+Resolve
+
+
+Teacher should also see flagged community content.
+
+Example:
+
+FLAGGED COMMUNITY CONTENT
+
+Student: [Student]
+
+Message:
+[Potentially inappropriate content]
+
+Reason:
+[Foul language detected]
+
+Actions:
+
+[Dismiss Flag]
+
+[Issue Warning]
+
+
+============================================================
+40. ADMIN FRONTEND
+============================================================
+
+Admin interface can eventually contain:
+
+Dashboard
+
+Students
+
+Teachers/Mentors
+
+Announcements
+
+Digital Library
+
+Community Monitoring
+
+Reports
+
+Settings
+
+
+Admin should have broader management access.
+
+But ADMIN IS NOT THE CURRENT PRIMARY DEVELOPMENT FOCUS.
+
+Prioritize the student experience first.
+
+
+============================================================
+41. PROTOTYPE DATA
+============================================================
+
+For now, use dummy/static data.
+
+Do not connect to any database.
+
+Do not build APIs.
+
+Examples of dummy data:
+
+Student:
+
+Class 10
+Division A
+
+
+Doubts:
+
+- Mathematics question
+- Physics question
+- Biology question
+
+
+Library:
+
+- Mathematics textbook
+- Mathematics guide
+- Science textbook
+- English notes
+
+
+Announcements:
+
+- Unit test notice
+- New material notice
+- Holiday notice
+
+
+Community:
+
+- Algebra discussion
+- Physics discussion
+- Science discussion
+
+
+The dummy data should be structured so that it can later
+easily be replaced by JavaScript API calls.
+
+
+============================================================
+42. FRONTEND CODE STRUCTURE
+============================================================
+
+Prefer a clean structure such as:
+
+project/
+│
+├── index.html
+├── login.html
+├── register.html
+│
+├── student/
+│   ├── dashboard.html
+│   ├── doubts.html
+│   ├── ask-doubt.html
+│   ├── doubt-details.html
+│   ├── library.html
+│   ├── resource-viewer.html
+│   ├── community.html
+│   ├── discussion.html
+│   ├── announcements.html
+│   ├── notifications.html
+│   ├── activity.html
+│   ├── profile.html
+│   └── settings.html
+│
+├── teacher/
+│   ├── dashboard.html
+│   ├── doubts.html
+│   ├── doubt-review.html
+│   ├── community-moderation.html
+│   ├── announcements.html
+│   └── resources.html
+│
+├── admin/
+│   └── dashboard.html
+│
+├── css/
+│   ├── variables.css
+│   ├── global.css
+│   ├── layout.css
+│   ├── components.css
+│   ├── forms.css
+│   └── responsive.css
+│
+├── js/
+│   ├── main.js
+│   ├── theme.js
+│   ├── auth.js
+│   ├── dashboard.js
+│   ├── doubts.js
+│   ├── library.js
+│   ├── community.js
+│   ├── notifications.js
+│   └── activity.js
+│
+└── assets/
+    ├── images/
+    └── icons/
+
+
+You may adjust this structure if you have a better,
+simpler structure.
+
+Do NOT create unnecessary files.
+
+
+============================================================
+43. CSS ARCHITECTURE
+============================================================
+
+CSS should be simple and maintainable.
+
+Prefer:
+
+CSS variables
+
+Reusable components
+
+Reusable utility classes where appropriate
+
+Responsive media queries
+
+
+Example conceptual design tokens:
+
+Primary
+
+Secondary
+
+Background
+
+Surface
+
+Text
+
+Muted text
+
+Border
+
+Success
+
+Warning
+
+Danger
+
+
+Avoid putting hundreds of unrelated styles into one massive
+CSS file.
+
+Do not generate unnecessary CSS complexity.
+
+
+============================================================
+44. JAVASCRIPT ARCHITECTURE
+============================================================
+
+Use vanilla JavaScript.
+
+JavaScript should handle:
+
+- Navigation
+- Theme switching
+- Mobile sidebar
+- Form validation
+- Modal dialogs
+- Tabs
+- Filters
+- Search
+- Notifications
+- Status changes
+- Dummy data interactions
+- Prototype state
+
+
+For example:
+
+Submitting a doubt should change:
+
+Draft
+→ Under Review
+
+
+Teacher prototype can change:
+
+Under Review
+→ Approved
+
+or:
+
+Under Review
+→ Rejected
+
+
+This can all be simulated with frontend JavaScript.
+
+
+============================================================
+45. PROTOTYPE STATE
+============================================================
+
+Since there is no backend yet, simulate application state
+using JavaScript.
+
+You may use:
+
+localStorage
+
+for:
+
+- Theme
+- Dummy login state
+- Notification read/unread state
+- Prototype doubt state
+- Basic user preferences
+
+
+Do not build a fake complicated backend in JavaScript.
+
+
+============================================================
+46. RESPONSIVE SIDEBAR
+============================================================
+
+Desktop:
+
+Persistent sidebar.
+
+Tablet/mobile:
+
+Collapsible sidebar.
+
+Use a hamburger button.
+
+When opened:
+
+sidebar slides/displays.
+
+When closed:
+
+main content gets full width.
+
+
+============================================================
+47. COMPONENT CONSISTENCY
+============================================================
+
+Reusable components should have consistent appearance.
+
+Examples:
+
+Buttons
+
+Primary button
+
+Secondary button
+
+Danger button
+
+Cards
+
+Status badges
+
+Forms
+
+Inputs
+
+Dropdowns
+
+Modal
+
+Toast/notification
+
+Sidebar
+
+Header
+
+Pagination if needed
+
+Search bar
+
+Filter controls
+
+
+The same component should look the same across pages.
+
+
+============================================================
+48. STATUS DESIGN
+============================================================
+
+Doubt statuses should have clear visual distinction.
+
+UNDER REVIEW
+
+APPROVED
+
+IN PROGRESS
+
+ANSWERED
+
+RESOLVED
+
+REJECTED
+
+
+Example:
+
+Blue:
+Under Review
+
+Green:
+Resolved
+
+Yellow:
+Waiting / In Progress
+
+Red:
+Rejected
+
+
+But always include the written status.
+
+Never communicate meaning using color alone.
+
+
+============================================================
+49. ERROR / EMPTY STATES
+============================================================
+
+Every important page should consider:
+
+Loading state
+
+Empty state
+
+Error state
+
+Success state
+
+
+Examples:
+
+No doubts yet:
+
+"You haven't submitted any doubts yet."
+
+No notifications:
+
+"You're all caught up."
+
+No community posts:
+
+"No discussions available."
+
+Search result:
+
+"No resources match your search."
+
+
+============================================================
+50. SECURITY-AWARE FRONTEND DESIGN
+============================================================
+
+Even though the backend is not being implemented now,
+do not design insecure assumptions.
+
+Do not store real passwords in localStorage.
+
+Do not pretend frontend-only authentication is secure.
+
+Dummy login is only for prototype navigation.
+
+Clearly separate prototype behavior from real authentication.
+
+
+============================================================
+51. PERFORMANCE / LOW-BANDWIDTH CONSIDERATIONS
+============================================================
+
+Because this is designed for rural education, consider:
+
+- Lightweight assets
+- Minimal animations
+- Optimized images
+- No unnecessary libraries
+- No huge background videos
+- No excessive JavaScript
+- Simple page structure
+
+
+The interface should remain usable on slower connections.
+
+
+============================================================
+52. WHAT WE ARE NOT BUILDING RIGHT NOW
+============================================================
+
+DO NOT implement:
+
+- Spring Boot
+- Java backend
+- JPA
+- Hibernate
+- MySQL
+- REST API
+- JWT
+- Real authentication
+- Real file upload backend
+- Real AI chatbot backend
+- Real moderation AI backend
+- Real-time WebSockets
+
+
+These are future phases.
+
+For now, simulate the interactions in the frontend.
+
+
+============================================================
+53. FUTURE BACKEND COMPATIBILITY
+============================================================
+
+Although backend development is NOT part of the current task,
+the frontend should be designed so it can later consume APIs.
+
+For example, today:
+
+JavaScript dummy data
+
+Later:
+
+fetch("/api/doubts")
+
+
+Today:
+
+dummy student profile
+
+Later:
+
+fetch("/api/student/profile")
+
+
+Today:
+
+dummy library data
+
+Later:
+
+fetch("/api/library")
+
+
+Do not tightly couple the HTML to fake data in a way that
+makes future replacement difficult.
+
+
+============================================================
+54. FUTURE DATA CONCEPTS
+============================================================
+
+DO NOT IMPLEMENT THESE NOW.
+
+But keep the frontend concepts compatible with future
+backend entities such as:
+
+User
+
+Student
+
+Teacher
+
+Admin
+
+Class
+
+Division
+
+Subject
+
+Resource
+
+LibraryItem
+
+Doubt
+
+DoubtMessage
+
+DoubtStatus
+
+CommunityPost
+
+CommunityReply
+
+ModerationFlag
+
+Warning
+
+Announcement
+
+Notification
+
+StudentActivity
+
+
+Again:
+
+DO NOT CREATE THE BACKEND NOW.
+
+These are only conceptual references for future compatibility.
+
+
+============================================================
+55. PRIMARY STUDENT USER JOURNEY
+============================================================
+
+The most important demo journey should be:
+
+Student opens website
+        ↓
+Landing page
+        ↓
+Login
+        ↓
+Student Dashboard
+        ↓
+Student sees:
+Class + Division
+Recent Doubts
+Announcements
+Library
+Community
+Notifications
+        ↓
+Student opens Digital Library
+        ↓
+Student finds textbook / guide / notes
+        ↓
+Student has a question
+        ↓
+Student opens Ask a Doubt
+        ↓
+Submits doubt
+        ↓
+Doubt becomes:
+UNDER REVIEW
+        ↓
+Teacher reviews
+        ↓
+APPROVED
+        ↓
+Mentor answers
+        ↓
+Student receives notification
+        ↓
+Student opens Doubt Discussion
+        ↓
+Student asks follow-up
+        ↓
+Mentor responds
+        ↓
+Student marks RESOLVED
+        ↓
+Student returns to Dashboard
+
+
+A second important journey:
+
+Student
+ ↓
+Community
+ ↓
+Posts question
+ ↓
+Other students respond
+ ↓
+Moderation system monitors
+ ↓
+Potential foul language detected
+ ↓
+Teacher notified
+ ↓
+Teacher reviews
+ ↓
+Teacher issues warning
+ ↓
+Student receives notification
+
+
+A third journey:
+
+Teacher/Admin
+ ↓
+Upload textbook/guide/PPT/PDF
+ ↓
+Student opens Digital Library
+ ↓
+Student sees newly uploaded material
+
+
+A fourth journey:
+
+Teacher/Admin
+ ↓
+Create announcement
+ ↓
+Student receives notification
+ ↓
+Student opens Announcement Center
+
+
+============================================================
+56. DEVELOPMENT PHASES — FRONTEND ONLY
+============================================================
+
+DO NOT include backend phases in the current implementation plan.
+
+Use this frontend-only roadmap:
+
+PHASE 1
+Global Design System
+- Typography
+- Colors
+- Light/Dark theme
+- Header
+- Sidebar
+- Buttons
+- Cards
+- Forms
+- Responsive behavior
+
+PHASE 2
+Landing Page
+
+PHASE 3
+Login + Registration
+
+PHASE 4
+Student Dashboard
+
+PHASE 5
+Student Doubt Module
+- Ask Doubt
+- My Doubts
+- Doubt Details
+- Status
+- Rejection reason
+- Discussion
+
+PHASE 6
+Digital Library
+- Library home
+- Search
+- Filters
+- Resource categories
+- Resource viewer
+
+PHASE 7
+Student Community
+- Community home
+- Create post
+- Discussion
+- Replies
+- Moderation indicators
+
+PHASE 8
+Announcements + Notifications
+
+PHASE 9
+Student Activity / Progress
+
+PHASE 10
+Teacher Frontend
+- Dashboard
+- Doubt review
+- Answer
+- Moderation
+- Warnings
+- Announcements
+- Resource upload
+
+PHASE 11
+Admin Frontend
+
+PHASE 12
+Full frontend integration
+- Navigation
+- Shared state
+- Theme
+- Responsive testing
+- Error/empty states
+- Accessibility
+- UI polish
+
+
+============================================================
+57. IMPLEMENTATION ORDER
+============================================================
+
+Do NOT jump around.
+
+Recommended order:
+
+1. Design system
+2. Global layout
+3. Landing page
+4. Login
+5. Registration
+6. Student dashboard
+7. My Doubts
+8. Ask Doubt
+9. Doubt Details
+10. Digital Library
+11. Resource Viewer
+12. Student Community
+13. Discussion
+14. Announcements
+15. Notifications
+16. Activity
+17. Teacher screens
+18. Admin screens
+19. Responsive polish
+20. Accessibility review
+
+
+============================================================
+58. BEFORE CODING
+============================================================
+
+Your FIRST response after receiving this prompt should NOT
+contain code.
+
+Instead provide:
+
+A. Project understanding
+
+B. Proposed frontend architecture
+
+C. Proposed folder structure
+
+D. Complete screen list
+
+E. Navigation map
+
+F. Student workflow
+
+G. Doubt workflow
+
+H. Community/moderation workflow
+
+I. Announcement/notification workflow
+
+J. Design system proposal
+
+K. Light/dark theme strategy
+
+L. Responsive strategy
+
+M. Reusable components
+
+N. Dummy data strategy
+
+O. Phase-by-phase implementation plan
+
+P. Any assumptions
+
+Q. Any questions that need clarification
+
+
+Then STOP.
+
+
+============================================================
+59. DO NOT IMPLEMENT BEFORE APPROVAL
+============================================================
+
+After giving the plan:
+
+WAIT.
+
+Do not:
+
+- Create HTML files
+- Create CSS files
+- Create JavaScript files
+- Modify existing files
+- Install packages
+- Generate components
+- Start the server
+
+until I explicitly say:
+
+START WORKING
+
+
+============================================================
+60. WHEN I SAY "START WORKING"
+============================================================
+
+When I say:
+
+START WORKING
+
+begin with the phase I specify.
+
+If I only say:
+
+START WORKING
+
+start with PHASE 1.
+
+If I say:
+
+START WORKING ON PHASE 4
+
+start with the Student Dashboard.
+
+Do not implement other phases unless requested.
+
+
+============================================================
+61. IMPLEMENTATION QUALITY
+============================================================
+
+During implementation:
+
+- Keep files organized.
+- Keep CSS simple.
+- Keep JavaScript understandable.
+- Avoid unnecessary libraries.
+- Avoid unnecessary abstractions.
+- Do not break previously completed screens.
+- Maintain consistent navigation.
+- Maintain consistent theme support.
+- Test every page.
+- Test dark mode.
+- Test mobile responsiveness.
+- Test links between screens.
+- Test form validation.
+- Test empty states.
+- Test status changes.
+- Test notification behavior.
+
+
+============================================================
+62. FINAL PRODUCT VISION
+============================================================
+
+The final frontend should feel like a real educational
+institution portal.
+
+A student should immediately understand:
+
+"I can find my class materials here."
+
+"I can ask an academic doubt here."
+
+"My doubt will be reviewed before a mentor answers it."
+
+"I can communicate with other students."
+
+"I can see official announcements."
+
+"I can receive notifications."
+
+"I can access textbooks and guide books."
+
+"I can track my academic activity."
+
+
+The interface should be:
+
+Professional
+Simple
+Educational
+Accessible
+Responsive
+Low-bandwidth friendly
+Light/Dark mode enabled
+Easy to understand
+Easy to maintain
+Easy to demonstrate
+
+
+============================================================
+FINAL COMMAND
+============================================================
+
+DO NOT START CODING.
+
+DO NOT CREATE FILES.
+
+DO NOT IMPLEMENT ANYTHING.
+
+First analyze this specification and return the complete
+frontend implementation plan for my approval.
+
+After I review your plan, I will explicitly say:
+
+"START WORKING"
+
+Only then should you begin implementation.
+============================================================

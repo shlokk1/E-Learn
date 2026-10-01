@@ -1,0 +1,2598 @@
+============================================================
+PROJECT: RURAL E-LEARNING & DOUBT RESOLUTION PORTAL
+TEACHER / MENTOR FRONTEND SPECIFICATION
+============================================================
+
+You are working as the UI/UX architect and frontend development
+assistant for the Teacher/Mentor section of our academic project:
+
+"Rural E-Learning & Doubt Resolution Portal"
+
+This document defines the FRONTEND PROTOTYPE for the
+Teacher/Mentor role.
+
+IMPORTANT:
+
+We are currently developing ONLY the frontend.
+
+DO NOT implement:
+
+- Spring Boot
+- Java backend
+- JPA
+- Hibernate
+- MySQL
+- REST APIs
+- JWT
+- Real authentication
+- Real file storage
+- Real AI moderation
+- Real-time communication backend
+
+The backend will be implemented later after the entire
+frontend prototype has been finalized.
+
+For now use:
+
+- HTML5
+- CSS3
+- Vanilla JavaScript
+
+Tailwind CSS may be used if genuinely useful, but it is
+NOT mandatory.
+
+DO NOT use React, Next.js, Vue, Angular or other frontend
+frameworks unless explicitly approved.
+
+
+============================================================
+1. VERY IMPORTANT DEVELOPMENT INSTRUCTION
+============================================================
+
+DO NOT START CODING IMMEDIATELY.
+
+First analyze this entire specification.
+
+Your first response must contain ONLY a detailed implementation
+plan.
+
+The plan should explain:
+
+1. Your understanding of the Teacher/Mentor role
+2. Information architecture
+3. Navigation
+4. Complete screen list
+5. Teacher dashboard structure
+6. Doubt review workflow
+7. Doubt approval/rejection workflow
+8. Doubt answering workflow
+9. Follow-up discussion workflow
+10. Digital library/resource workflow
+11. Community moderation workflow
+12. Warning workflow
+13. Announcement workflow
+14. Notification workflow
+15. Student/class visibility
+16. Reusable UI components
+17. CSS architecture
+18. JavaScript architecture
+19. Dummy data structure
+20. Light/dark mode strategy
+21. Responsive design strategy
+22. Implementation phases
+23. Potential ambiguities
+24. Recommended improvements
+
+Then STOP.
+
+DO NOT:
+
+- Create files
+- Modify files
+- Write implementation code
+- Install packages
+- Start the project
+
+Wait for my explicit instruction:
+
+"START WORKING"
+
+Only then begin implementation.
+
+If I say:
+
+"START WORKING ON PHASE 1"
+
+only implement Phase 1.
+
+
+============================================================
+2. ROLE OF TEACHER / MENTOR
+============================================================
+
+The Teacher/Mentor is the academic support role.
+
+The Teacher/Mentor is responsible for helping students learn
+and resolving academic doubts.
+
+The Teacher/Mentor should be able to:
+
+1. Review student doubts
+2. Approve valid doubts
+3. Reject invalid/bogus/irrelevant doubts
+4. Provide a rejection reason
+5. Answer approved doubts
+6. Continue doubt discussions
+7. Mark doubts as resolved
+8. View students relevant to their assigned classes
+9. Upload academic learning materials
+10. Manage materials they are responsible for
+11. Participate in the student community
+12. Review flagged community content
+13. Issue warnings to students when necessary
+14. Publish announcements
+15. View notifications
+16. View basic contribution/activity statistics
+17. Manage their own profile/settings
+
+
+============================================================
+3. IMPORTANT ROLE DISTINCTION
+============================================================
+
+The Teacher/Mentor is NOT an Admin.
+
+Teacher/Mentor:
+
+- Handles academic interaction
+- Reviews doubts
+- Answers doubts
+- Supports students
+- Uploads academic material
+- Moderates student community
+- Publishes academic announcements
+
+Admin:
+
+- Manages teachers
+- Manages students
+- Manages classes/divisions
+- Manages platform structure
+- Has system-level oversight
+
+Do NOT give the Teacher/Mentor unnecessary Admin capabilities.
+
+For example, Teacher/Mentor should NOT normally:
+
+- Delete platform users
+- Create system-wide roles
+- Manage all teachers
+- Manage all classes
+- Change platform settings
+- Access unrelated administrative reports
+
+
+============================================================
+4. TEACHER VS MENTOR
+============================================================
+
+For the frontend prototype, Teacher and Mentor can use a
+SHARED INTERFACE.
+
+The role can be called:
+
+"Teacher / Mentor"
+
+This avoids creating two completely separate dashboards.
+
+However, the system should allow for different permissions
+later.
+
+For example:
+
+Teacher:
+
+- Assigned classes
+- Assigned subjects
+- Student doubts
+- Academic materials
+- Announcements
+
+Mentor:
+
+- Assigned doubt tickets
+- Student support
+- Community participation
+- Academic responses
+
+The exact backend permission model will be decided later.
+
+For the frontend prototype, use a unified Teacher/Mentor portal.
+
+
+============================================================
+5. CORE PURPOSE OF THE TEACHER DASHBOARD
+============================================================
+
+The Teacher/Mentor dashboard should answer one question:
+
+"What needs my attention right now?"
+
+The most important information should therefore be:
+
+- Doubts waiting for review
+- Approved doubts waiting for an answer
+- Active student conversations
+- Flagged community posts
+- Recent announcements
+- Recently uploaded materials
+
+
+The dashboard should NOT primarily show:
+
+- Course completion
+- Student-style learning progress
+- Course enrollment
+
+
+It should be an ACTION-ORIENTED dashboard.
+
+
+============================================================
+6. TEACHER DASHBOARD STRUCTURE
+============================================================
+
+Use:
+
+LEFT SIDEBAR
++
+TOP HEADER
++
+MAIN CONTENT
++
+RIGHT-SIDE INFORMATION PANEL
+
+
+Conceptually:
+
+┌────────────────┬─────────────────────────────────────────┐
+│                │ Header                                  │
+│                ├─────────────────────────────────────────┤
+│                │                                         │
+│ Teacher        │ Dashboard                               │
+│ Sidebar        │                                         │
+│                │ Summary Cards                           │
+│ Dashboard      │                                         │
+│ Doubts         │ Pending Actions                         │
+│ Students       │                                         │
+│ Materials      │ Recent Activity                         │
+│ Community      │                                         │
+│ Announcements  │                                         │
+│ Notifications  │                                         │
+│ Activity       │                                         │
+│ Profile        │                                         │
+│ Settings       │                                         │
+│                │                                         │
+│ Logout         │                                         │
+└────────────────┴─────────────────────────────────────────┘
+
+
+============================================================
+7. TEACHER SIDEBAR
+============================================================
+
+Recommended navigation:
+
+Dashboard
+
+Doubt Review
+
+My Doubts / Assigned Doubts
+
+Students
+
+Class Materials
+
+Community Moderation
+
+Announcements
+
+Notifications
+
+My Activity
+
+Profile
+
+Settings
+
+Logout
+
+
+Do not add unnecessary navigation items.
+
+
+============================================================
+8. TEACHER HEADER
+============================================================
+
+The header should contain:
+
+Page title / breadcrumb
+
+Search if useful
+
+Theme toggle
+
+Notifications
+
+Teacher profile
+
+
+Example:
+
+Teacher Portal
+
+Search...
+
+☀ / 🌙
+
+🔔
+
+Teacher
+
+
+Do NOT use a fictional teacher name unless necessary.
+
+Use generic data such as:
+
+"Teacher"
+
+or
+
+"Teacher / Mentor"
+
+
+============================================================
+9. LIGHT / DARK MODE
+============================================================
+
+The Teacher/Mentor interface MUST support:
+
+LIGHT MODE
+
+DARK MODE
+
+The theme system must match the Student and Admin interfaces.
+
+Use CSS variables.
+
+Do NOT create a separate visual language for teachers.
+
+The application should feel like one unified platform.
+
+
+============================================================
+10. DESIGN PHILOSOPHY
+============================================================
+
+The Teacher/Mentor interface should be:
+
+- Professional
+- Academic
+- Clean
+- Functional
+- Information-focused
+- Easy to scan
+- Accessible
+- Responsive
+
+Avoid:
+
+- Gaming UI
+- Neon colors
+- Excessive gradients
+- Glassmorphism
+- Excessive animations
+- Huge decorative elements
+- Excessive shadows
+- Excessive rounded cards
+
+
+Use:
+
+- Solid colors
+- White/light-gray surfaces
+- Neutral backgrounds
+- One primary brand color
+- Semantic status colors
+- Simple borders
+- Subtle shadows
+- Moderate border radius
+- Clear typography
+
+
+============================================================
+11. TEACHER DASHBOARD SUMMARY CARDS
+============================================================
+
+Useful cards:
+
+Doubts Awaiting Review
+
+Approved Doubts Awaiting Answer
+
+Active Conversations
+
+Flagged Community Posts
+
+
+Optional:
+
+Students Supported
+
+Doubts Resolved
+
+Resources Uploaded
+
+Announcements Published
+
+
+Example:
+
+------------------------------------------------------------
+Doubts Awaiting Review
+12
+------------------------------------------------------------
+
+------------------------------------------------------------
+Awaiting Answer
+7
+------------------------------------------------------------
+
+------------------------------------------------------------
+Active Discussions
+5
+------------------------------------------------------------
+
+------------------------------------------------------------
+Community Flags
+3
+------------------------------------------------------------
+
+
+These should be actionable.
+
+
+============================================================
+12. PENDING ACTIONS
+============================================================
+
+The dashboard should contain a prominent:
+
+"Pending Actions"
+
+section.
+
+Example:
+
+------------------------------------------------------------
+Pending Actions
+------------------------------------------------------------
+
+12 doubts awaiting review
+[Review]
+
+7 approved doubts awaiting answer
+[Answer]
+
+3 community posts flagged
+[Review]
+
+2 announcements awaiting publication
+[View]
+
+
+The teacher should immediately understand what needs attention.
+
+
+============================================================
+13. RECENT ACTIVITY
+============================================================
+
+Show recent teacher activity.
+
+Example:
+
+Answered Mathematics doubt
+10 minutes ago
+
+Approved Physics doubt
+25 minutes ago
+
+Uploaded Class 10 Science notes
+1 hour ago
+
+Issued student warning
+Yesterday
+
+Published announcement
+Yesterday
+
+
+Use a simple activity list or timeline.
+
+
+============================================================
+14. DOUBT RESOLUTION — CORE TEACHER FEATURE
+============================================================
+
+Doubt resolution is the MOST IMPORTANT feature of the
+Teacher/Mentor portal.
+
+The workflow is:
+
+Student submits doubt
+        ↓
+UNDER REVIEW
+        ↓
+Teacher/Mentor reviews
+        ↓
+   ┌───────────────┐
+   ↓               ↓
+APPROVE          REJECT
+   ↓               ↓
+Answer           Reason
+   ↓
+Follow-up
+   ↓
+RESOLVED
+
+
+The teacher should NOT answer a doubt before reviewing it.
+
+
+============================================================
+15. DOUBT REVIEW PAGE
+============================================================
+
+Create a dedicated:
+
+"Doubt Review"
+
+page.
+
+It should show a list/table of doubts awaiting review.
+
+Example:
+
+------------------------------------------------------------
+Doubt Review
+------------------------------------------------------------
+
+Search doubts...
+
+Filters:
+
+Class
+Division
+Subject
+Date
+Status
+
+
+------------------------------------------------------------
+Student     Subject      Topic       Status
+------------------------------------------------------------
+
+Student A   Mathematics  Algebra     Under Review
+
+Student B   Science      Physics     Under Review
+
+Student C   Biology      Plants      Under Review
+
+
+Action:
+
+[Review]
+
+
+============================================================
+16. DOUBT REVIEW DETAILS
+============================================================
+
+When Teacher opens a doubt:
+
+Show:
+
+Student
+
+Class
+
+Division
+
+Subject
+
+Topic
+
+Question
+
+Detailed description
+
+Attachment
+
+Submission date
+
+Reference material if available
+
+
+Example:
+
+------------------------------------------------------------
+Mathematics — Algebra
+
+Student:
+Student A
+
+Class:
+10-A
+
+Question:
+How do I solve this equation?
+
+Description:
+I don't understand how to isolate x.
+
+Attachment:
+[View Image]
+
+Submitted:
+Today
+
+
+Actions:
+
+[Approve Doubt]
+
+[Reject Doubt]
+
+
+============================================================
+17. APPROVE DOUBT
+============================================================
+
+If the doubt is valid:
+
+Teacher clicks:
+
+[Approve Doubt]
+
+
+The status changes to:
+
+APPROVED
+
+
+Then the teacher can:
+
+- Answer the doubt
+- Assign it to a mentor if appropriate
+- Continue the conversation
+
+
+For the prototype, simulate the state transition with
+JavaScript.
+
+
+============================================================
+18. REJECT DOUBT
+============================================================
+
+A teacher may reject a doubt if it is:
+
+- Bogus
+- Irrelevant
+- Inappropriate
+- Duplicate
+- Outside the academic scope
+- Incomplete and not suitable for answering
+
+
+When rejecting:
+
+DO NOT simply change the status to "Rejected."
+
+Require a reason.
+
+
+Example:
+
+------------------------------------------------------------
+Reject Doubt
+
+Reason:
+
+[ This question is outside the academic scope of the
+  platform. ]
+
+[Cancel]
+
+[Reject Doubt]
+------------------------------------------------------------
+
+
+After rejection:
+
+Student receives a notification.
+
+Student can see:
+
+Status:
+Rejected
+
+Reason:
+This question is outside the academic scope of the platform.
+
+
+============================================================
+19. APPROVED DOUBTS
+============================================================
+
+Create an:
+
+"Approved Doubts"
+
+or
+
+"Assigned Doubts"
+
+section.
+
+It should show doubts that require academic responses.
+
+Example:
+
+------------------------------------------------------------
+Approved Doubts
+
+Student A
+Mathematics
+Algebra
+Approved
+Waiting for Answer
+
+[Answer]
+
+
+Student B
+Physics
+Motion
+In Progress
+
+[Continue]
+
+
+============================================================
+20. ANSWERING A DOUBT
+============================================================
+
+Teacher opens an approved doubt.
+
+Display:
+
+Student's question
+
+Context
+
+Attachments
+
+Previous discussion
+
+Answer box
+
+
+Example:
+
+------------------------------------------------------------
+Student Question
+
+How do I solve 2x + 5 = 15?
+
+
+Previous discussion:
+
+Student:
+I don't understand why we subtract 5.
+
+
+------------------------------------------------------------
+
+Your Answer:
+
+[____________________________________]
+[____________________________________]
+[____________________________________]
+
+
+Optional:
+
+[Attach Resource]
+
+
+Buttons:
+
+[Send Answer]
+
+[Save Draft]
+
+
+============================================================
+21. FOLLOW-UP DISCUSSION
+============================================================
+
+After answering, the teacher and student can continue
+the conversation.
+
+Example:
+
+STUDENT:
+I don't understand why we subtract 5.
+
+TEACHER:
+We subtract 5 to isolate the term containing x.
+
+STUDENT:
+Okay, now I understand.
+
+TEACHER:
+Great. Try the next practice problem.
+
+
+The teacher can:
+
+- Reply
+- Attach resource
+- Continue discussion
+- Mark resolved
+
+
+============================================================
+22. RESOLVE DOUBT
+============================================================
+
+When the teacher believes the student's question has been
+resolved, the teacher may mark:
+
+[Mark as Resolved]
+
+
+Status:
+
+RESOLVED
+
+
+The student should receive a notification.
+
+
+Do not automatically resolve after the first answer.
+
+The student should ideally have the ability to indicate
+whether the doubt was resolved.
+
+The exact backend behavior will be finalized later.
+
+
+============================================================
+23. DOUBT STATUS SYSTEM
+============================================================
+
+Use these statuses:
+
+UNDER REVIEW
+
+APPROVED
+
+REJECTED
+
+ASSIGNED
+
+IN PROGRESS
+
+ANSWERED
+
+RESOLVED
+
+
+Use clear status badges.
+
+Example:
+
+Blue:
+Under Review
+
+Green:
+Resolved
+
+Yellow:
+In Progress
+
+Red:
+Rejected
+
+Purple/neutral:
+Approved
+
+
+Always display the text.
+
+Do not rely only on color.
+
+
+============================================================
+24. MY DOUBTS / ASSIGNED DOUBTS
+============================================================
+
+Teacher should have a page showing doubts relevant to them.
+
+Possible tabs:
+
+Pending Review
+
+Assigned
+
+In Progress
+
+Answered
+
+Resolved
+
+
+Example:
+
+------------------------------------------------------------
+My Doubts
+------------------------------------------------------------
+
+[Pending] [In Progress] [Resolved]
+
+
+Student A
+Mathematics
+Algebra
+In Progress
+
+[Open]
+
+
+============================================================
+25. STUDENT LIST
+============================================================
+
+Teacher should be able to view students relevant to
+their assigned classes/divisions.
+
+Do NOT give teachers access to every student in the
+platform unless required.
+
+Example:
+
+My Students
+
+Class 10 - Division A
+42 Students
+
+Class 10 - Division B
+38 Students
+
+
+Teacher can select a class/division.
+
+
+============================================================
+26. STUDENT LIST VIEW
+============================================================
+
+Example:
+
+------------------------------------------------------------
+Class 10 - Division A
+
+Search students...
+
+
+Student        Doubts    Resolved    Status
+------------------------------------------------------------
+
+Student A        8          7         Active
+
+Student B        5          5         Active
+
+Student C        3          1         Active
+
+
+[View Student]
+
+
+The teacher can see only relevant academic information.
+
+
+============================================================
+27. STUDENT DETAILS FOR TEACHER
+============================================================
+
+Teacher can view:
+
+Student name
+
+Class
+
+Division
+
+Recent doubts
+
+Doubt status
+
+Community activity relevant to moderation
+
+Warnings if appropriate
+
+
+Do NOT expose unnecessary private information.
+
+
+============================================================
+28. CLASS MATERIALS
+============================================================
+
+Teachers should be able to upload academic materials
+for their assigned classes.
+
+This is a CORE feature.
+
+Teachers can upload:
+
+- Textbooks
+- Guide / Answer Books
+- Notes
+- PDFs
+- PPTs
+- Worksheets
+- Practice papers
+- Question papers
+- Videos
+
+
+The material should be associated with:
+
+Class
+
+Division if required
+
+Subject
+
+Chapter / Topic
+
+Material type
+
+
+============================================================
+29. MATERIAL UPLOAD PAGE
+============================================================
+
+Create:
+
+"Upload Class Material"
+
+
+Form:
+
+Title
+
+Description
+
+Class
+
+Division
+
+Subject
+
+Chapter / Topic
+
+Material Type
+
+File
+
+Optional thumbnail
+
+Visibility
+
+
+Example:
+
+Title:
+Algebra Chapter 2 Notes
+
+Class:
+10
+
+Division:
+A
+
+Subject:
+Mathematics
+
+Chapter:
+Linear Equations
+
+Type:
+PDF
+
+
+Buttons:
+
+[Save Draft]
+
+[Publish]
+
+
+For the prototype:
+
+Do NOT implement real file upload.
+
+Simulate the upload.
+
+
+============================================================
+30. TEACHER MATERIAL LIBRARY
+============================================================
+
+Teachers should have:
+
+"My Materials"
+
+Example:
+
+------------------------------------------------------------
+My Materials
+
+Search...
+
+
+Title                  Type    Class    Status
+
+Algebra Notes           PDF     10-A     Published
+
+Physics Chapter 3      PPT     10-A     Published
+
+Science Guide          PDF     10-B     Draft
+
+
+Actions:
+
+View
+
+Edit
+
+Archive
+
+
+============================================================
+31. MATERIAL EDITING
+============================================================
+
+Teacher can edit materials they uploaded.
+
+Possible actions:
+
+Edit title
+
+Edit description
+
+Change class/division
+
+Change subject
+
+Change chapter
+
+Replace file placeholder
+
+Archive
+
+
+Do not allow teachers to modify resources they do not own
+unless appropriate permissions are later defined.
+
+
+============================================================
+32. STUDENT COMMUNITY — TEACHER ROLE
+============================================================
+
+Teachers can participate in the Student Community.
+
+The community is:
+
+Student ↔ Student ↔ Teacher
+
+
+Teacher responsibilities:
+
+- Answer academic questions
+- Clarify misconceptions
+- Monitor flagged conversations
+- Encourage respectful discussion
+
+
+Teacher should NOT need to respond to every post.
+
+
+============================================================
+33. COMMUNITY MODERATION
+============================================================
+
+The platform has a moderation chatbot/system.
+
+It monitors community messages for:
+
+- Foul language
+- Abusive language
+- Harassment
+- Spam
+- Offensive content
+
+
+Workflow:
+
+Student posts
+      ↓
+Moderation system checks
+      ↓
+Potential issue?
+      ↓
+Flag created
+      ↓
+Teacher reviews
+      ↓
+Teacher decision
+
+
+IMPORTANT:
+
+The automated moderation system does NOT have final authority.
+
+The teacher decides whether the content actually violates
+the community guidelines.
+
+
+============================================================
+34. COMMUNITY MODERATION DASHBOARD
+============================================================
+
+Create:
+
+"Community Moderation"
+
+
+Example:
+
+------------------------------------------------------------
+Community Moderation
+
+Pending Flags: 3
+
+Reviewed Today: 12
+
+Warnings Issued: 2
+
+
+------------------------------------------------------------
+Student     Post              Flag Reason      Status
+
+Student A   [content]         Foul language    Pending
+
+Student B   [content]         Spam             Reviewed
+
+Student C   [content]         Harassment       Warning
+
+
+Actions:
+
+[View]
+
+[Dismiss]
+
+[Issue Warning]
+
+
+============================================================
+35. FLAG DETAILS
+============================================================
+
+When teacher opens a flag:
+
+Show:
+
+Student
+
+Class
+
+Original post
+
+Context
+
+Flag reason
+
+Previous warnings if relevant
+
+Automated moderation note
+
+
+Example:
+
+------------------------------------------------------------
+Flagged Community Content
+
+Student:
+Student A
+
+Post:
+"[message]"
+
+
+Flag reason:
+Potential foul language
+
+
+Moderation system:
+"Potential inappropriate language detected."
+
+
+Teacher decision:
+
+[Dismiss]
+
+[Issue Warning]
+
+[Remove / Hide Post]
+
+
+Do not automatically remove the content simply because
+the chatbot flagged it.
+
+
+============================================================
+36. ISSUE WARNING
+============================================================
+
+If teacher determines a violation occurred:
+
+Teacher can issue a warning.
+
+
+Example:
+
+------------------------------------------------------------
+Issue Warning
+
+Student:
+Student A
+
+Reason:
+
+[Inappropriate language in community discussion]
+
+
+Message to student:
+
+[Please follow the community guidelines...]
+
+
+[Cancel]
+
+[Issue Warning]
+
+
+After issuing:
+
+Student receives a Notification.
+
+
+============================================================
+37. WARNING HISTORY
+============================================================
+
+Teacher should be able to see relevant warning history.
+
+Example:
+
+------------------------------------------------------------
+Warning History
+
+Student A
+
+1. Inappropriate language
+   Issued: Today
+   By: Teacher
+
+2. Spam
+   Issued: 2 weeks ago
+   By: Teacher
+
+
+Do not make the interface unnecessarily punitive.
+
+
+============================================================
+38. ANNOUNCEMENTS
+============================================================
+
+Teachers can create academic announcements.
+
+Examples:
+
+- Test notice
+- Homework
+- Assignment deadline
+- New study material
+- Class update
+- Important academic message
+
+
+Teacher should be able to target:
+
+Specific class
+
+Specific division
+
+Specific subject
+
+Potentially all assigned students
+
+
+============================================================
+39. CREATE ANNOUNCEMENT
+============================================================
+
+Form:
+
+Title
+
+Description
+
+Audience
+
+Class
+
+Division
+
+Subject
+
+Attachment
+
+Publish date
+
+Status
+
+
+Buttons:
+
+[Save Draft]
+
+[Publish]
+
+
+Example:
+
+Title:
+
+Mathematics Unit Test
+
+
+Audience:
+
+Class 10 - Division A
+
+
+Description:
+
+The Mathematics Unit Test will be held on Friday.
+
+
+After publishing:
+
+Students receive notification.
+
+
+============================================================
+40. ANNOUNCEMENT MANAGEMENT
+============================================================
+
+Teacher can view:
+
+Draft
+
+Published
+
+Archived
+
+
+Actions:
+
+Edit
+
+Publish
+
+Archive
+
+
+Do not allow teachers to manage announcements created
+by unrelated teachers unless the future permission system
+allows it.
+
+
+============================================================
+41. NOTIFICATION CENTER
+============================================================
+
+Teacher should receive notifications such as:
+
+New doubt awaiting review
+
+Doubt assigned
+
+Student follow-up message
+
+Community flag
+
+Student warning action
+
+Announcement publication
+
+Resource upload status
+
+
+Example:
+
+🔔 New Mathematics doubt requires review.
+
+💬 Student replied to your doubt.
+
+⚠ Community post has been flagged.
+
+📚 Resource published successfully.
+
+
+Unread/read states should be supported.
+
+
+============================================================
+42. TEACHER ACTIVITY / CONTRIBUTION
+============================================================
+
+Create a simple:
+
+"My Activity"
+
+section.
+
+It may show:
+
+Doubts reviewed
+
+Doubts answered
+
+Doubts resolved
+
+Students supported
+
+Resources uploaded
+
+Announcements published
+
+Community moderation actions
+
+
+Example:
+
+------------------------------------------------------------
+My Activity
+
+Doubts Reviewed:
+48
+
+Doubts Answered:
+37
+
+Doubts Resolved:
+31
+
+Resources Uploaded:
+12
+
+Students Supported:
+28
+
+
+Keep this simple.
+
+It is NOT a performance-ranking system.
+
+
+============================================================
+43. DO NOT GAMIFY TEACHER PERFORMANCE
+============================================================
+
+Do NOT create:
+
+Leaderboards
+
+Points
+
+Badges
+
+Competitive rankings
+
+"Top Teacher"
+
+"Best Mentor"
+
+
+This is an educational/community platform.
+
+Contribution statistics are for useful information,
+not competition.
+
+
+============================================================
+44. TEACHER PROFILE
+============================================================
+
+Profile should show:
+
+Name
+
+Email
+
+Role
+
+Subjects
+
+Assigned classes
+
+Assigned divisions
+
+Verification status
+
+Profile image if appropriate
+
+
+Example:
+
+Teacher / Mentor
+
+Mathematics
+
+Class 10 - A
+
+Class 10 - B
+
+
+Keep it simple.
+
+
+============================================================
+45. TEACHER SETTINGS
+============================================================
+
+Settings:
+
+Light / Dark / System theme
+
+Notification preferences
+
+Account settings
+
+Password placeholder
+
+Availability preferences if needed
+
+
+Do not create unnecessary settings.
+
+
+============================================================
+46. RIGHT-SIDE INFORMATION DESIGN
+============================================================
+
+Do NOT create a huge horizontal menu containing every feature.
+
+Use:
+
+LEFT SIDEBAR
++
+MAIN CONTENT
++
+RIGHT-SIDE INFORMATION
+
+
+Example:
+
+┌──────────────┬────────────────────────────┬──────────────────┐
+│              │                            │                  │
+│ Sidebar      │ Main Content               │ Right Panel      │
+│              │                            │                  │
+│ Dashboard    │ Pending Doubts             │ Pending Actions  │
+│ Doubt Review │                            │                  │
+│ Students     │ Recent Activity            │ Notifications    │
+│ Materials    │                            │                  │
+│ Community    │ Student Discussions        │ Announcements    │
+│ Announcements│                            │                  │
+│ Notifications│                            │                  │
+│ Activity     │                            │                  │
+│ Profile      │                            │                  │
+│ Settings     │                            │                  │
+│ Logout       │                            │                  │
+└──────────────┴────────────────────────────┴──────────────────┘
+
+
+The right panel should provide contextual information.
+
+Do not duplicate the sidebar navigation there.
+
+
+============================================================
+47. TEACHER DASHBOARD PRIORITY
+============================================================
+
+The dashboard should prioritize:
+
+1. Doubts awaiting review
+2. Approved doubts awaiting answers
+3. Follow-up conversations
+4. Community moderation flags
+5. Recent student activity
+6. New announcements/tasks
+
+
+The teacher should be able to perform the most common
+actions directly from the dashboard.
+
+
+============================================================
+48. DASHBOARD QUICK ACTIONS
+============================================================
+
+Possible quick actions:
+
+[Review Doubts]
+
+[Answer Doubts]
+
+[Upload Material]
+
+[View Community Flags]
+
+[Create Announcement]
+
+
+Do not make every action a giant colorful button.
+
+
+============================================================
+49. STATUS SYSTEM
+============================================================
+
+Doubt statuses:
+
+UNDER REVIEW
+
+APPROVED
+
+REJECTED
+
+ASSIGNED
+
+IN PROGRESS
+
+ANSWERED
+
+RESOLVED
+
+
+Community flag statuses:
+
+PENDING
+
+UNDER REVIEW
+
+DISMISSED
+
+WARNING ISSUED
+
+CONTENT REMOVED
+
+
+Announcement statuses:
+
+DRAFT
+
+PUBLISHED
+
+ARCHIVED
+
+
+Resource statuses:
+
+DRAFT
+
+PUBLISHED
+
+ARCHIVED
+
+
+Always use text labels.
+
+
+============================================================
+50. RESPONSIVE DESIGN
+============================================================
+
+Desktop:
+
+Persistent sidebar
+
+Main content
+
+Right information panel
+
+
+Tablet:
+
+Collapsible sidebar
+
+Right panel may move below main content
+
+
+Mobile:
+
+Sidebar becomes drawer
+
+Right panel becomes stacked cards
+
+Tables become cards or horizontal scroll containers
+
+
+All forms should remain usable on mobile.
+
+
+============================================================
+51. ACCESSIBILITY
+============================================================
+
+Use:
+
+Semantic HTML
+
+Accessible labels
+
+Keyboard navigation
+
+Focus states
+
+Readable text
+
+Adequate contrast
+
+Clear status labels
+
+Accessible modals
+
+Accessible dropdowns
+
+
+Never communicate important information through color alone.
+
+
+============================================================
+52. CSS REQUIREMENTS
+============================================================
+
+CSS should be simple and industry-standard.
+
+Avoid excessive custom styling.
+
+Use:
+
+CSS variables
+
+Reusable components
+
+Consistent spacing
+
+Responsive breakpoints
+
+Reusable form styles
+
+Reusable table styles
+
+Reusable status badges
+
+
+Do not create separate CSS rules for every individual card
+when a reusable component can be used.
+
+
+============================================================
+53. JAVASCRIPT REQUIREMENTS
+============================================================
+
+Use Vanilla JavaScript.
+
+JavaScript should handle prototype interactions such as:
+
+- Theme switching
+- Sidebar
+- Tabs
+- Search
+- Filters
+- Modal
+- Form validation
+- Doubt approval
+- Doubt rejection
+- Rejection reason
+- Answer submission
+- Mark resolved
+- Community moderation
+- Issue warning
+- Create announcement
+- Publish announcement
+- Notification read/unread
+- Resource upload simulation
+
+
+Use dummy data.
+
+Do not create a fake backend.
+
+
+============================================================
+54. DUMMY DATA
+============================================================
+
+Use generic dummy data.
+
+Students:
+
+Student A
+Student B
+Student C
+
+
+Classes:
+
+Class 9 - A
+Class 10 - A
+Class 10 - B
+
+
+Subjects:
+
+Mathematics
+Science
+English
+Biology
+
+
+Doubts:
+
+Mathematics — Algebra
+Physics — Motion
+Biology — Plants
+
+
+Resources:
+
+Mathematics Textbook
+Mathematics Guide
+Science Notes
+Physics PPT
+
+
+Community flags:
+
+Potential foul language
+Spam
+Harassment
+
+
+Announcements:
+
+Mathematics Unit Test
+New Science Notes
+Assignment Reminder
+
+
+Do NOT use real personal information.
+
+
+============================================================
+55. PROTOTYPE STATE
+============================================================
+
+Use JavaScript/localStorage where useful to simulate state.
+
+Examples:
+
+Doubt:
+
+UNDER REVIEW
+→ APPROVED
+
+or:
+
+UNDER REVIEW
+→ REJECTED
+
+Approved:
+
+APPROVED
+→ ANSWERED
+→ RESOLVED
+
+
+Community:
+
+FLAGGED
+→ REVIEWED
+→ DISMISSED
+
+or:
+
+FLAGGED
+→ WARNING ISSUED
+
+
+Announcement:
+
+DRAFT
+→ PUBLISHED
+
+
+Resource:
+
+DRAFT
+→ PUBLISHED
+
+
+This is only for frontend demonstration.
+
+
+============================================================
+56. NO REAL AUTHENTICATION
+============================================================
+
+Teacher login may be simulated.
+
+Do NOT:
+
+- Store real passwords
+- Build security mechanisms
+- Pretend frontend authentication is secure
+
+
+The real authentication system will be implemented later.
+
+
+============================================================
+57. NO BACKEND
+============================================================
+
+Absolutely no backend during this phase.
+
+Do NOT implement:
+
+Spring Boot
+
+REST API
+
+JPA
+
+Hibernate
+
+MySQL
+
+JWT
+
+WebSockets
+
+Real file upload
+
+Real AI moderation
+
+Real notifications backend
+
+
+Everything is frontend prototype behavior.
+
+
+============================================================
+58. FUTURE BACKEND COMPATIBILITY
+============================================================
+
+Even though the backend is not currently being built,
+the frontend should be structured so dummy data can later
+be replaced with API data.
+
+Conceptually, future APIs may include:
+
+GET /api/teacher/dashboard
+
+GET /api/teacher/doubts
+
+GET /api/teacher/doubts/{id}
+
+PUT /api/teacher/doubts/{id}/approve
+
+PUT /api/teacher/doubts/{id}/reject
+
+POST /api/teacher/doubts/{id}/answer
+
+PUT /api/teacher/doubts/{id}/resolve
+
+GET /api/teacher/students
+
+GET /api/teacher/resources
+
+POST /api/teacher/resources
+
+GET /api/teacher/community/flags
+
+POST /api/teacher/warnings
+
+GET /api/teacher/announcements
+
+POST /api/teacher/announcements
+
+
+DO NOT implement these now.
+
+They are only future compatibility references.
+
+
+============================================================
+59. SUGGESTED FRONTEND STRUCTURE
+============================================================
+
+Suggested:
+
+teacher/
+│
+├── dashboard.html
+├── doubts.html
+├── doubt-review.html
+├── doubt-details.html
+├── students.html
+├── student-details.html
+├── materials.html
+├── upload-material.html
+├── community.html
+├── moderation.html
+├── moderation-details.html
+├── announcements.html
+├── create-announcement.html
+├── notifications.html
+├── activity.html
+├── profile.html
+└── settings.html
+
+
+Shared:
+
+css/
+├── variables.css
+├── global.css
+├── layout.css
+├── components.css
+├── forms.css
+├── tables.css
+└── responsive.css
+
+
+js/
+├── main.js
+├── theme.js
+├── teacher-dashboard.js
+├── doubts.js
+├── students.js
+├── materials.js
+├── moderation.js
+├── announcements.js
+├── notifications.js
+└── activity.js
+
+
+You may simplify this structure if a cleaner approach is
+available.
+
+Do not create unnecessary files.
+
+
+============================================================
+60. TEACHER SCREEN LIST
+============================================================
+
+PRIORITY 1:
+
+1. Teacher Login
+2. Teacher Dashboard
+3. Doubt Review
+4. Doubt Details
+5. Answer Doubt
+
+
+PRIORITY 2:
+
+6. My/Assigned Doubts
+7. Students
+8. Student Details
+9. Class Materials
+10. Upload Material
+
+
+PRIORITY 3:
+
+11. Student Community
+12. Community Moderation
+13. Flag Details
+14. Issue Warning
+
+
+PRIORITY 4:
+
+15. Announcements
+16. Create Announcement
+17. Notifications
+18. Activity
+19. Profile
+20. Settings
+
+
+============================================================
+61. PRIMARY TEACHER DEMO FLOW
+============================================================
+
+The most important prototype journey should be:
+
+Teacher logs in
+      ↓
+Teacher Dashboard
+      ↓
+Sees "Doubts Awaiting Review"
+      ↓
+Opens Doubt Review
+      ↓
+Selects a doubt
+      ↓
+Reviews student question
+      ↓
+Approves doubt
+      ↓
+Answers question
+      ↓
+Student receives response
+      ↓
+Student sends follow-up
+      ↓
+Teacher replies
+      ↓
+Teacher marks doubt resolved
+
+
+This is the CORE demonstration.
+
+
+============================================================
+62. SECONDARY TEACHER DEMO FLOW
+============================================================
+
+Teacher Dashboard
+      ↓
+Community Moderation
+      ↓
+Flagged Post
+      ↓
+Review Content
+      ↓
+Teacher determines violation
+      ↓
+Issue Warning
+      ↓
+Student receives notification
+
+
+============================================================
+63. THIRD TEACHER DEMO FLOW
+============================================================
+
+Teacher Dashboard
+      ↓
+Class Materials
+      ↓
+Upload Material
+      ↓
+Select Class
+      ↓
+Select Division
+      ↓
+Select Subject
+      ↓
+Select Chapter
+      ↓
+Select Material Type
+      ↓
+Publish
+      ↓
+Student sees material in Digital Library
+
+
+============================================================
+64. FOURTH TEACHER DEMO FLOW
+============================================================
+
+Teacher Dashboard
+      ↓
+Announcements
+      ↓
+Create Announcement
+      ↓
+Choose Class/Division
+      ↓
+Publish
+      ↓
+Student receives notification
+
+
+============================================================
+65. IMPORTANT TEACHER DASHBOARD STORY
+============================================================
+
+When a teacher logs in, the interface should communicate:
+
+"I have students who need help."
+
+"I need to review some doubts."
+
+"Some approved doubts need answers."
+
+"There may be community content that requires review."
+
+"I can upload materials for my classes."
+
+"I can send announcements."
+
+"I can see my activity."
+
+
+This should be immediately understandable.
+
+
+============================================================
+66. DO NOT OVERLOAD THE DASHBOARD
+============================================================
+
+The dashboard should NOT display every piece of data.
+
+It should be an overview.
+
+Detailed management belongs on separate pages.
+
+Example:
+
+Dashboard
+    ↓
+Doubt Review
+    ↓
+Doubt Details
+
+
+Dashboard
+    ↓
+Community Moderation
+    ↓
+Flag Details
+
+
+Dashboard
+    ↓
+Class Materials
+    ↓
+Material Details
+
+
+Keep the information architecture clean.
+
+
+============================================================
+67. TEACHER PERFORMANCE
+============================================================
+
+You may show contribution statistics such as:
+
+Doubts Reviewed
+
+Doubts Answered
+
+Doubts Resolved
+
+Students Supported
+
+Resources Uploaded
+
+
+However:
+
+DO NOT create:
+
+- Leaderboards
+- Competitive rankings
+- Teacher points
+- Badges
+- "Best Teacher"
+- Gamified rewards
+
+
+The platform is educational and community-focused.
+
+
+============================================================
+68. FINAL DESIGN REQUIREMENT
+============================================================
+
+The Teacher/Mentor interface should look like part of the
+same Rural E-Learning Portal as:
+
+Student Portal
+Admin Portal
+
+
+Use the same:
+
+- Brand identity
+- Typography
+- Color tokens
+- Light/dark theme
+- Buttons
+- Forms
+- Status badges
+- Sidebar style
+- Header style
+- Spacing
+
+
+But the information architecture should be different.
+
+Student:
+Learning and support
+
+Teacher:
+Academic support and moderation
+
+Admin:
+Platform management
+
+
+============================================================
+69. FINAL FRONTEND DEVELOPMENT PHASES
+============================================================
+
+PHASE 1
+Teacher Global Layout + Design System
+
+PHASE 2
+Teacher Login
+
+PHASE 3
+Teacher Dashboard
+
+PHASE 4
+Doubt Review
+
+PHASE 5
+Doubt Approval / Rejection
+
+PHASE 6
+Answer + Follow-up + Resolve
+
+PHASE 7
+Student List / Student Details
+
+PHASE 8
+Class Materials
+
+PHASE 9
+Material Upload / Management
+
+PHASE 10
+Community Moderation
+
+PHASE 11
+Warning System
+
+PHASE 12
+Announcements
+
+PHASE 13
+Notifications
+
+PHASE 14
+Teacher Activity
+
+PHASE 15
+Profile + Settings
+
+PHASE 16
+Responsive / Accessibility / Final UI Integration
+
+
+============================================================
+70. FIRST RESPONSE REQUIREMENT
+============================================================
+
+After receiving this specification:
+
+DO NOT CODE.
+
+DO NOT CREATE FILES.
+
+DO NOT MODIFY FILES.
+
+DO NOT INSTALL PACKAGES.
+
+Return a detailed implementation plan covering:
+
+1. Teacher/Mentor role
+2. Information architecture
+3. Navigation
+4. Complete screen list
+5. Dashboard layout
+6. Doubt workflow
+7. Approval/rejection workflow
+8. Answer/follow-up workflow
+9. Student management
+10. Class material workflow
+11. Community moderation
+12. Warning system
+13. Announcement system
+14. Notification system
+15. Activity system
+16. Reusable components
+17. CSS architecture
+18. JavaScript architecture
+19. Dummy data
+20. Theme strategy
+21. Responsive strategy
+22. Implementation phases
+23. Potential issues
+24. Recommended improvements
+
+
+Then STOP.
+
+Wait for approval.
+
+
+============================================================
+FINAL COMMAND
+============================================================
+
+DO NOT START WORKING.
+
+First analyze this entire Teacher/Mentor specification
+and provide the complete frontend implementation plan.
+
+WAIT FOR MY APPROVAL.
+
+Only after I explicitly say:
+
+"START WORKING"
+
+should you begin implementing the Teacher/Mentor frontend.
+============================================================

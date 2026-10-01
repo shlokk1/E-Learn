@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'dashboard', icon: 'squares-four', text: 'Dashboard', link: 'dashboard.html' },
         { id: 'doubt-review', icon: 'magnifying-glass', text: 'Doubt Review', link: 'doubt-review.html' },
         { id: 'my-doubts', icon: 'chat-teardrop-text', text: 'My Doubts', link: 'my-doubts.html' },
+        { id: 'sessions', icon: 'chalkboard-teacher', text: '1:1 Sessions', link: 'sessions.html' },
         { id: 'students', icon: 'users', text: 'Students', link: 'students.html' },
         { id: 'materials', icon: 'books', text: 'Class Materials', link: 'materials.html' },
         { id: 'moderation', icon: 'shield-warning', text: 'Community Moderation', link: 'moderation.html' },

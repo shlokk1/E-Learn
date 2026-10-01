@@ -27,8 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 division: 'A'
             };
             
-            // Store user in localStorage
+            // Store user in localStorage and sessionStorage
             localStorage.setItem('currentUser', JSON.stringify(mockUser));
+            sessionStorage.setItem('currentUser', JSON.stringify(mockUser));
             
             // Redirect based on role
             if (role === 'admin') {
@@ -63,8 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 division: division || 'A'
             };
             
-            // Store user in localStorage
+            // Store user in localStorage and sessionStorage
             localStorage.setItem('currentUser', JSON.stringify(mockUser));
+            sessionStorage.setItem('currentUser', JSON.stringify(mockUser));
             
             // Redirect based on role
             if (role === 'admin') {

@@ -1,0 +1,2609 @@
+============================================================
+PROJECT: RURAL E-LEARNING & DOUBT RESOLUTION PORTAL
+ADMIN FRONTEND SPECIFICATION
+============================================================
+
+You are working as the UI/UX architect and frontend development
+assistant for the Admin section of our academic project:
+
+"Rural E-Learning & Doubt Resolution Portal"
+
+IMPORTANT:
+
+This document defines ONLY the ADMIN FRONTEND.
+
+We are currently developing the FRONTEND PROTOTYPE.
+
+DO NOT implement:
+
+- Spring Boot
+- Java backend
+- JPA
+- Hibernate
+- MySQL
+- REST APIs
+- JWT
+- Real authentication
+- Real file storage
+- Real AI moderation
+- Real-time backend systems
+
+The backend will be developed later after the frontend
+prototype is finalized.
+
+For now, use:
+
+- HTML
+- CSS
+- Vanilla JavaScript
+
+Tailwind CSS may be used only if it genuinely improves
+maintainability.
+
+Do NOT use React, Next.js, Vue, Angular or other frontend
+frameworks unless explicitly approved.
+
+
+============================================================
+1. CRITICAL WORKFLOW INSTRUCTION
+============================================================
+
+DO NOT START CODING IMMEDIATELY.
+
+First:
+
+1. Read the complete specification.
+2. Understand the Admin's responsibilities.
+3. Analyze the required screens.
+4. Analyze the navigation.
+5. Analyze the Admin workflows.
+6. Identify reusable components.
+7. Propose the folder structure.
+8. Propose the UI architecture.
+9. Propose the implementation phases.
+10. Identify any missing requirements or ambiguities.
+
+Then provide the complete implementation plan.
+
+STOP.
+
+DO NOT CREATE FILES.
+
+DO NOT MODIFY FILES.
+
+DO NOT IMPLEMENT THE ADMIN PANEL.
+
+Wait until I explicitly say:
+
+"START WORKING"
+
+Only then begin implementation.
+
+If I say:
+
+"START WORKING ON PHASE 1"
+
+only implement Phase 1.
+
+Do not automatically implement all phases.
+
+
+============================================================
+2. ROLE OF THE ADMIN
+============================================================
+
+The Admin is responsible for managing the overall platform.
+
+The Admin is NOT primarily responsible for:
+
+- Teaching students
+- Answering every doubt
+- Participating in every discussion
+- Creating normal student-level academic conversations
+
+Those are primarily Teacher/Mentor responsibilities.
+
+The Admin's purpose is:
+
+PLATFORM MANAGEMENT
++
+USER MANAGEMENT
++
+ACADEMIC STRUCTURE MANAGEMENT
++
+CONTENT MANAGEMENT
++
+ANNOUNCEMENT MANAGEMENT
++
+MODERATION OVERSIGHT
++
+PLATFORM MONITORING
+
+
+============================================================
+3. ADMIN'S MAIN RESPONSIBILITIES
+============================================================
+
+The Admin should eventually be able to manage:
+
+1. Students
+2. Teachers/Mentors
+3. Classes
+4. Divisions
+5. Subjects
+6. Digital Library
+7. Educational Resources
+8. Announcements
+9. Community moderation
+10. Doubt monitoring
+11. Notifications
+12. Reports / Statistics
+13. Platform settings
+14. Admin profile
+
+
+============================================================
+4. ADMIN DASHBOARD — PURPOSE
+============================================================
+
+The Admin Dashboard should provide a high-level overview
+of the platform.
+
+The Admin should immediately understand:
+
+- How many students exist
+- How many teachers/mentors exist
+- How many pending mentor approvals exist
+- How many doubts are currently under review
+- How many doubts are unresolved
+- How many resources are available
+- How many announcements are active
+- How many community flags are pending
+- Recent platform activity
+
+
+============================================================
+5. ADMIN DASHBOARD LAYOUT
+============================================================
+
+The Admin interface should use:
+
+LEFT SIDEBAR
++
+TOP HEADER
++
+MAIN CONTENT
++
+OPTIONAL RIGHT-SIDE INFORMATION PANEL
+
+
+Suggested layout:
+
+┌────────────────┬──────────────────────────────────────────┐
+│                │ Header                                   │
+│                ├──────────────────────────────────────────┤
+│                │                                          │
+│    Sidebar     │ Dashboard                                │
+│                │                                          │
+│ Dashboard      │ Summary Cards                            │
+│ Students       │                                          │
+│ Teachers       │ Recent Activity                          │
+│ Classes        │                                          │
+│ Library        │ Pending Actions                          │
+│ Doubts         │                                          │
+│ Community      │                                          │
+│ Announcements  │                                          │
+│ Notifications  │                                          │
+│ Reports        │                                          │
+│ Settings       │                                          │
+│                │                                          │
+│ Logout         │                                          │
+└────────────────┴──────────────────────────────────────────┘
+
+
+============================================================
+6. ADMIN DASHBOARD SUMMARY CARDS
+============================================================
+
+Use useful operational statistics.
+
+Example:
+
+Students
+1,248
+
+Teachers
+56
+
+Pending Mentor Approvals
+7
+
+Doubts Under Review
+24
+
+
+Additional cards can include:
+
+Active Resources
+Announcements
+Flagged Community Posts
+Unresolved Doubts
+
+
+Do NOT fill the dashboard with meaningless statistics.
+
+Every statistic should represent something the Admin can
+actually manage or monitor.
+
+
+============================================================
+7. ADMIN DASHBOARD — QUICK ACTIONS
+============================================================
+
+Provide quick actions such as:
+
+[Add Student]
+
+[Add Teacher]
+
+[Manage Classes]
+
+[Upload Resource]
+
+[Create Announcement]
+
+[Review Flags]
+
+
+These should take the Admin directly to the appropriate
+management page.
+
+
+============================================================
+8. ADMIN RECENT ACTIVITY
+============================================================
+
+Show recent administrative activity.
+
+Example:
+
+Teacher account approved
+5 minutes ago
+
+New Mathematics textbook uploaded
+20 minutes ago
+
+Community post flagged
+35 minutes ago
+
+Announcement published
+1 hour ago
+
+Student account registered
+2 hours ago
+
+
+Use a clean timeline/list.
+
+Do not create excessive animations.
+
+
+============================================================
+9. ADMIN PENDING ACTIONS
+============================================================
+
+The dashboard should show things requiring attention.
+
+Example:
+
+------------------------------------------------------------
+Pending Actions
+------------------------------------------------------------
+
+7 Mentor Applications
+[Review]
+
+12 Community Flags
+[Review]
+
+24 Doubts Under Review
+[View]
+
+3 Content Items Pending Approval
+[Review]
+
+
+This allows the Admin to immediately understand what needs
+attention.
+
+
+============================================================
+10. ADMIN SIDEBAR
+============================================================
+
+Recommended navigation:
+
+Dashboard
+
+Students
+
+Teachers / Mentors
+
+Classes & Divisions
+
+Subjects
+
+Digital Library
+
+Doubts
+
+Community Moderation
+
+Announcements
+
+Notifications
+
+Reports
+
+Settings
+
+Logout
+
+
+Keep the sidebar simple.
+
+Do not use unnecessary nested navigation.
+
+If nested navigation is necessary, use collapsible sections.
+
+
+============================================================
+11. ADMIN HEADER
+============================================================
+
+The header should contain:
+
+Page title / breadcrumb
+
+Search if appropriate
+
+Theme toggle
+
+Notifications
+
+Admin profile
+
+
+Example:
+
+Admin Portal
+
+Search...
+
+☀ / 🌙
+
+🔔
+
+Admin
+
+
+Do not use a fictional administrator name unless needed
+for dummy data.
+
+Prefer:
+
+"Administrator"
+
+or generic data.
+
+
+============================================================
+12. ADMIN LIGHT / DARK MODE
+============================================================
+
+The Admin interface MUST support:
+
+LIGHT MODE
+
+DARK MODE
+
+
+Use the same global design system as the Student interface.
+
+The Student and Admin portals should feel like parts of
+the SAME application.
+
+Do not create a completely different visual language.
+
+
+Use CSS variables/design tokens.
+
+Example conceptual tokens:
+
+--primary
+--background
+--surface
+--surface-secondary
+--text
+--text-muted
+--border
+--success
+--warning
+--danger
+--info
+
+
+Theme preference should persist using localStorage.
+
+
+============================================================
+13. ADMIN DESIGN PHILOSOPHY
+============================================================
+
+The Admin interface should be:
+
+Professional
+
+Simple
+
+Information-dense but not cluttered
+
+Institutional
+
+Functional
+
+Accessible
+
+Responsive
+
+Easy to scan
+
+Easy to operate
+
+
+Avoid:
+
+- Gaming UI
+- Neon colors
+- Excessive gradients
+- Glassmorphism
+- Excessive animations
+- Giant decorative elements
+- Excessive shadows
+- Excessive rounded cards
+
+
+The Admin panel is a management system.
+
+It should prioritize:
+
+CLARITY
++
+EFFICIENCY
++
+DATA VISIBILITY
+
+
+============================================================
+14. STUDENT MANAGEMENT
+============================================================
+
+Admin should have a Student Management page.
+
+The page should allow the Admin to:
+
+- View students
+- Search students
+- Filter students
+- View student details
+- Edit student information
+- Activate/deactivate account
+- View class/division
+- View student activity summary
+
+
+Example table:
+
+------------------------------------------------------------
+Students
+------------------------------------------------------------
+
+Search students...
+
+Filter:
+Class
+Division
+Status
+
+------------------------------------------------------------
+Name       Class   Division   Status    Actions
+------------------------------------------------------------
+
+Student A   10       A        Active    View
+
+Student B   10       B        Active    View
+
+Student C   9        A        Inactive  View
+
+------------------------------------------------------------
+
+
+Actions:
+
+View
+
+Edit
+
+Activate
+
+Deactivate
+
+
+Do not delete important records directly in the UI without
+confirmation.
+
+Use confirmation dialogs for destructive actions.
+
+
+============================================================
+15. STUDENT DETAILS
+============================================================
+
+When Admin opens a student:
+
+Show:
+
+Student name
+
+Email
+
+Class
+
+Division
+
+Account status
+
+Registration date
+
+Recent activity
+
+Doubts summary
+
+Community activity
+
+Warnings if applicable
+
+
+Example:
+
+------------------------------------------------------------
+Student Details
+------------------------------------------------------------
+
+Name:
+Student Name
+
+Class:
+10
+
+Division:
+A
+
+Status:
+Active
+
+
+Doubts:
+12
+
+Resolved:
+10
+
+Community Contributions:
+18
+
+Warnings:
+1
+
+
+Recent Activity
+------------------------------------------------------------
+
+Submitted Mathematics doubt
+Posted community question
+Viewed Science textbook
+
+
+The Admin should not see unnecessary private information.
+
+
+============================================================
+16. TEACHER / MENTOR MANAGEMENT
+============================================================
+
+Admin manages teachers/mentors.
+
+The Admin should be able to:
+
+- View teachers
+- Search teachers
+- Filter teachers
+- Approve mentor applications
+- Reject applications
+- View teacher details
+- Activate/deactivate teacher
+- View contribution statistics
+
+
+Example:
+
+------------------------------------------------------------
+Teacher Applications
+------------------------------------------------------------
+
+Teacher Name
+Subject
+Application Date
+Status
+Actions
+
+
+Pending:
+
+[Review]
+
+Approved:
+
+[View]
+
+Rejected:
+
+[View Reason]
+
+
+============================================================
+17. MENTOR APPROVAL WORKFLOW
+============================================================
+
+The workflow should be:
+
+Teacher applies
+      ↓
+Application Pending
+      ↓
+Admin reviews
+      ↓
+ ┌───────────────┐
+ ↓               ↓
+Approve         Reject
+ ↓               ↓
+Active          Reason
+Teacher          ↓
+                Applicant notified
+
+
+The frontend prototype should simulate this workflow.
+
+
+============================================================
+18. TEACHER DETAILS
+============================================================
+
+Admin should be able to view:
+
+Name
+
+Email
+
+Subjects
+
+Classes assigned
+
+Verification status
+
+Account status
+
+Doubts answered
+
+Students helped
+
+Community moderation actions
+
+Joined date
+
+
+Example:
+
+Teacher:
+Mr. Sharma
+
+Subjects:
+Mathematics, Physics
+
+Classes:
+9, 10
+
+Status:
+Verified
+
+Doubts Answered:
+148
+
+
+============================================================
+19. CLASSES & DIVISIONS
+============================================================
+
+The platform uses:
+
+CLASS + DIVISION
+
+not course enrollment.
+
+Admin should manage:
+
+Classes
+
+Divisions
+
+
+Example:
+
+Class 9
+- A
+- B
+- C
+
+Class 10
+- A
+- B
+- C
+
+
+Admin should be able to:
+
+- Create class
+- Create division
+- Rename division
+- Activate/deactivate division
+- View students in division
+
+
+Do not overcomplicate this feature.
+
+
+============================================================
+20. CLASS DETAILS
+============================================================
+
+Example:
+
+------------------------------------------------------------
+Class 10 - Division A
+------------------------------------------------------------
+
+Students:
+42
+
+Teachers:
+4
+
+Subjects:
+6
+
+
+Students
+------------------------------------------------------------
+
+Student A
+Student B
+Student C
+
+
+Teachers
+------------------------------------------------------------
+
+Mathematics — Teacher A
+Science — Teacher B
+English — Teacher C
+
+
+This provides useful context to the Admin.
+
+
+============================================================
+21. SUBJECT MANAGEMENT
+============================================================
+
+Admin can manage subjects.
+
+Example:
+
+Mathematics
+
+Science
+
+English
+
+Biology
+
+History
+
+Geography
+
+
+Admin actions:
+
+Add Subject
+
+Edit Subject
+
+Activate/Deactivate
+
+
+Subjects will eventually be associated with:
+
+- Classes
+- Teachers
+- Resources
+- Doubts
+- Community categories
+
+
+============================================================
+22. DIGITAL LIBRARY MANAGEMENT
+============================================================
+
+This is a major Admin feature.
+
+The Admin should be able to:
+
+- View resources
+- Search resources
+- Filter resources
+- Add resources
+- Edit resources
+- Archive resources
+- Organize resources
+- Assign resources to class
+- Assign resources to subject
+- Assign chapter/topic
+
+
+Resource types:
+
+Textbook
+
+Guide / Answer Book
+
+PDF
+
+PPT
+
+Notes
+
+Worksheet
+
+Practice Paper
+
+Question Paper
+
+Video
+
+
+============================================================
+23. RESOURCE MANAGEMENT
+============================================================
+
+Example:
+
+------------------------------------------------------------
+Digital Library
+------------------------------------------------------------
+
+Search resources...
+
+
+Filters:
+
+Class
+Subject
+Resource Type
+Status
+
+
+------------------------------------------------------------
+Title              Type       Class    Status
+------------------------------------------------------------
+
+Mathematics Textbook
+Textbook            10       Active
+
+Mathematics Guide
+Guide               10       Active
+
+Algebra Notes
+PDF                 10       Active
+
+Physics Chapter 2
+PPT                 10       Active
+
+
+Actions:
+
+View
+
+Edit
+
+Archive
+
+
+============================================================
+24. UPLOAD RESOURCE
+============================================================
+
+Admin should have:
+
+[Upload Resource]
+
+
+Form:
+
+Title
+
+Description
+
+Class
+
+Division if applicable
+
+Subject
+
+Chapter
+
+Resource Type
+
+File
+
+Thumbnail if appropriate
+
+Visibility
+
+Status
+
+
+For prototype:
+
+Do not implement real server-side file upload.
+
+Simulate the upload process.
+
+Show a success message such as:
+
+"Resource uploaded successfully."
+
+
+============================================================
+25. RESOURCE ORGANIZATION
+============================================================
+
+The Admin should be able to organize resources logically.
+
+Example:
+
+Class 10
+  ↓
+Mathematics
+  ↓
+Chapter 1
+  ↓
+Textbook
+Guide
+Notes
+PPT
+Practice Questions
+
+
+The UI should make this hierarchy easy to understand.
+
+
+============================================================
+26. DOUBT MANAGEMENT
+============================================================
+
+The Admin should have a platform-level Doubt Management
+section.
+
+IMPORTANT:
+
+The Admin does NOT need to answer every doubt.
+
+Teachers/Mentors handle academic doubt responses.
+
+Admin monitors:
+
+- Doubts under review
+- Unassigned doubts
+- Doubts pending too long
+- Rejected doubts
+- Resolved doubts
+- Problematic activity
+
+
+============================================================
+27. DOUBT MANAGEMENT DASHBOARD
+============================================================
+
+Example:
+
+------------------------------------------------------------
+Doubt Management
+------------------------------------------------------------
+
+Under Review: 24
+
+Unassigned: 8
+
+In Progress: 15
+
+Resolved: 120
+
+Rejected: 10
+
+
+Filters:
+
+Status
+Subject
+Class
+Teacher
+Date
+
+
+------------------------------------------------------------
+Student       Subject       Status       Assigned
+------------------------------------------------------------
+
+Student A     Mathematics   Review       -
+Student B     Science       Progress     Teacher B
+Student C     Biology       Resolved     Teacher C
+
+
+Actions:
+
+View
+
+Monitor
+
+Assign if necessary
+
+
+============================================================
+28. DOUBT ESCALATION
+============================================================
+
+If a doubt remains unanswered for too long, the Admin
+should be able to identify it.
+
+Example:
+
+Doubt:
+
+"How do I solve this equation?"
+
+Status:
+
+Waiting for mentor for 48 hours
+
+
+Admin action:
+
+[Assign Mentor]
+
+[Escalate]
+
+[View]
+
+
+This should be a management function, not normal academic
+answering.
+
+
+============================================================
+29. COMMUNITY MODERATION
+============================================================
+
+The Admin should have a Community Moderation page.
+
+The moderation system may flag content.
+
+Workflow:
+
+Student posts
+      ↓
+Moderation system detects possible violation
+      ↓
+Flag created
+      ↓
+Teacher reviews
+      ↓
+Teacher may issue warning
+      ↓
+Admin can oversee the moderation process
+
+
+Admin should be able to see:
+
+- Flagged posts
+- Reason
+- Student
+- Teacher review status
+- Warning status
+- Action taken
+
+
+============================================================
+30. COMMUNITY MODERATION DASHBOARD
+============================================================
+
+Example:
+
+------------------------------------------------------------
+Community Moderation
+------------------------------------------------------------
+
+Pending Flags: 12
+
+Reviewed Today: 24
+
+Warnings Issued: 3
+
+
+------------------------------------------------------------
+Student     Content             Reason       Status
+------------------------------------------------------------
+
+Student A   [content]           Foul language Pending
+
+Student B   [content]           Spam         Reviewed
+
+Student C   [content]           Harassment   Warning issued
+
+
+Actions:
+
+View
+
+Review
+
+Dismiss
+
+Escalate
+
+
+IMPORTANT:
+
+The moderation system is an assistant.
+
+Teachers/Admins make the final decision.
+
+Do not design the UI as though an automated chatbot has
+absolute authority.
+
+
+============================================================
+31. WARNING MANAGEMENT
+============================================================
+
+Admin should be able to view warnings issued to students.
+
+Example:
+
+Student:
+Student A
+
+Warning:
+Inappropriate language
+
+Issued by:
+Teacher
+
+Date:
+18 August 2026
+
+Status:
+Active
+
+
+Possible actions:
+
+View
+
+Review
+
+Resolve if applicable
+
+
+Do not make this punitive-looking.
+
+The UI should remain professional and educational.
+
+
+============================================================
+32. ANNOUNCEMENT MANAGEMENT
+============================================================
+
+Admin should have an Announcement Management page.
+
+Admin can:
+
+- View announcements
+- Create announcement
+- Edit announcement
+- Publish announcement
+- Schedule if needed
+- Archive announcement
+
+
+Example:
+
+------------------------------------------------------------
+Announcements
+------------------------------------------------------------
+
+Title
+Audience
+Author
+Date
+Status
+
+
+New Mathematics Study Material
+Class 10
+Admin
+Today
+Published
+
+
+Holiday Notice
+All Students
+Admin
+Yesterday
+Published
+
+
+------------------------------------------------------------
+
+
+============================================================
+33. CREATE ANNOUNCEMENT
+============================================================
+
+Form:
+
+Announcement Title
+
+Description
+
+Audience
+
+Class
+
+Division
+
+Subject if relevant
+
+Attachment
+
+Publish Date
+
+Status
+
+
+Audience examples:
+
+All Students
+
+Specific Class
+
+Specific Division
+
+Teachers
+
+Students + Teachers
+
+
+Buttons:
+
+Save Draft
+
+Publish
+
+
+For prototype, simulate these states.
+
+
+============================================================
+34. NOTIFICATION MANAGEMENT
+============================================================
+
+Admin should be able to view system notifications.
+
+Examples:
+
+Announcement published
+
+Mentor approved
+
+Student warning issued
+
+Resource uploaded
+
+System activity
+
+
+Admin may not need to manually send every notification.
+
+The Admin interface should mainly provide visibility.
+
+If a manual notification feature is included, keep it simple.
+
+
+============================================================
+35. REPORTS
+============================================================
+
+Admin should have a basic Reports page.
+
+Do NOT make this a complicated analytics platform.
+
+Useful metrics:
+
+Total students
+
+Total teachers
+
+Active students
+
+Active teachers
+
+Doubts submitted
+
+Doubts resolved
+
+Doubts rejected
+
+Average response activity
+
+Library resources
+
+Community posts
+
+Community flags
+
+Announcements
+
+
+Use simple:
+
+- Cards
+- Tables
+- Basic charts if useful
+
+
+Do not create visually complicated dashboards.
+
+
+============================================================
+36. REPORT FILTERS
+============================================================
+
+Reports can be filtered by:
+
+Date
+
+Class
+
+Division
+
+Subject
+
+Teacher
+
+
+Example:
+
+Date:
+This Week
+
+Class:
+10
+
+Subject:
+Mathematics
+
+
+Then show:
+
+Doubts submitted:
+42
+
+Resolved:
+36
+
+Pending:
+6
+
+
+============================================================
+37. ADMIN SEARCH
+============================================================
+
+Admin should have useful search functionality.
+
+Search may include:
+
+Students
+
+Teachers
+
+Resources
+
+Doubts
+
+Announcements
+
+
+Do not create one giant confusing search system if it makes
+the UI difficult.
+
+Context-specific search is acceptable.
+
+
+============================================================
+38. ADMIN NOTIFICATIONS
+============================================================
+
+Admin should receive notifications such as:
+
+New mentor application
+
+Large number of flagged community posts
+
+Unassigned doubt
+
+Resource upload
+
+System alert
+
+Pending action
+
+
+Example:
+
+🔔 New mentor application received.
+
+⚠ 12 community posts require review.
+
+⚠ 8 doubts remain unassigned.
+
+📚 New resource uploaded.
+
+
+============================================================
+39. ADMIN PROFILE
+============================================================
+
+Admin profile should show:
+
+Name
+
+Email
+
+Role
+
+Profile picture if applicable
+
+Account status
+
+
+Keep it simple.
+
+
+============================================================
+40. ADMIN SETTINGS
+============================================================
+
+Settings should include:
+
+Light / Dark / System theme
+
+Notification preferences
+
+Account settings
+
+Password placeholder
+
+System preferences if required
+
+
+Do not create unnecessary settings.
+
+
+============================================================
+41. CONFIRMATION DIALOGS
+============================================================
+
+For potentially destructive actions:
+
+Deactivate student
+
+Deactivate teacher
+
+Archive resource
+
+Delete/Archive announcement
+
+Reject mentor application
+
+
+Show confirmation.
+
+Example:
+
+"Are you sure you want to deactivate this teacher?"
+
+Buttons:
+
+Cancel
+
+Confirm
+
+
+For destructive actions, make the wording clear.
+
+
+============================================================
+42. EMPTY STATES
+============================================================
+
+Every management page should have a useful empty state.
+
+Examples:
+
+No pending mentor applications.
+
+No flagged community posts.
+
+No announcements found.
+
+No resources match your filters.
+
+No unresolved doubts.
+
+
+Do not leave blank white screens.
+
+
+============================================================
+43. ERROR STATES
+============================================================
+
+Prototype should demonstrate appropriate error states.
+
+Examples:
+
+Unable to load resources.
+
+Something went wrong.
+
+Please try again.
+
+
+For forms:
+
+Required field missing.
+
+Invalid input.
+
+File type not supported.
+
+
+Keep messages simple and understandable.
+
+
+============================================================
+44. SUCCESS STATES
+============================================================
+
+After actions:
+
+Resource uploaded:
+
+"Resource uploaded successfully."
+
+Announcement published:
+
+"Announcement published successfully."
+
+Teacher approved:
+
+"Teacher approved successfully."
+
+Student deactivated:
+
+"Student account deactivated."
+
+
+Use a small toast or inline confirmation.
+
+
+============================================================
+45. ADMIN RESPONSIVE DESIGN
+============================================================
+
+Desktop:
+
+Sidebar + main content.
+
+Tablet:
+
+Collapsible sidebar.
+
+Mobile:
+
+Sidebar becomes a drawer.
+
+Tables should become:
+
+- Scrollable
+or
+- Card-based
+
+depending on content.
+
+
+Do not allow tables to break the entire mobile layout.
+
+
+============================================================
+46. ADMIN ACCESSIBILITY
+============================================================
+
+Use:
+
+Semantic HTML
+
+Proper form labels
+
+Keyboard navigation
+
+Focus states
+
+Readable typography
+
+Adequate contrast
+
+Clear status labels
+
+Accessible dialogs
+
+Accessible buttons
+
+
+Do not rely on color alone.
+
+
+============================================================
+47. ADMIN CSS
+============================================================
+
+CSS should remain simple.
+
+Use:
+
+CSS variables
+
+Reusable layout classes
+
+Reusable components
+
+Responsive media queries
+
+Consistent spacing
+
+
+Do not create extremely long page-specific CSS if
+components can be reused.
+
+
+============================================================
+48. ADMIN COMPONENTS
+============================================================
+
+Recommended reusable components:
+
+Sidebar
+
+Header
+
+Breadcrumb
+
+Summary Card
+
+Data Table
+
+Search Bar
+
+Filter Bar
+
+Status Badge
+
+Button
+
+Modal
+
+Confirmation Dialog
+
+Toast
+
+Form Input
+
+Dropdown
+
+Pagination
+
+Empty State
+
+Loading State
+
+Notification Item
+
+Activity Item
+
+
+Use the same components throughout the Admin section.
+
+
+============================================================
+49. ADMIN DATA TABLES
+============================================================
+
+Management pages will frequently use tables.
+
+Tables should support:
+
+- Search
+- Filters
+- Status
+- Actions
+
+
+Example:
+
+Name | Class | Status | Actions
+
+
+Actions can be:
+
+View
+
+Edit
+
+Approve
+
+Reject
+
+Deactivate
+
+Archive
+
+
+Do not overload each row with too many buttons.
+
+Use a contextual action menu when necessary.
+
+
+============================================================
+50. ADMIN DASHBOARD RIGHT PANEL
+============================================================
+
+The Admin dashboard can use a right-side panel for:
+
+Pending Actions
+
+Recent Activity
+
+System Notifications
+
+
+Example:
+
+MAIN CONTENT
+------------------------------
+
+Summary Cards
+
+Doubt Statistics
+
+Resource Statistics
+
+Recent Activity
+
+
+RIGHT PANEL
+------------------------------
+
+Pending Mentor Approvals
+
+Flagged Community Posts
+
+Unresolved Doubts
+
+System Notifications
+
+
+This is preferable to putting everything into the top navigation.
+
+
+============================================================
+51. ADMIN NAVIGATION HIERARCHY
+============================================================
+
+Recommended:
+
+Dashboard
+
+User Management
+    Students
+    Teachers/Mentors
+
+Academic Structure
+    Classes
+    Divisions
+    Subjects
+
+Digital Library
+
+Doubt Management
+
+Community Moderation
+
+Announcements
+
+Notifications
+
+Reports
+
+Settings
+
+Logout
+
+
+If nested navigation becomes visually heavy,
+use separate pages with breadcrumbs instead.
+
+
+============================================================
+52. ADMIN WORKFLOW — USER MANAGEMENT
+============================================================
+
+Student:
+
+View
+→ Edit
+→ Activate/Deactivate
+
+
+Teacher:
+
+Application
+→ Review
+→ Approve/Reject
+→ Active/Inactive
+
+
+The prototype should make these states visible.
+
+
+============================================================
+53. ADMIN WORKFLOW — RESOURCE MANAGEMENT
+============================================================
+
+Admin:
+
+Digital Library
+      ↓
+Add Resource
+      ↓
+Enter Details
+      ↓
+Select Class
+      ↓
+Select Subject
+      ↓
+Select Chapter
+      ↓
+Select Type
+      ↓
+Upload Placeholder
+      ↓
+Save
+      ↓
+Published / Draft
+
+
+The frontend should simulate this.
+
+
+============================================================
+54. ADMIN WORKFLOW — ANNOUNCEMENT
+============================================================
+
+Admin:
+
+Announcements
+      ↓
+Create
+      ↓
+Enter content
+      ↓
+Choose audience
+      ↓
+Save Draft / Publish
+      ↓
+Students receive announcement
+
+
+Simulate this entirely on frontend.
+
+
+============================================================
+55. ADMIN WORKFLOW — COMMUNITY MODERATION
+============================================================
+
+Student creates community post
+      ↓
+Moderation system flags possible issue
+      ↓
+Teacher reviews
+      ↓
+Teacher takes action
+      ↓
+Admin can monitor the action
+
+
+Admin should have oversight.
+
+Do not make Admin automatically issue warnings based solely
+on automated detection.
+
+
+============================================================
+56. ADMIN WORKFLOW — DOUBTS
+============================================================
+
+Student submits doubt
+      ↓
+Under Review
+      ↓
+Teacher/Mentor reviews
+      ↓
+Approved / Rejected
+      ↓
+Approved:
+Mentor answers
+      ↓
+Student follows up
+      ↓
+Resolved
+
+
+Admin can monitor the process.
+
+If a doubt is stuck:
+
+Admin can identify it.
+
+Admin may assign/escalate if appropriate.
+
+
+============================================================
+57. FRONTEND PROTOTYPE DATA
+============================================================
+
+Use dummy data.
+
+Examples:
+
+Students:
+
+Student A
+Student B
+Student C
+
+
+Teachers:
+
+Teacher A
+Teacher B
+
+
+Classes:
+
+Class 9
+Class 10
+
+
+Divisions:
+
+A
+B
+C
+
+
+Resources:
+
+Mathematics Textbook
+Science Guide
+Algebra Notes
+Physics PPT
+
+
+Announcements:
+
+Unit Test Notice
+New Library Material
+Holiday Notice
+
+
+Doubts:
+
+Mathematics doubt
+Physics doubt
+Biology doubt
+
+
+Community flags:
+
+Foul language
+Spam
+Harassment
+
+
+Do not use real personal data.
+
+
+============================================================
+58. NO REAL AUTHENTICATION
+============================================================
+
+The frontend prototype may simulate Admin login.
+
+Do not implement real authentication.
+
+Do not store passwords.
+
+Do not pretend frontend-only login is secure.
+
+Real authentication will be developed later.
+
+
+============================================================
+59. NO BACKEND
+============================================================
+
+Absolutely no backend in this phase.
+
+Do not implement:
+
+Spring Boot
+
+REST APIs
+
+JPA
+
+Hibernate
+
+MySQL
+
+JWT
+
+Database
+
+File storage
+
+WebSockets
+
+
+Use JavaScript dummy data only.
+
+
+============================================================
+60. FUTURE BACKEND COMPATIBILITY
+============================================================
+
+Even though backend is not currently being developed,
+structure the frontend so it can eventually receive data
+from APIs.
+
+Examples of future concepts:
+
+GET students
+
+GET teachers
+
+GET resources
+
+GET doubts
+
+GET announcements
+
+GET notifications
+
+GET reports
+
+
+Do not implement these API calls now.
+
+Use clean dummy data objects.
+
+
+============================================================
+61. SUGGESTED FRONTEND STRUCTURE
+============================================================
+
+Suggested structure:
+
+project/
+│
+├── admin/
+│   ├── dashboard.html
+│   │
+│   ├── students.html
+│   ├── student-details.html
+│   │
+│   ├── teachers.html
+│   ├── teacher-details.html
+│   ├── mentor-applications.html
+│   │
+│   ├── classes.html
+│   ├── divisions.html
+│   ├── subjects.html
+│   │
+│   ├── library.html
+│   ├── resource-upload.html
+│   ├── resource-details.html
+│   │
+│   ├── doubts.html
+│   ├── doubt-details.html
+│   │
+│   ├── community-moderation.html
+│   ├── moderation-details.html
+│   │
+│   ├── announcements.html
+│   ├── create-announcement.html
+│   │
+│   ├── notifications.html
+│   │
+│   ├── reports.html
+│   │
+│   ├── profile.html
+│   └── settings.html
+│
+├── css/
+│   ├── variables.css
+│   ├── global.css
+│   ├── layout.css
+│   ├── components.css
+│   ├── tables.css
+│   ├── forms.css
+│   └── responsive.css
+│
+├── js/
+│   ├── main.js
+│   ├── theme.js
+│   ├── admin-dashboard.js
+│   ├── students.js
+│   ├── teachers.js
+│   ├── classes.js
+│   ├── library.js
+│   ├── doubts.js
+│   ├── moderation.js
+│   ├── announcements.js
+│   ├── notifications.js
+│   └── reports.js
+│
+└── assets/
+    ├── images/
+    └── icons/
+
+
+You may simplify or modify this structure if a cleaner
+architecture is available.
+
+Do not create unnecessary files.
+
+
+============================================================
+62. ADMIN SCREENS — PRIORITY
+============================================================
+
+Priority 1:
+
+1. Admin Login
+2. Admin Dashboard
+3. Student Management
+4. Teacher/Mentor Management
+5. Mentor Approval
+6. Digital Library Management
+7. Announcement Management
+
+
+Priority 2:
+
+8. Class/Division Management
+9. Subject Management
+10. Doubt Management
+11. Community Moderation
+12. Notifications
+
+
+Priority 3:
+
+13. Reports
+14. Student Details
+15. Teacher Details
+16. Profile
+17. Settings
+
+
+Build in this order unless we approve another order.
+
+
+============================================================
+63. ADMIN DASHBOARD DEMO FLOW
+============================================================
+
+The Admin prototype should demonstrate:
+
+Admin logs in
+      ↓
+Admin Dashboard
+      ↓
+Sees pending mentor applications
+      ↓
+Reviews teacher
+      ↓
+Approves teacher
+      ↓
+Returns to dashboard
+      ↓
+Opens Digital Library
+      ↓
+Views resources
+      ↓
+Uploads a new textbook/resource
+      ↓
+Opens Announcements
+      ↓
+Creates announcement
+      ↓
+Publishes announcement
+      ↓
+Opens Community Moderation
+      ↓
+Views flagged content
+      ↓
+Reviews warning status
+      ↓
+Opens Doubt Management
+      ↓
+Sees pending/unresolved doubts
+      ↓
+Returns to dashboard
+
+
+This should demonstrate that Admin manages the platform
+rather than directly teaching students.
+
+
+============================================================
+64. DESIGN RELATIONSHIP WITH STUDENT PORTAL
+============================================================
+
+The Admin portal and Student portal must look like the
+same application.
+
+Use the same:
+
+- Brand color
+- Typography
+- Theme system
+- Button system
+- Border system
+- Status badges
+- Header style
+- Sidebar style
+- Spacing system
+
+
+However:
+
+Student UI:
+Learning-focused
+
+Admin UI:
+Management-focused
+
+
+Do not make the Admin UI visually identical to the Student
+dashboard.
+
+
+============================================================
+65. IMPORTANT UI RULE
+============================================================
+
+Do not put every feature into a giant dashboard.
+
+The dashboard is an OVERVIEW.
+
+Detailed management happens on separate pages.
+
+For example:
+
+Dashboard
+   ↓
+Students
+   ↓
+Student Details
+
+
+Dashboard
+   ↓
+Library
+   ↓
+Resource Details
+
+
+Dashboard
+   ↓
+Community Moderation
+   ↓
+Flag Details
+
+
+This keeps the interface manageable.
+
+
+============================================================
+66. PERFORMANCE
+============================================================
+
+The application should remain lightweight.
+
+Avoid:
+
+- Huge image files
+- Background videos
+- Unnecessary animation
+- Large libraries
+- Excessive JavaScript
+
+
+The platform should be usable on slower devices and
+connections.
+
+
+============================================================
+67. CODE QUALITY
+============================================================
+
+Code must be:
+
+Readable
+
+Simple
+
+Maintainable
+
+Modular
+
+Well-commented where useful
+
+Easy for students to understand
+
+
+Do not over-engineer.
+
+Do not introduce design patterns unless they solve an
+actual problem.
+
+
+============================================================
+68. ACCESSIBILITY
+============================================================
+
+Use:
+
+Semantic HTML
+
+Accessible forms
+
+Keyboard navigation
+
+Focus states
+
+Clear labels
+
+Good contrast
+
+Meaningful buttons
+
+Accessible dialogs
+
+
+Admin interfaces contain important actions, so accidental
+clicks should be minimized.
+
+
+============================================================
+69. WHAT NOT TO DO
+============================================================
+
+DO NOT:
+
+- Build backend
+- Build database
+- Build API
+- Use React
+- Overuse Tailwind
+- Create flashy gradients
+- Create gaming-style UI
+- Make Admin answer every doubt
+- Make chatbot automatically punish students
+- Make Admin manually handle every student interaction
+- Add unnecessary analytics
+- Add unnecessary features
+- Use real personal data
+- Hardcode passwords
+- Create fake security mechanisms
+
+
+============================================================
+70. IMPLEMENTATION PHASES — FRONTEND ONLY
+============================================================
+
+PHASE 1
+Global Admin Design System
+
+- Theme
+- Sidebar
+- Header
+- Buttons
+- Cards
+- Tables
+- Forms
+- Status badges
+- Modal
+- Toast
+- Responsive layout
+
+
+PHASE 2
+Admin Login
+
+
+PHASE 3
+Admin Dashboard
+
+
+PHASE 4
+Student Management
+
+
+PHASE 5
+Teacher/Mentor Management
+
+
+PHASE 6
+Mentor Application Approval
+
+
+PHASE 7
+Class / Division / Subject Management
+
+
+PHASE 8
+Digital Library Management
+
+
+PHASE 9
+Doubt Management
+
+
+PHASE 10
+Community Moderation
+
+
+PHASE 11
+Announcements
+
+
+PHASE 12
+Notifications
+
+
+PHASE 13
+Reports
+
+
+PHASE 14
+Profile + Settings
+
+
+PHASE 15
+Full Admin Frontend Integration
+
+
+============================================================
+71. FIRST RESPONSE REQUIREMENT
+============================================================
+
+After receiving this specification:
+
+DO NOT CODE.
+
+DO NOT CREATE FILES.
+
+DO NOT MODIFY FILES.
+
+Return a detailed plan containing:
+
+1. Understanding of Admin responsibilities
+2. Recommended Admin information architecture
+3. Complete screen list
+4. Navigation structure
+5. Admin dashboard design
+6. Student management workflow
+7. Teacher management workflow
+8. Mentor approval workflow
+9. Class/division workflow
+10. Digital library workflow
+11. Doubt management workflow
+12. Community moderation workflow
+13. Announcement workflow
+14. Notification workflow
+15. Reporting workflow
+16. Reusable UI components
+17. CSS architecture
+18. JavaScript architecture
+19. Dummy data structure
+20. Light/dark theme strategy
+21. Responsive strategy
+22. Implementation phases
+23. Potential issues/ambiguities
+24. Recommended improvements
+
+
+Then STOP.
+
+
+============================================================
+72. FINAL COMMAND
+============================================================
+
+DO NOT START WORKING YET.
+
+First analyze the specification and give me your complete
+Admin frontend implementation plan.
+
+WAIT FOR MY APPROVAL.
+
+Only after I explicitly say:
+
+"START WORKING"
+
+should you begin implementing the Admin frontend.
+============================================================

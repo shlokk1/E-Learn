@@ -88,6 +88,45 @@
                             </div>
                         </div>
 
+                        <!-- 1:1 Session Overview -->
+                        <div class="card mb-4" id="dashboard-admin-sessions">
+                            <div class="card-header"><h3 class="card-title">1:1 Session Overview</h3></div>
+                            <div class="card-body">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span class="text-muted">Upcoming</span>
+                                    <strong id="admin-dash-upcoming">0</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span class="text-muted">Completed</span>
+                                    <strong id="admin-dash-completed">0</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem;">
+                                    <span class="text-muted">Active Teachers</span>
+                                    <strong id="admin-dash-teachers">0</strong>
+                                </div>
+                                <a href="sessions.html" class="btn btn-primary w-100" style="justify-content: center;">Monitor Sessions</a>
+                                <script>
+                                    function renderAdminDashboardSessions() {
+                                        const sessions = MOCK_DATA.getSessions();
+                                        const upcoming = sessions.filter(s => s.status === 'Booked' || s.status === 'Upcoming' || s.status === 'In Progress').length;
+                                        const completed = sessions.filter(s => s.status === 'Completed').length;
+                                        const teachers = new Set(sessions.map(s => s.teacherName)).size;
+
+                                        document.getElementById('admin-dash-upcoming').textContent = upcoming;
+                                        document.getElementById('admin-dash-completed').textContent = completed;
+                                        document.getElementById('admin-dash-teachers').textContent = teachers;
+                                    }
+                                    document.addEventListener('DOMContentLoaded', renderAdminDashboardSessions);
+                                    window.addEventListener('storage', function(e) {
+                                        if (e.key === 'mockSessions') {
+                                            renderAdminDashboardSessions();
+                                        }
+                                    });
+                                    window.addEventListener('storage-local', renderAdminDashboardSessions);
+                                </script>
+                            </div>
+                        </div>
+
                         <div class="card">
                             <div class="card-header"><h3 class="card-title">Quick Actions</h3></div>
                             <div class="card-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">

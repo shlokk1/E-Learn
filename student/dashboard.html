@@ -29,6 +29,46 @@
                     <div>
                         <div class="card mb-4">
                             <div class="card-header">
+                                <h3 class="card-title">Upcoming 1:1 Sessions</h3>
+                                <a href="sessions.html" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;">View All</a>
+                            </div>
+                            <div class="card-body" id="dashboard-upcoming-session">
+                                <script>
+                                    function renderStudentDashboardUpcoming() {
+                                        const sessions = MOCK_DATA.getSessions();
+                                        const currentUser = MOCK_DATA.getUser();
+                                        const upcoming = sessions.find(s => (s.status === 'Booked' || s.status === 'Upcoming') && s.studentName === currentUser.name);
+                                        const container = document.getElementById('dashboard-upcoming-session');
+                                        if(upcoming) {
+                                            container.innerHTML = `
+                                                <div class="list-card">
+                                                    <div class="list-card-header">
+                                                        <div>
+                                                            <h4>${upcoming.subject}</h4>
+                                                            <p class="text-muted" style="font-size: 0.85rem;">Teacher: ${upcoming.teacherName}</p>
+                                                            <p style="font-size: 0.85rem; font-weight:600; margin-top:0.25rem;">${upcoming.date} &middot; ${upcoming.startTime}</p>
+                                                        </div>
+                                                        <a href="session-room.html?id=${upcoming.id}" class="btn btn-primary btn-sm">Join Session</a>
+                                                    </div>
+                                                </div>
+                                            `;
+                                        } else {
+                                            container.innerHTML = '<p class="text-muted" style="font-size: 0.9rem;">No upcoming sessions scheduled.</p>';
+                                        }
+                                    }
+                                    document.addEventListener('DOMContentLoaded', renderStudentDashboardUpcoming);
+                                    window.addEventListener('storage', function(e) {
+                                        if (e.key === 'mockSessions') {
+                                            renderStudentDashboardUpcoming();
+                                        }
+                                    });
+                                    window.addEventListener('storage-local', renderStudentDashboardUpcoming);
+                                </script>
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
                                 <h3 class="card-title">Recent Doubts</h3>
                                 <a href="doubts.html" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;">View All</a>
                             </div>

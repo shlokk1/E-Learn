@@ -15,15 +15,18 @@ document.addEventListener('DOMContentLoaded', () => {
             <nav class="app-sidebar-nav">
                 <a href="dashboard.html" class="nav-item ${currentPage === 'dashboard' ? 'active' : ''}"><i class="ph ph-squares-four"></i> Dashboard</a>
                 <a href="doubts.html" class="nav-item ${['doubts', 'ask-doubt', 'doubt-details'].includes(currentPage) ? 'active' : ''}"><i class="ph ph-question"></i> My Doubts</a>
+                <a href="sessions.html" class="nav-item ${['sessions', 'session-room'].includes(currentPage) ? 'active' : ''}"><i class="ph ph-chalkboard-teacher"></i> 1:1 Sessions</a>
                 <a href="library.html" class="nav-item ${['library', 'resource-viewer'].includes(currentPage) ? 'active' : ''}"><i class="ph ph-books"></i> Digital Library</a>
                 <a href="community.html" class="nav-item ${['community', 'discussion'].includes(currentPage) ? 'active' : ''}"><i class="ph ph-users"></i> Student Community</a>
                 <a href="announcements.html" class="nav-item ${currentPage === 'announcements' ? 'active' : ''}"><i class="ph ph-megaphone"></i> Announcements</a>
                 <a href="notifications.html" class="nav-item ${currentPage === 'notifications' ? 'active' : ''}"><i class="ph ph-bell"></i> Notifications</a>
                 <a href="activity.html" class="nav-item ${currentPage === 'activity' ? 'active' : ''}"><i class="ph ph-chart-line-up"></i> My Activity</a>
+            </nav>
+            <div style="padding: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
                 <a href="profile.html" class="nav-item ${currentPage === 'profile' ? 'active' : ''}"><i class="ph ph-user"></i> Profile</a>
                 <a href="settings.html" class="nav-item ${currentPage === 'settings' ? 'active' : ''}"><i class="ph ph-gear"></i> Settings</a>
-                <a href="../login.html" class="nav-item mt-4" onclick="localStorage.removeItem('currentUser')"><i class="ph ph-sign-out"></i> Logout</a>
-            </nav>
+                <a href="../login.html" class="nav-item" onclick="sessionStorage.removeItem('currentUser'); localStorage.removeItem('currentUser');"><i class="ph ph-sign-out"></i> Logout</a>
+            </div>
         `;
     }
 
