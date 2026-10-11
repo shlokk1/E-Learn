@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students - EduPortal Admin</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/admin-tables.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/admin-core.js"></script>
+    <script src="../../assets/js/admin-layout.js"></script>
+</head>
+<body data-admin-page="students">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                <div class="mb-4" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h1>Student Management</h1>
+                        <p class="text-muted">Manage all registered students.</p>
+                    </div>
+                    <a href="add-student.html" class="btn btn-primary"><i class="ph ph-plus"></i> Add Student</a>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header-bar">
+                        <div class="form-group" style="margin: 0;">
+                            <input type="text" id="studentSearch" class="form-control" placeholder="Search students..." style="width: 250px;" oninput="filterStudents()">
+                        </div>
+                        <div class="table-filters">
+                            <select id="classFilter" class="form-control" onchange="filterStudents()">
+                                <option value="" selected>All Classes</option>
+                                <option value="9">Class 9</option>
+                                <option value="10">Class 10</option>
+                            </select>
+                            <select id="divFilter" class="form-control" onchange="filterStudents()">
+                                <option value="" selected>All Divs</option>
+                                <option value="A">Div A</option>
+                                <option value="B">Div B</option>
+                                <option value="C">Div C</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Class</th>
+                                <th>Division</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const DEFAULT_STUDENTS = [
+            { id: '1', name: 'Rahul Sharma', email: 'rahul@example.com', class: '10', division: 'A', status: 'Active', phone: '+91 98765 00001' },
+            { id: '2', name: 'Priya Singh', email: 'priya@example.com', class: '10', division: 'A', status: 'Active', phone: '+91 98765 00002' },
+            { id: '3', name: 'Amit Verma', email: 'amit.v@example.com', class: '10', division: 'B', status: 'Active', phone: '+91 98765 00003' },
+            { id: '4', name: 'Sneha Kulkarni', email: 'sneha.k@example.com', class: '9', division: 'A', status: 'Inactive', phone: '+91 98765 00004' }
+        ];
+
+        function getStoredStudents() {
+            const saved = localStorage.getItem('adminRegisteredStudents');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                } catch(e) {}
+            }
+            localStorage.setItem('adminRegisteredStudents', JSON.stringify(DEFAULT_STUDENTS));
+            return DEFAULT_STUDENTS;
+        }
+
+        function filterStudents() {
+            const query = (document.getElementById('studentSearch').value || '').toLowerCase().trim();
+            const classVal = document.getElementById('classFilter').value;
+            const divVal = document.getElementById('divFilter').value;
+
+            const all = getStoredStudents();
+            const filtered = all.filter(s => {
+                const matchesQuery = !query || 
+                    s.name.toLowerCase().includes(query) || 
+                    (s.email && s.email.toLowerCase().includes(query)) ||
+                    (s.roll && s.roll.toLowerCase().includes(query));
+                const matchesClass = !classVal || String(s.class) === String(classVal);
+                const matchesDiv = !divVal || s.division === divVal;
+                return matchesQuery && matchesClass && matchesDiv;
+            });
+
+            renderStudentsTable(filtered);
+        }
+
+        function deleteStudent(id, name) {
+            if (!confirm(`Are you sure you want to remove student ${name}?`)) return;
+            let list = getStoredStudents();
+            list = list.filter(s => String(s.id) !== String(id));
+            localStorage.setItem('adminRegisteredStudents', JSON.stringify(list));
+            AdminCore.showToast(`Removed student ${name}`, 'info');
+            filterStudents();
+        }
+
+        function renderStudentsTable(students) {
+            const tbody = document.getElementById('studentsTableBody');
+            if (!students || students.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
+                            <i class="ph ph-users" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
+                            No students found matching your criteria.<br>
+                            <a href="add-student.html" class="btn btn-secondary mt-2" style="font-size:0.85rem;"><i class="ph ph-plus"></i> Add New Student</a>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = students.map(s => {
+                let badgeClass = 'badge-success';
+                if (s.status === 'Pending') badgeClass = 'badge-warning';
+                else if (s.status === 'Inactive') badgeClass = 'badge-danger';
+
+                return `
+                    <tr>
+                        <td>
+                            <strong>${s.name}</strong><br>
+                            <span class="text-muted" style="font-size:0.85rem">${s.email || 'No email provided'}</span>
+                        </td>
+                        <td>${s.class}</td>
+                        <td>${s.division}</td>
+                        <td><span class="badge ${badgeClass}">${s.status}</span></td>
+                        <td>
+                            <div class="table-actions">
+                                <a href="student-details.html?id=${encodeURIComponent(s.id)}" class="btn-icon" title="View Profile"><i class="ph ph-eye"></i></a>
+                                <a href="add-student.html?edit=${encodeURIComponent(s.id)}" class="btn-icon" title="Edit Student Profile"><i class="ph ph-pencil-simple"></i></a>
+                                <button class="btn-icon" onclick="deleteStudent('${s.id}', '${s.name.replace(/'/g, "\\'")}')" title="Delete" style="color: var(--status-danger);"><i class="ph ph-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            filterStudents();
+        });
+    </script>
+</body>
+</html>

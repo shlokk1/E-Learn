@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - EduPortal</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/student.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/mock-data.js"></script>
+    <script src="../../assets/js/student.js"></script>
+</head>
+<body data-page="profile">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <div class="mb-4">
+                    <h1>My Profile</h1>
+                    <p class="text-muted">Manage your personal information.</p>
+                </div>
+
+                <div class="card" style="max-width: 600px;">
+                    <div class="card-body">
+                        
+                        <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 600;">
+                                <span id="profile-initial">D</span>
+                            </div>
+                            <div>
+                                <button class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;"><i class="ph ph-upload-simple"></i> Upload Photo</button>
+                            </div>
+                        </div>
+
+                        <form onsubmit="event.preventDefault(); alert('Profile updated (Prototype)!');">
+                            <div class="form-group">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="profile-name" value="Demo Student">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="profile-email" value="student@example.com" disabled title="Contact admin to change email">
+                            </div>
+
+                            <div class="grid-2-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label">Class</label>
+                                    <input type="text" class="form-control" id="profile-class" value="10" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Division</label>
+                                    <input type="text" class="form-control" id="profile-div" value="A" disabled>
+                                </div>
+                            </div>
+                            
+                            <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1.5rem;">Note: Class and Division can only be changed by the administration.</p>
+
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        // Populate dummy profile on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = MOCK_DATA.getUser();
+            document.getElementById('profile-name').value = user.name;
+            if(user.email) document.getElementById('profile-email').value = user.email;
+            document.getElementById('profile-class').value = user.class;
+            document.getElementById('profile-div').value = user.division;
+            document.getElementById('profile-initial').innerText = user.name.charAt(0);
+        });
+    </script>
+</body>
+</html>

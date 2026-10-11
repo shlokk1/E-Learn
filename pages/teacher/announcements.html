@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements - Teacher Portal</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/admin-tables.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/teacher-core.js"></script>
+    <script src="../../assets/js/teacher-layout.js"></script>
+</head>
+<body data-teacher-page="announcements">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <div class="mb-4" style="display: flex; justify-content: space-between; align-items: flex-end;">
+                    <div>
+                        <h1>Announcements</h1>
+                        <p class="text-muted">Broadcast important academic messages to your classes.</p>
+                    </div>
+                    <a href="create-announcement.html" class="btn btn-primary"><i class="ph ph-megaphone"></i> New Announcement</a>
+                </div>
+
+                <div class="table-container card" style="padding: 0;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Target Audience</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><div style="font-weight: 500;">Mathematics Unit Test</div><div class="text-muted" style="font-size: 0.8rem;">Chapter 1 to 3</div></td>
+                                <td>Class 10 - A</td>
+                                <td>Oct 20, 2026</td>
+                                <td><span class="badge badge-success">Published</span></td>
+                                <td>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <a href="edit-announcement.html?id=1" class="btn-icon text-muted" title="Edit" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;"><i class="ph ph-pencil-simple"></i></a>
+                                        <button class="btn-icon text-muted" title="Archive" onclick="archiveAnnouncement(this)"><i class="ph ph-archive"></i></button>
+                                        <button class="btn-icon" style="color: var(--status-danger);" title="Delete" onclick="deleteAnnouncement(this)"><i class="ph ph-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><div style="font-weight: 500;">Science Assignment Deadline Extended</div><div class="text-muted" style="font-size: 0.8rem;">Physics Lab Report</div></td>
+                                <td>All Class 10</td>
+                                <td>Oct 18, 2026</td>
+                                <td><span class="badge badge-success">Published</span></td>
+                                <td>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <a href="edit-announcement.html?id=2" class="btn-icon text-muted" title="Edit" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;"><i class="ph ph-pencil-simple"></i></a>
+                                        <button class="btn-icon text-muted" title="Archive" onclick="archiveAnnouncement(this)"><i class="ph ph-archive"></i></button>
+                                        <button class="btn-icon" style="color: var(--status-danger);" title="Delete" onclick="deleteAnnouncement(this)"><i class="ph ph-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><div style="font-weight: 500;">Draft: Winter Break Homework</div><div class="text-muted" style="font-size: 0.8rem;">Math worksheets</div></td>
+                                <td>Class 10 - B</td>
+                                <td>-</td>
+                                <td><span class="badge badge-warning">Draft</span></td>
+                                <td>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <a href="edit-announcement.html?id=3" class="btn-icon text-muted" title="Edit" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;"><i class="ph ph-pencil-simple"></i></a>
+                                        <button class="btn-icon text-muted" title="Publish" onclick="publishAnnouncement(this)"><i class="ph ph-paper-plane-tilt"></i></button>
+                                        <button class="btn-icon" style="color: var(--status-danger);" title="Delete" onclick="deleteAnnouncement(this)"><i class="ph ph-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

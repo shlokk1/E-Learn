@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Teacher - EduPortal Admin</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/admin-core.js"></script>
+    <script src="../../assets/js/admin-layout.js"></script>
+</head>
+<body data-admin-page="teachers">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                <a href="teachers.html" class="btn btn-secondary mb-4" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;"><i class="ph ph-arrow-left"></i> Back to Teachers</a>
+                
+                <h1 class="mb-4" id="pageHeading">Add Teacher</h1>
+                
+                <div class="card" style="max-width: 650px;">
+                    <div class="card-body">
+                        <form id="addTeacherForm" onsubmit="handleTeacherSubmit(event)">
+                            <div class="form-group">
+                                <label class="form-label" for="teacherName">Full Name <span style="color: var(--status-danger)">*</span></label>
+                                <input type="text" id="teacherName" class="form-control" placeholder="e.g. Mr. Amit Kumar" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="teacherEmail">Email Address <span style="color: var(--status-danger)">*</span></label>
+                                <input type="email" id="teacherEmail" class="form-control" placeholder="e.g. amit@example.com" required>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label" for="teacherSubject">Primary Subject <span style="color: var(--status-danger)">*</span></label>
+                                    <select id="teacherSubject" class="form-control" required>
+                                        <option value="Mathematics" selected>Mathematics</option>
+                                        <option value="Science">Science</option>
+                                        <option value="English">English</option>
+                                        <option value="Social Science">Social Science</option>
+                                        <option value="Hindi">Hindi</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="teacherClasses">Classes Assigned <span style="color: var(--status-danger)">*</span></label>
+                                    <select id="teacherClasses" class="form-control" required>
+                                        <option value="9, 10" selected>Class 9, 10</option>
+                                        <option value="10">Class 10 Only</option>
+                                        <option value="9">Class 9 Only</option>
+                                        <option value="8, 9, 10">Class 8, 9, 10</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label" for="teacherPhone">Phone Number</label>
+                                    <input type="tel" id="teacherPhone" class="form-control" placeholder="e.g. +91 98765 11111">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="teacherStatus">Status</label>
+                                    <select id="teacherStatus" class="form-control">
+                                        <option value="Verified" selected>Verified</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Inactive">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
+                                <a href="teachers.html" class="btn btn-secondary">Cancel</a>
+                                <button type="submit" class="btn btn-primary" id="submitBtn"><i class="ph ph-plus"></i> Add Teacher</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let editTeacherId = null;
+
+        const DEFAULT_TEACHERS = [
+            { id: '1', name: 'Mr. Amit Kumar', email: 'amit@example.com', subject: 'Mathematics', classes: '9, 10', status: 'Verified', phone: '+91 98765 11111', joinedDate: 'Jan 10, 2026' },
+            { id: '2', name: 'Mrs. Sunita Rao', email: 'sunita@example.com', subject: 'Science', classes: '10', status: 'Verified', phone: '+91 98765 22222', joinedDate: 'Feb 15, 2026' },
+            { id: '3', name: 'Mr. Rajesh Sharma', email: 'rajesh.s@example.com', subject: 'English', classes: '9, 10', status: 'Verified', phone: '+91 98765 33333', joinedDate: 'Mar 1, 2026' }
+        ];
+
+        function getStoredTeachers() {
+            const saved = localStorage.getItem('adminRegisteredTeachers');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                } catch(e) {}
+            }
+            localStorage.setItem('adminRegisteredTeachers', JSON.stringify(DEFAULT_TEACHERS));
+            return DEFAULT_TEACHERS;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const editId = params.get('edit') || params.get('id');
+
+            if (editId) {
+                editTeacherId = editId;
+                const teachers = getStoredTeachers();
+                const teacher = teachers.find(t => String(t.id) === String(editId));
+
+                if (teacher) {
+                    document.title = 'Edit Teacher - EduPortal Admin';
+                    document.getElementById('pageHeading').textContent = 'Edit Teacher';
+                    document.getElementById('teacherName').value = teacher.name || '';
+                    document.getElementById('teacherEmail').value = teacher.email || '';
+                    if (teacher.subject) document.getElementById('teacherSubject').value = teacher.subject;
+                    if (teacher.classes) document.getElementById('teacherClasses').value = teacher.classes;
+                    document.getElementById('teacherPhone').value = (teacher.phone && teacher.phone !== '-') ? teacher.phone : '';
+                    if (teacher.status) document.getElementById('teacherStatus').value = teacher.status;
+
+                    document.getElementById('submitBtn').innerHTML = '<i class="ph ph-check"></i> Save Changes';
+                }
+            }
+        });
+
+        function handleTeacherSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('teacherName').value.trim();
+            const email = document.getElementById('teacherEmail').value.trim();
+            const subject = document.getElementById('teacherSubject').value;
+            const classes = document.getElementById('teacherClasses').value;
+            const phone = document.getElementById('teacherPhone').value.trim();
+            const status = document.getElementById('teacherStatus').value;
+
+            const teachers = getStoredTeachers();
+
+            if (editTeacherId) {
+                const index = teachers.findIndex(t => String(t.id) === String(editTeacherId));
+                if (index > -1) {
+                    teachers[index] = {
+                        ...teachers[index],
+                        name,
+                        email,
+                        subject,
+                        classes,
+                        phone: phone || '-',
+                        status
+                    };
+                } else {
+                    teachers.unshift({
+                        id: editTeacherId,
+                        name,
+                        email,
+                        subject,
+                        classes,
+                        phone: phone || '-',
+                        status,
+                        joinedDate: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                    });
+                }
+                localStorage.setItem('adminRegisteredTeachers', JSON.stringify(teachers));
+                AdminCore.showToast('Teacher updated successfully!', 'success');
+            } else {
+                const newTeacher = {
+                    id: 't_' + Date.now(),
+                    name,
+                    email,
+                    subject,
+                    classes,
+                    phone: phone || '-',
+                    status,
+                    joinedDate: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                };
+                teachers.unshift(newTeacher);
+                localStorage.setItem('adminRegisteredTeachers', JSON.stringify(teachers));
+                AdminCore.showToast('Teacher added successfully!', 'success');
+            }
+
+            setTimeout(() => {
+                window.location.href = 'teachers.html';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

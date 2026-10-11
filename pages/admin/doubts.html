@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doubt Management - Admin Portal</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/admin-tables.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/mock-data.js"></script>
+    <script src="../../assets/js/admin-core.js"></script>
+    <script src="../../assets/js/admin-layout.js"></script>
+    <style>
+        .question-snippet {
+            max-width: 320px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: var(--text-main);
+            font-size: 0.9rem;
+        }
+        .unassigned-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            background: var(--bg-color);
+            color: var(--text-muted);
+            border: 1px dashed var(--border-color);
+        }
+        .assigned-mentor-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body data-admin-page="doubts">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                <div class="mb-4">
+                    <h1 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 0.25rem;">Doubt Management Oversight</h1>
+                    <p class="text-muted" style="margin: 0;">Monitor doubt resolution flow, assign mentors to pending queries, and review progress.</p>
+                </div>
+
+                <!-- Metric Cards -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                    <div class="card" style="padding: 1.25rem; border-left: 4px solid var(--status-info);">
+                        <div class="text-muted" style="font-size: 0.8rem; text-transform: uppercase; font-weight: 600;">Under Review</div>
+                        <div style="font-size: 1.75rem; font-weight: bold; margin-top: 0.25rem;" id="statUnderReview">0</div>
+                    </div>
+                    <div class="card" style="padding: 1.25rem; border-left: 4px solid var(--status-danger);">
+                        <div class="text-muted" style="font-size: 0.8rem; text-transform: uppercase; font-weight: 600;">Unassigned</div>
+                        <div style="font-size: 1.75rem; font-weight: bold; color: var(--status-danger); margin-top: 0.25rem;" id="statUnassigned">0</div>
+                    </div>
+                    <div class="card" style="padding: 1.25rem; border-left: 4px solid var(--status-warning);">
+                        <div class="text-muted" style="font-size: 0.8rem; text-transform: uppercase; font-weight: 600;">In Progress</div>
+                        <div style="font-size: 1.75rem; font-weight: bold; margin-top: 0.25rem;" id="statInProgress">0</div>
+                    </div>
+                    <div class="card" style="padding: 1.25rem; border-left: 4px solid var(--status-success);">
+                        <div class="text-muted" style="font-size: 0.8rem; text-transform: uppercase; font-weight: 600;">Resolved</div>
+                        <div style="font-size: 1.75rem; font-weight: bold; margin-top: 0.25rem;" id="statResolved">0</div>
+                    </div>
+                </div>
+
+                <!-- Doubt Table Container -->
+                <div class="table-container">
+                    <div class="table-header-bar">
+                        <div class="form-group" style="margin: 0; flex: 1; max-width: 320px;">
+                            <input type="text" id="doubtSearch" class="form-control" placeholder="Search by student, subject, question..." oninput="renderDoubtsTable()">
+                        </div>
+                        <div class="table-filters">
+                            <select id="subjectFilter" class="form-control" onchange="renderDoubtsTable()">
+                                <option value="">All Subjects</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Science">Science</option>
+                                <option value="English">English</option>
+                            </select>
+                            <select id="statusFilter" class="form-control" onchange="renderDoubtsTable()">
+                                <option value="">All Statuses</option>
+                                <option value="Under Review">Under Review</option>
+                                <option value="Unassigned">Unassigned</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Resolved">Resolved</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Subject</th>
+                                <th>Question Preview</th>
+                                <th>Status</th>
+                                <th>Assigned Mentor</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="doubtsTableBody">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+
+                    <div id="empty-doubts-state" style="display: none; padding: 3rem 1.5rem; text-align: center;">
+                        <i class="ph ph-question" style="font-size: 3rem; color: var(--text-muted); opacity: 0.6; margin-bottom: 0.75rem; display: inline-block;"></i>
+                        <h4 style="margin-bottom: 0.25rem;">No Doubts Match Your Filters</h4>
+                        <p class="text-muted">Try adjusting your search query or subject filter.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const DEFAULT_DOUBTS = [
+            {
+                id: 'D-1041',
+                student: 'Rahul Sharma',
+                class: '10',
+                division: 'A',
+                subject: 'Mathematics',
+                topic: 'Algebra',
+                question: 'How do I solve 2x + 5 = 15? Why do we subtract 5 first instead of dividing by 2?',
+                status: 'Under Review',
+                timeAgo: 'Submitted 3 hours ago',
+                assignedTo: null
+            },
+            {
+                id: 'D-1042',
+                student: 'Priya Singh',
+                class: '10',
+                division: 'A',
+                subject: 'Science',
+                topic: 'Physics',
+                question: 'Why does velocity change in circular motion even when the speed remains constant?',
+                status: 'Unassigned',
+                timeAgo: 'Waiting 48h',
+                assignedTo: null
+            },
+            {
+                id: 'D-1043',
+                student: 'Amit Verma',
+                class: '10',
+                division: 'B',
+                subject: 'Mathematics',
+                topic: 'Quadratic Equations',
+                question: 'Why does the quadratic formula work for every quadratic equation?',
+                status: 'In Progress',
+                timeAgo: 'Yesterday',
+                assignedTo: 'Mr. Amit Kumar'
+            },
+            {
+                id: 'D-1044',
+                student: 'Sneha Kulkarni',
+                class: '9',
+                division: 'A',
+                subject: 'English',
+                topic: 'Grammar',
+                question: 'What is the correct structure for formal letters in Board Exams?',
+                status: 'Resolved',
+                timeAgo: 'Today at 11:30 AM',
+                assignedTo: 'Mr. Rajesh Sharma'
+            }
+        ];
+
+        function getDoubtsList() {
+            const saved = localStorage.getItem('adminDoubts');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                } catch(e) {}
+            }
+            localStorage.setItem('adminDoubts', JSON.stringify(DEFAULT_DOUBTS));
+            return DEFAULT_DOUBTS;
+        }
+
+        function renderDoubtsTable() {
+            const list = getDoubtsList();
+
+            // Update top metrics
+            const underReview = list.filter(d => d.status === 'Under Review').length;
+            const unassigned = list.filter(d => d.status === 'Unassigned' || (!d.assignedTo && d.status !== 'Resolved')).length;
+            const inProgress = list.filter(d => d.status === 'In Progress').length;
+            const resolved = list.filter(d => d.status === 'Resolved').length;
+
+            document.getElementById('statUnderReview').textContent = underReview;
+            document.getElementById('statUnassigned').textContent = unassigned;
+            document.getElementById('statInProgress').textContent = inProgress;
+            document.getElementById('statResolved').textContent = resolved;
+
+            const search = (document.getElementById('doubtSearch')?.value || '').trim().toLowerCase();
+            const subject = document.getElementById('subjectFilter')?.value || '';
+            const status = document.getElementById('statusFilter')?.value || '';
+
+            const filtered = list.filter(d => {
+                if (subject && d.subject !== subject) return false;
+                if (status && d.status !== status) return false;
+                if (search) {
+                    const studentMatch = (d.student || '').toLowerCase().includes(search);
+                    const subjectMatch = (d.subject || '').toLowerCase().includes(search);
+                    const qMatch = (d.question || '').toLowerCase().includes(search);
+                    const mentorMatch = (d.assignedTo || '').toLowerCase().includes(search);
+                    if (!studentMatch && !subjectMatch && !qMatch && !mentorMatch) return false;
+                }
+                return true;
+            });
+
+            const tbody = document.getElementById('doubtsTableBody');
+            const emptyState = document.getElementById('empty-doubts-state');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            if (filtered.length === 0) {
+                if (emptyState) emptyState.style.display = 'block';
+                return;
+            } else {
+                if (emptyState) emptyState.style.display = 'none';
+            }
+
+            filtered.forEach(d => {
+                let badgeClass = 'badge-secondary';
+                if (d.status === 'Under Review') badgeClass = 'badge-info';
+                if (d.status === 'Unassigned') badgeClass = 'badge-danger';
+                if (d.status === 'In Progress') badgeClass = 'badge-warning';
+                if (d.status === 'Resolved') badgeClass = 'badge-success';
+
+                const assignedCol = d.assignedTo ? `
+                    <span class="assigned-mentor-pill">
+                        <i class="ph ph-chalkboard-teacher" style="color: var(--primary-color);"></i>
+                        ${d.assignedTo}
+                    </span>
+                ` : `
+                    <span class="unassigned-badge"><i class="ph ph-user-minus"></i> Unassigned</span>
+                `;
+
+                // Actions: Keep ONLY Assign Mentor (remove Escalate completely)
+                let actionBtn = '';
+                if (d.status === 'Resolved') {
+                    actionBtn = `<span class="badge badge-success"><i class="ph ph-check"></i> Resolved</span>`;
+                } else if (d.assignedTo) {
+                    actionBtn = `
+                        <a href="assign-mentor.html?id=${d.id}" class="btn btn-secondary" style="font-size:0.85rem; padding:0.35rem 0.75rem; text-decoration: none;">
+                            <i class="ph ph-arrows-clockwise"></i> Reassign Mentor
+                        </a>
+                    `;
+                } else {
+                    actionBtn = `
+                        <a href="assign-mentor.html?id=${d.id}" class="btn btn-primary" style="font-size:0.85rem; padding:0.35rem 0.75rem; text-decoration: none;">
+                            <i class="ph ph-user-plus"></i> Assign Mentor
+                        </a>
+                    `;
+                }
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td>
+                            <strong>${d.student}</strong><br>
+                            <small class="text-muted">Class ${d.class} &bull; Div ${d.division}</small>
+                        </td>
+                        <td>
+                            <span class="badge badge-secondary">${d.subject}</span>
+                            ${d.topic ? `<br><small class="text-muted">${d.topic}</small>` : ''}
+                        </td>
+                        <td>
+                            <div class="question-snippet" title="${d.question.replace(/"/g, '&quot;')}">"${d.question}"</div>
+                            <small class="text-muted">${d.timeAgo || ''}</small>
+                        </td>
+                        <td><span class="badge ${badgeClass}">${d.status}</span></td>
+                        <td>${assignedCol}</td>
+                        <td>
+                            <div class="table-actions">
+                                ${actionBtn}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', renderDoubtsTable);
+    </script>
+</body>
+</html>

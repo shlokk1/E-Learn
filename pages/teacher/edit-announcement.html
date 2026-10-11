@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Announcement - Teacher Portal</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/teacher-core.js"></script>
+    <script src="../../assets/js/teacher-layout.js"></script>
+</head>
+<body data-teacher-page="announcements">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <a href="announcements.html" class="btn btn-secondary mb-4" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;"><i class="ph ph-arrow-left"></i> Back to Announcements</a>
+                
+                <div class="card" style="max-width: 800px;">
+                    <h1 class="card-title mb-4">Edit Announcement</h1>
+                    <form id="editAnnouncementForm" onsubmit="event.preventDefault(); TeacherCore.showToast('Announcement Updated Successfully!', 'success'); setTimeout(()=>window.location.href='announcements.html', 1200);">
+                        <div class="form-group">
+                            <label class="form-label">Announcement Title</label>
+                            <input type="text" id="announcementTitle" class="form-control" placeholder="e.g. Mathematics Unit Test Notice" value="Mathematics Unit Test" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Message Details</label>
+                            <textarea id="announcementMessage" class="form-control" placeholder="Write your announcement here..." style="min-height: 120px;" required>Important notice: The upcoming unit test covering Chapters 1 to 3 will be conducted on Monday during the first period. Please ensure all sample problem sheets are reviewed beforehand.</textarea>
+                        </div>
+
+                        <h3 style="font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Target Audience</h3>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">Class</label>
+                                <select id="announcementClass" class="form-control" required>
+                                    <option value="">Select Class...</option>
+                                    <option value="Class 9">Class 9</option>
+                                    <option value="Class 10" selected>Class 10</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Division</label>
+                                <select id="announcementDivision" class="form-control">
+                                    <option value="">All Divisions</option>
+                                    <option value="A" selected>A</option>
+                                    <option value="B">B</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Subject Context (Optional)</label>
+                            <select id="announcementSubject" class="form-control">
+                                <option value="">General Announcement</option>
+                                <option value="Mathematics" selected>Mathematics</option>
+                                <option value="Science">Science</option>
+                                <option value="English">English</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Attachment (Optional)</label>
+                            <input type="file" class="form-control" style="padding-top: 0.5rem;">
+                            <small class="text-muted" id="attachmentHint" style="display: block; margin-top: 0.35rem;"><i class="ph ph-file-text"></i> Currently attached: Unit_Test_Syllabus.pdf (1.2 MB)</small>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                            <button type="submit" class="btn btn-primary" style="flex: 1;"><i class="ph ph-check-circle"></i> Save Changes</button>
+                            <a href="announcements.html" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            const announcementsData = {
+                '1': {
+                    title: 'Mathematics Unit Test',
+                    message: 'Important notice: The upcoming unit test covering Chapters 1 to 3 will be conducted on Monday during the first period. Please ensure all sample problem sheets are reviewed beforehand.',
+                    cls: 'Class 10',
+                    div: 'A',
+                    subject: 'Mathematics',
+                    file: 'Unit_Test_Syllabus.pdf (1.2 MB)'
+                },
+                '2': {
+                    title: 'Science Assignment Deadline Extended',
+                    message: 'The deadline for submitting the Physics Lab Report (Experiment 4 - Ohm\'s law & resistance) has been extended to Friday, 5:00 PM.',
+                    cls: 'Class 10',
+                    div: '',
+                    subject: 'Science',
+                    file: 'Physics_Lab_Manual.pdf (850 KB)'
+                },
+                '3': {
+                    title: 'Draft: Winter Break Homework',
+                    message: 'Draft plan for winter break math worksheets covering quadratic equations, arithmetic progressions, and coordinate geometry.',
+                    cls: 'Class 10',
+                    div: 'B',
+                    subject: 'Mathematics',
+                    file: ''
+                }
+            };
+
+            const data = announcementsData[id] || (params.get('title') ? {
+                title: params.get('title'),
+                message: params.get('desc') || '',
+                cls: params.get('class') || 'Class 10',
+                div: params.get('div') || '',
+                subject: params.get('subject') || '',
+                file: ''
+            } : announcementsData['1']);
+
+            if (data) {
+                const titleEl = document.getElementById('announcementTitle');
+                const msgEl = document.getElementById('announcementMessage');
+                const classEl = document.getElementById('announcementClass');
+                const divEl = document.getElementById('announcementDivision');
+                const subjEl = document.getElementById('announcementSubject');
+                const attachHint = document.getElementById('attachmentHint');
+
+                if (titleEl) titleEl.value = data.title;
+                if (msgEl) msgEl.value = data.message;
+                if (classEl && data.cls) classEl.value = data.cls;
+                if (divEl) divEl.value = data.div;
+                if (subjEl && data.subject) subjEl.value = data.subject;
+                if (attachHint) {
+                    if (data.file) {
+                        attachHint.style.display = 'block';
+                        attachHint.innerHTML = `<i class="ph ph-file-text"></i> Currently attached: ${data.file}`;
+                    } else {
+                        attachHint.style.display = 'none';
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

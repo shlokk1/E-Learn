@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask a Doubt - EduPortal</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/student.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/mock-data.js"></script>
+    <script src="../../assets/js/student.js"></script>
+</head>
+<body data-page="ask-doubt">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <div class="mb-4">
+                    <a href="doubts.html" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.85rem; margin-bottom: 1rem;"><i class="ph ph-arrow-left"></i> Back to Doubts</a>
+                    <h1>Ask a Doubt</h1>
+                    <p class="text-muted">Submit your academic doubt. It will be reviewed by a teacher before a mentor answers.</p>
+                </div>
+
+                <div class="card" style="max-width: 800px;">
+                    <div class="card-body">
+                        <form onsubmit="event.preventDefault(); window.location.href='doubts.html';">
+                            <div class="grid-2-col mb-3" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label">Subject</label>
+                                    <select class="form-control" required>
+                                        <option value="">Select Subject</option>
+                                        <option>Mathematics</option>
+                                        <option>Science</option>
+                                        <option>English</option>
+                                        <option>History</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Topic / Chapter</label>
+                                    <input type="text" class="form-control" placeholder="e.g. Algebra" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Question Title</label>
+                                <input type="text" class="form-control" placeholder="Brief summary of your doubt" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Detailed Description</label>
+                                <textarea class="form-control" placeholder="Explain what you don't understand..." style="min-height: 150px;" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Optional Reference (Textbook/Page No.)</label>
+                                <input type="text" class="form-control" placeholder="e.g. NCERT Math Book, Page 45">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Attachment (Optional image/photo)</label>
+                                <input type="file" class="form-control" accept="image/*">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary mt-2">Submit Doubt</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

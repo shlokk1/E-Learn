@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Library Management - Admin</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/admin-tables.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/admin-core.js"></script>
+    <script src="../../assets/js/admin-layout.js"></script>
+    <style>
+        .class-rectangle-box {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 1.75rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .class-rectangle-box:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.08);
+        }
+        .class-box-header {
+            padding: 1.25rem 1.5rem;
+            background: var(--surface-color);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .class-header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .class-icon-badge {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(99, 102, 241, 0.12);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .add-floating-circle-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--primary-gradient, var(--primary-color));
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .add-floating-circle-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 18px rgba(99, 102, 241, 0.5);
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body data-admin-page="library">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                <div class="mb-4" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <h1>Digital Library</h1>
+                        <p class="text-muted">Educational resources, textbooks, and notes organized by class.</p>
+                    </div>
+                    <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+                        <input type="text" id="librarySearchInput" class="form-control" placeholder="Search resources by title or file..." style="width: 240px;" oninput="renderLibraryBoxes()">
+                        <select id="libraryTypeFilter" class="form-control" style="width: auto;" onchange="renderLibraryBoxes()">
+                            <option value="">All Types</option>
+                            <option value="Textbook">Textbook</option>
+                            <option value="PPT">PPT</option>
+                            <option value="Notes">Notes</option>
+                            <option value="Worksheet">Worksheet</option>
+                        </select>
+                        <a href="resource-upload.html" class="btn btn-primary"><i class="ph ph-upload-simple"></i> Upload Resource</a>
+                    </div>
+                </div>
+
+                <!-- Main Class Rectangle Boxes Container -->
+                <div id="classBoxesContainer">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- Circular Add Button (as shown in reference image) -->
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 2.5rem 0 3rem;">
+                    <a href="resource-upload.html" class="add-floating-circle-btn" title="Upload New Educational Resource">
+                        <i class="ph ph-plus"></i>
+                    </a>
+                    <span class="text-muted" style="font-size: 0.85rem; margin-top: 0.5rem; font-weight: 500;">Upload Resource</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const DEFAULT_RESOURCES = [
+            { id: 'res_1', title: 'Mathematics NCERT Chapter 1-5', type: 'Textbook', class: '10', subject: 'Mathematics', desc: 'Official NCERT Textbook for Class 10 Math', fileName: 'mathematics_ncert.pdf', status: 'Active' },
+            { id: 'res_2', title: 'Chemical Reactions & Equations', type: 'PPT', class: '10', subject: 'Science', desc: 'Presentation slides on chemical equations and reactions', fileName: 'chemical_reactions.pptx', status: 'Active' },
+            { id: 'res_3', title: 'Physics Formula Board Revision', type: 'Notes', class: '10', subject: 'Science', desc: 'Quick reference formulas for Board Exams', fileName: 'physics_formulas.pdf', status: 'Active' },
+            { id: 'res_4', title: 'World History Overview', type: 'Textbook', class: '9', subject: 'Social Science', desc: 'Comprehensive world history textbook for Class 9', fileName: 'world_history.pdf', status: 'Active' },
+            { id: 'res_5', title: 'English Grammar & Letter Writing', type: 'Worksheet', class: '9', subject: 'English', desc: 'Grammar exercises and sample formal letters', fileName: 'english_grammar.pdf', status: 'Active' },
+            { id: 'res_6', title: 'Living Organisms & Habitat', type: 'Notes', class: '8', subject: 'Science', desc: 'Introductory biology notes and chapter questions', fileName: 'living_organisms.pdf', status: 'Active' },
+            { id: 'res_7', title: 'Rational Numbers Exercise Book', type: 'Worksheet', class: '8', subject: 'Mathematics', desc: 'Problem sets and solutions for Class 8 Math', fileName: 'rational_numbers.pdf', status: 'Active' }
+        ];
+
+        function getStoredResources() {
+            const saved = localStorage.getItem('adminLibraryResources');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                } catch(e) {}
+            }
+            localStorage.setItem('adminLibraryResources', JSON.stringify(DEFAULT_RESOURCES));
+            return DEFAULT_RESOURCES;
+        }
+
+        function saveResources(data) {
+            localStorage.setItem('adminLibraryResources', JSON.stringify(data));
+            renderLibraryBoxes();
+        }
+
+        function toggleArchive(id) {
+            let list = getStoredResources();
+            const index = list.findIndex(r => String(r.id) === String(id));
+            if (index > -1) {
+                const isArchived = list[index].status === 'Archived';
+                list[index].status = isArchived ? 'Active' : 'Archived';
+                saveResources(list);
+                AdminCore.showToast(`Resource marked as ${list[index].status}!`, 'info');
+            }
+        }
+
+        function deleteResource(id, title) {
+            if (!confirm(`Are you sure you want to delete "${title}"?`)) return;
+            let list = getStoredResources();
+            list = list.filter(r => String(r.id) !== String(id));
+            saveResources(list);
+            AdminCore.showToast(`Deleted resource "${title}"`, 'info');
+        }
+
+        function renderLibraryBoxes() {
+            const resources = getStoredResources();
+            const search = (document.getElementById('librarySearchInput').value || '').trim().toLowerCase();
+            const typeFilter = document.getElementById('libraryTypeFilter').value;
+            const container = document.getElementById('classBoxesContainer');
+
+            // Unique class levels in descending order (e.g. 10, 9, 8)
+            const classSet = new Set(resources.map(r => String(r.class)));
+            classSet.add('10');
+            classSet.add('9');
+            classSet.add('8');
+            const classList = Array.from(classSet).sort((a, b) => parseInt(b) - parseInt(a));
+
+            container.innerHTML = classList.map(cls => {
+                let classResources = resources.filter(r => String(r.class) === String(cls));
+
+                if (typeFilter) {
+                    classResources = classResources.filter(r => r.type === typeFilter);
+                }
+
+                if (search) {
+                    classResources = classResources.filter(r => 
+                        r.title.toLowerCase().includes(search) || 
+                        (r.subject && r.subject.toLowerCase().includes(search)) ||
+                        (r.fileName && r.fileName.toLowerCase().includes(search)) ||
+                        (r.desc && r.desc.toLowerCase().includes(search))
+                    );
+                }
+
+                const count = classResources.length;
+
+                const tableContent = count > 0 
+                    ? `
+                        <div class="table-container" style="border: none; border-radius: 0; box-shadow: none;">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Resource Title &amp; File</th>
+                                        <th>Type</th>
+                                        <th>Subject</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${classResources.map(r => {
+                                        let badgeClass = 'badge-success';
+                                        if (r.status === 'Archived') badgeClass = 'badge-warning';
+                                        else if (r.status === 'Inactive') badgeClass = 'badge-danger';
+
+                                        return `
+                                            <tr>
+                                                <td>
+                                                    <strong>${r.title}</strong><br>
+                                                    <span class="text-muted" style="font-size:0.8rem; display:inline-flex; align-items:center; gap:0.25rem;">
+                                                        <i class="ph ph-file-text"></i> ${r.fileName || 'document.pdf'}
+                                                    </span>
+                                                </td>
+                                                <td><span class="badge badge-info" style="font-size:0.75rem;">${r.type}</span></td>
+                                                <td>${r.subject}</td>
+                                                <td><span class="badge ${badgeClass}">${r.status}</span></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <a href="resource-upload.html?edit=${encodeURIComponent(r.id)}" class="btn-icon" title="Edit Resource">
+                                                            <i class="ph ph-pencil-simple"></i>
+                                                        </a>
+                                                        <button class="btn-icon" onclick="toggleArchive('${r.id}')" style="color:var(--status-warning);" title="${r.status === 'Archived' ? 'Restore' : 'Archive'}">
+                                                            <i class="ph ph-archive"></i>
+                                                        </button>
+                                                        <button class="btn-icon" onclick="deleteResource('${r.id}', '${r.title.replace(/'/g, "\\'")}')" title="Delete" style="color: var(--status-danger);">
+                                                            <i class="ph ph-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        `;
+                                    }).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    `
+                    : `
+                        <div style="padding: 2rem; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+                            <i class="ph ph-file-dashed" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
+                            ${search || typeFilter ? 'No resources matched your search filter for Class ' + cls + '.' : 'No resources uploaded for Class ' + cls + ' yet.'}
+                            <div style="margin-top: 0.75rem;">
+                                <a href="resource-upload.html?class=${encodeURIComponent(cls)}" class="btn btn-secondary" style="font-size: 0.85rem;">
+                                    <i class="ph ph-upload-simple"></i> Upload Resource to Class ${cls}
+                                </a>
+                            </div>
+                        </div>
+                    `;
+
+                return `
+                    <div class="class-rectangle-box" data-class="${cls}">
+                        <!-- Rectangle Box Header -->
+                        <div class="class-box-header">
+                            <div class="class-header-left">
+                                <div class="class-icon-badge">
+                                    <i class="ph ph-graduation-cap"></i>
+                                </div>
+                                <div>
+                                    <h2 style="font-size: 1.2rem; font-weight: 600; margin: 0; color: var(--text-main);">Class ${cls}</h2>
+                                    <span class="text-muted" style="font-size: 0.85rem;">
+                                        <i class="ph ph-files"></i> ${count} Educational Resource${count === 1 ? '' : 's'}
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <a href="resource-upload.html?class=${encodeURIComponent(cls)}" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.85rem;">
+                                    <i class="ph ph-upload-simple"></i> Upload to Class ${cls}
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Inside Rectangle Box: Resources Table -->
+                        ${tableContent}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderLibraryBoxes();
+        });
+    </script>
+</body>
+</html>

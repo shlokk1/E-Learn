@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Announcement - Teacher Portal</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/teacher-core.js"></script>
+    <script src="../../assets/js/teacher-layout.js"></script>
+</head>
+<body data-teacher-page="announcements">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <a href="announcements.html" class="btn btn-secondary mb-4" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;"><i class="ph ph-arrow-left"></i> Back to Announcements</a>
+                
+                <div class="card" style="max-width: 800px;">
+                    <h1 class="card-title mb-4">Create Announcement</h1>
+                    <form onsubmit="event.preventDefault(); TeacherCore.showToast('Announcement Published!', 'success'); setTimeout(()=>window.location.href='announcements.html', 1500);">
+                        <div class="form-group">
+                            <label class="form-label">Announcement Title</label>
+                            <input type="text" class="form-control" placeholder="e.g. Mathematics Unit Test Notice" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Message Details</label>
+                            <textarea class="form-control" placeholder="Write your announcement here..." style="min-height: 120px;" required></textarea>
+                        </div>
+
+                        <h3 style="font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Target Audience</h3>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">Class</label>
+                                <select class="form-control" required>
+                                    <option value="">Select Class...</option>
+                                    <option>Class 9</option>
+                                    <option>Class 10</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Division</label>
+                                <select class="form-control">
+                                    <option value="">All Divisions</option>
+                                    <option>A</option>
+                                    <option>B</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Subject Context (Optional)</label>
+                            <select class="form-control">
+                                <option value="">General Announcement</option>
+                                <option>Mathematics</option>
+                                <option>Science</option>
+                                <option>English</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Attachment (Optional)</label>
+                            <input type="file" class="form-control" style="padding-top: 0.5rem;">
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                            <button type="submit" class="btn btn-primary" style="flex: 1;"><i class="ph ph-paper-plane-tilt"></i> Publish Announcement</button>
+                            <button type="button" class="btn btn-secondary" onclick="TeacherCore.showToast('Draft Saved.', 'info')">Save as Draft</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

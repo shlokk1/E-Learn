@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Materials - Teacher Portal</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/admin-tables.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/teacher-core.js"></script>
+    <script src="../../assets/js/teacher-layout.js"></script>
+</head>
+<body data-teacher-page="materials">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <div class="mb-4" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <h1>My Class Materials</h1>
+                        <p class="text-muted">Organize, view, upload, and update academic resources by class.</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="openUploadModal('Class 10', 'A')">
+                        <i class="ph ph-upload-simple"></i> Upload New Material
+                    </button>
+                </div>
+
+                <!-- Search and Filters Bar -->
+                <div class="card mb-4" style="padding: 1rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 220px;">
+                        <input type="text" id="materialSearchInput" class="form-control" placeholder="Search materials by title, topic, subject...">
+                    </div>
+                    <select id="materialClassFilter" class="form-control" style="width: auto;">
+                        <option value="all">All Classes</option>
+                        <option value="10-a">Class 10 - Division A</option>
+                        <option value="10-b">Class 10 - Division B</option>
+                        <option value="9-a">Class 9 - Division A</option>
+                    </select>
+                    <select id="materialTypeFilter" class="form-control" style="width: auto;">
+                        <option value="all">All Types</option>
+                        <option value="pdf">PDF</option>
+                        <option value="video">Video</option>
+                        <option value="ppt">PPT</option>
+                    </select>
+                    <select id="materialSubjectFilter" class="form-control" style="width: auto;">
+                        <option value="all">All Subjects</option>
+                        <option value="mathematics">Mathematics</option>
+                        <option value="science">Science</option>
+                        <option value="english">English</option>
+                    </select>
+                    <button id="materialResetBtn" class="btn btn-secondary" style="display: none; padding: 0.55rem 0.9rem; font-size: 0.85rem;">
+                        <i class="ph ph-arrow-counter-clockwise"></i> Reset
+                    </button>
+                </div>
+
+                <!-- Main Class Boxes Container -->
+                <div id="classBoxesContainer">
+
+                    <!-- MAIN BOX 1: Class 10 - Division A -->
+                    <div class="class-material-box card mb-4" data-class="10-a" style="padding: 0; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                        <!-- Class Box Header -->
+                        <div style="padding: 1.25rem 1.5rem; background: var(--surface-color); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.85rem;">
+                                <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(59, 130, 246, 0.12); color: var(--primary-color); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                    <i class="ph ph-chalkboard-teacher"></i>
+                                </div>
+                                <div>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <h2 style="font-size: 1.2rem; font-weight: 600; margin: 0; color: var(--text-main);">Class 10 - Division A</h2>
+                                        <span class="badge badge-info" style="font-size: 0.75rem;">Grade 10</span>
+                                    </div>
+                                    <div class="text-muted" style="font-size: 0.85rem; margin-top: 0.2rem;">
+                                        <span><i class="ph ph-books"></i> Mathematics &bull; Science</span>
+                                        <span style="margin: 0 0.4rem;">&middot;</span>
+                                        <span class="class-material-count"><i class="ph ph-files"></i> 4 Materials</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;" onclick="openUploadModal('Class 10', 'A')">
+                                    <i class="ph ph-upload-simple"></i> Upload Material
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Inside Box: Materials Table -->
+                        <div class="table-container" style="padding: 0; border: none; box-shadow: none;">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Title &amp; Topic</th>
+                                        <th>Type</th>
+                                        <th>Subject</th>
+                                        <th>Status</th>
+                                        <th style="text-align: right; padding-right: 1.5rem;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-id="mat-1" data-type="pdf" data-class="10-a" data-subject="mathematics" data-status="published">
+                                        <td>
+                                            <div class="material-title" style="font-weight: 500;">Algebra Chapter 2 Notes</div>
+                                            <div class="material-topic text-muted" style="font-size: 0.8rem;">Linear Equations</div>
+                                        </td>
+                                        <td><span class="material-type-badge badge" style="background: var(--bg-color); color: var(--text-main);"><i class="ph ph-file-pdf" style="color: red;"></i> PDF</span></td>
+                                        <td class="material-subject">Mathematics</td>
+                                        <td><span class="material-status-badge badge badge-success">Published</span></td>
+                                        <td style="text-align: right; padding-right: 1.5rem;">
+                                            <div style="display: inline-flex; gap: 0.4rem; align-items: center;">
+                                                <button class="btn btn-secondary btn-sm" onclick="viewMaterial('Algebra Chapter 2 Notes', 'Linear Equations', 'Mathematics', 'PDF', 'Published')" title="View Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-eye"></i> View
+                                                </button>
+                                                <button class="btn btn-secondary btn-sm" onclick="openUpdateModal('mat-1', 'Algebra Chapter 2 Notes', 'Linear Equations', 'Class 10', 'A', 'Mathematics', 'PDF', 'Published')" title="Update Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-pencil-simple"></i> Update
+                                                </button>
+                                                <button class="btn-icon text-muted" title="Archive" onclick="archiveMaterial(this)"><i class="ph ph-archive"></i></button>
+                                                <button class="btn-icon" style="color: var(--status-danger);" title="Delete" onclick="deleteMaterial(this)"><i class="ph ph-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="mat-2" data-type="ppt" data-class="10-a" data-subject="science" data-status="published">
+                                        <td>
+                                            <div class="material-title" style="font-weight: 500;">Physics Motion PPT</div>
+                                            <div class="material-topic text-muted" style="font-size: 0.8rem;">Chapter 3 Laws &amp; Acceleration</div>
+                                        </td>
+                                        <td><span class="material-type-badge badge" style="background: var(--bg-color); color: var(--text-main);"><i class="ph ph-presentation-chart" style="color: orange;"></i> PPT</span></td>
+                                        <td class="material-subject">Science</td>
+                                        <td><span class="material-status-badge badge badge-success">Published</span></td>
+                                        <td style="text-align: right; padding-right: 1.5rem;">
+                                            <div style="display: inline-flex; gap: 0.4rem; align-items: center;">
+                                                <button class="btn btn-secondary btn-sm" onclick="viewMaterial('Physics Motion PPT', 'Chapter 3 Laws & Acceleration', 'Science', 'PPT', 'Published')" title="View Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-eye"></i> View
+                                                </button>
+                                                <button class="btn btn-secondary btn-sm" onclick="openUpdateModal('mat-2', 'Physics Motion PPT', 'Chapter 3 Laws & Acceleration', 'Class 10', 'A', 'Science', 'PPT', 'Published')" title="Update Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-pencil-simple"></i> Update
+                                                </button>
+                                                <button class="btn-icon text-muted" title="Archive" onclick="archiveMaterial(this)"><i class="ph ph-archive"></i></button>
+                                                <button class="btn-icon" style="color: var(--status-danger);" title="Delete" onclick="deleteMaterial(this)"><i class="ph ph-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="mat-3" data-type="video" data-class="10-a" data-subject="science" data-status="published">
+                                        <td>
+                                            <div class="material-title" style="font-weight: 500;">Cell Division 3D Animation</div>
+                                            <div class="material-topic text-muted" style="font-size: 0.8rem;">Mitosis &amp; Meiosis Stages</div>
+                                        </td>
+                                        <td><span class="material-type-badge badge" style="background: var(--bg-color); color: var(--text-main);"><i class="ph ph-video" style="color: dodgerblue;"></i> Video</span></td>
+                                        <td class="material-subject">Science</td>
+                                        <td><span class="material-status-badge badge badge-success">Published</span></td>
+                                        <td style="text-align: right; padding-right: 1.5rem;">
+                                            <div style="display: inline-flex; gap: 0.4rem; align-items: center;">
+                                                <button class="btn btn-secondary btn-sm" onclick="viewMaterial('Cell Division 3D Animation', 'Mitosis & Meiosis Stages', 'Science', 'Video', 'Published')" title="View Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-eye"></i> View
+                                                </button>
+                                                <button class="btn btn-secondary btn-sm" onclick="openUpdateModal('mat-3', 'Cell Division 3D Animation', 'Mitosis & Meiosis Stages', 'Class 10', 'A', 'Science', 'Video', 'Published')" title="Update Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-pencil-simple"></i> Update
+                                                </button>
+                                                <button class="btn-icon text-muted" title="Archive" onclick="archiveMaterial(this)"><i class="ph ph-archive"></i></button>
+                                                <button class="btn-icon" style="color: var(--status-danger);" title="Delete" onclick="deleteMaterial(this)"><i class="ph ph-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="mat-4" data-type="video" data-class="10-a" data-subject="mathematics" data-status="published">
+                                        <td>
+                                            <div class="material-title" style="font-weight: 500;">Pythagoras Theorem Proofs Video</div>
+                                            <div class="material-topic text-muted" style="font-size: 0.8rem;">Visual Geometric Demonstration</div>
+                                        </td>
+                                        <td><span class="material-type-badge badge" style="background: var(--bg-color); color: var(--text-main);"><i class="ph ph-video" style="color: dodgerblue;"></i> Video</span></td>
+                                        <td class="material-subject">Mathematics</td>
+                                        <td><span class="material-status-badge badge badge-success">Published</span></td>
+                                        <td style="text-align: right; padding-right: 1.5rem;">
+                                            <div style="display: inline-flex; gap: 0.4rem; align-items: center;">
+                                                <button class="btn btn-secondary btn-sm" onclick="viewMaterial('Pythagoras Theorem Proofs Video', 'Visual Geometric Demonstration', 'Mathematics', 'Video', 'Published')" title="View Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-eye"></i> View
+                                                </button>
+                                                <button class="btn btn-secondary btn-sm" onclick="openUpdateModal('mat-4', 'Pythagoras Theorem Proofs Video', 'Visual Geometric Demonstration', 'Class 10', 'A', 'Mathematics', 'Video', 'Published')" title="Update Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-pencil-simple"></i> Update
+                                                </button>
+                                                <button class="btn-icon text-muted" title="Archive" onclick="archiveMaterial(this)"><i class="ph ph-archive"></i></button>
+                                                <button class="btn-icon" style="color: var(--status-danger);" title="Delete" onclick="deleteMaterial(this)"><i class="ph ph-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- MAIN BOX 2: Class 10 - Division B -->
+                    <div class="class-material-box card mb-4" data-class="10-b" style="padding: 0; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                        <!-- Class Box Header -->
+                        <div style="padding: 1.25rem 1.5rem; background: var(--surface-color); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.85rem;">
+                                <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(16, 185, 129, 0.12); color: var(--status-success); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                    <i class="ph ph-chalkboard-teacher"></i>
+                                </div>
+                                <div>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <h2 style="font-size: 1.2rem; font-weight: 600; margin: 0; color: var(--text-main);">Class 10 - Division B</h2>
+                                        <span class="badge badge-success" style="font-size: 0.75rem;">Grade 10</span>
+                                    </div>
+                                    <div class="text-muted" style="font-size: 0.85rem; margin-top: 0.2rem;">
+                                        <span><i class="ph ph-books"></i> Science &bull; English</span>
+                                        <span style="margin: 0 0.4rem;">&middot;</span>
+                                        <span class="class-material-count"><i class="ph ph-files"></i> 3 Materials</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;" onclick="openUploadModal('Class 10', 'B')">
+                                    <i class="ph ph-upload-simple"></i> Upload Material
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Inside Box: Materials Table -->
+                        <div class="table-container" style="padding: 0; border: none; box-shadow: none;">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Title &amp; Topic</th>
+                                        <th>Type</th>
+                                        <th>Subject</th>
+                                        <th>Status</th>
+                                        <th style="text-align: right; padding-right: 1.5rem;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-id="mat-5" data-type="pdf" data-class="10-b" data-subject="science" data-status="draft">
+                                        <td>
+                                            <div class="material-title" style="font-weight: 500;">Science Final Guide</div>
+                                            <div class="material-topic text-muted" style="font-size: 0.8rem;">Complete revision booklet</div>
+                                        </td>
+                                        <td><span class="material-type-badge badge" style="background: var(--bg-color); color: var(--text-main);"><i class="ph ph-file-pdf" style="color: red;"></i> PDF</span></td>
+                                        <td class="material-subject">Science</td>
+                                        <td><span class="material-status-badge badge badge-warning">Draft</span></td>
+                                        <td style="text-align: right; padding-right: 1.5rem;">
+                                            <div style="display: inline-flex; gap: 0.4rem; align-items: center;">
+                                                <button class="btn btn-secondary btn-sm" onclick="viewMaterial('Science Final Guide', 'Complete revision booklet', 'Science', 'PDF', 'Draft')" title="View Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-eye"></i> View
+                                                </button>
+                                                <button class="btn btn-secondary btn-sm" onclick="openUpdateModal('mat-5', 'Science Final Guide', 'Complete revision booklet', 'Class 10', 'B', 'Science', 'PDF', 'Draft')" title="Update Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-pencil-simple"></i> Update
+                                                </button>
+                                                <button class="btn-icon text-muted" title="Archive" onclick="archiveMaterial(this)"><i class="ph ph-archive"></i></button>
+                                                <button class="btn-icon" style="color: var(--status-danger);" title="Delete" onclick="deleteMaterial(this)"><i class="ph ph-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="mat-6" data-type="pdf" data-class="10-b" data-subject="english" data-status="published">
+                                        <td>
+                                            <div class="material-title" style="font-weight: 500;">English Grammar &amp; Tenses Handbook</div>
+                                            <div class="material-topic text-muted" style="font-size: 0.8rem;">Rules and Practice Examples</div>
+                                        </td>
+                                        <td><span class="material-type-badge badge" style="background: var(--bg-color); color: var(--text-main);"><i class="ph ph-file-pdf" style="color: red;"></i> PDF</span></td>
+                                        <td class="material-subject">English</td>
+                                        <td><span class="material-status-badge badge badge-success">Published</span></td>
+                                        <td style="text-align: right; padding-right: 1.5rem;">
+                                            <div style="display: inline-flex; gap: 0.4rem; align-items: center;">
+                                                <button class="btn btn-secondary btn-sm" onclick="viewMaterial('English Grammar & Tenses Handbook', 'Rules and Practice Examples', 'English', 'PDF', 'Published')" title="View Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-eye"></i> View
+                                                </button>
+                                                <button class="btn btn-secondary btn-sm" onclick="openUpdateModal('mat-6', 'English Grammar & Tenses Handbook', 'Rules and Practice Examples', 'Class 10', 'B', 'English', 'PDF', 'Published')" title="Update Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-pencil-simple"></i> Update
+                                                </button>
+                                                <button class="btn-icon text-muted" title="Archive" onclick="archiveMaterial(this)"><i class="ph ph-archive"></i></button>
+                                                <button class="btn-icon" style="color: var(--status-danger);" title="Delete" onclick="deleteMaterial(this)"><i class="ph ph-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="mat-7" data-type="ppt" data-class="10-b" data-subject="science" data-status="published">
+                                        <td>
+                                            <div class="material-title" style="font-weight: 500;">Acids, Bases &amp; Salts Lab Slides</div>
+                                            <div class="material-topic text-muted" style="font-size: 0.8rem;">Chapter 2 Reaction Demonstrations</div>
+                                        </td>
+                                        <td><span class="material-type-badge badge" style="background: var(--bg-color); color: var(--text-main);"><i class="ph ph-presentation-chart" style="color: orange;"></i> PPT</span></td>
+                                        <td class="material-subject">Science</td>
+                                        <td><span class="material-status-badge badge badge-success">Published</span></td>
+                                        <td style="text-align: right; padding-right: 1.5rem;">
+                                            <div style="display: inline-flex; gap: 0.4rem; align-items: center;">
+                                                <button class="btn btn-secondary btn-sm" onclick="viewMaterial('Acids, Bases & Salts Lab Slides', 'Chapter 2 Reaction Demonstrations', 'Science', 'PPT', 'Published')" title="View Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-eye"></i> View
+                                                </button>
+                                                <button class="btn btn-secondary btn-sm" onclick="openUpdateModal('mat-7', 'Acids, Bases & Salts Lab Slides', 'Chapter 2 Reaction Demonstrations', 'Class 10', 'B', 'Science', 'PPT', 'Published')" title="Update Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-pencil-simple"></i> Update
+                                                </button>
+                                                <button class="btn-icon text-muted" title="Archive" onclick="archiveMaterial(this)"><i class="ph ph-archive"></i></button>
+                                                <button class="btn-icon" style="color: var(--status-danger);" title="Delete" onclick="deleteMaterial(this)"><i class="ph ph-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- MAIN BOX 3: Class 9 - Division A -->
+                    <div class="class-material-box card mb-4" data-class="9-a" style="padding: 0; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                        <!-- Class Box Header -->
+                        <div style="padding: 1.25rem 1.5rem; background: var(--surface-color); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.85rem;">
+                                <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(168, 85, 247, 0.12); color: #9333ea; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                    <i class="ph ph-chalkboard-teacher"></i>
+                                </div>
+                                <div>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <h2 style="font-size: 1.2rem; font-weight: 600; margin: 0; color: var(--text-main);">Class 9 - Division A</h2>
+                                        <span class="badge badge-warning" style="font-size: 0.75rem;">Grade 9</span>
+                                    </div>
+                                    <div class="text-muted" style="font-size: 0.85rem; margin-top: 0.2rem;">
+                                        <span><i class="ph ph-books"></i> Mathematics &bull; Science</span>
+                                        <span style="margin: 0 0.4rem;">&middot;</span>
+                                        <span class="class-material-count"><i class="ph ph-files"></i> 2 Materials</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;" onclick="openUploadModal('Class 9', 'A')">
+                                    <i class="ph ph-upload-simple"></i> Upload Material
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Inside Box: Materials Table -->
+                        <div class="table-container" style="padding: 0; border: none; box-shadow: none;">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Title &amp; Topic</th>
+                                        <th>Type</th>
+                                        <th>Subject</th>
+                                        <th>Status</th>
+                                        <th style="text-align: right; padding-right: 1.5rem;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-id="mat-8" data-type="pdf" data-class="9-a" data-subject="mathematics" data-status="published">
+                                        <td>
+                                            <div class="material-title" style="font-weight: 500;">Number Systems Formula Sheet</div>
+                                            <div class="material-topic text-muted" style="font-size: 0.8rem;">Real Numbers &amp; Laws of Exponents</div>
+                                        </td>
+                                        <td><span class="material-type-badge badge" style="background: var(--bg-color); color: var(--text-main);"><i class="ph ph-file-pdf" style="color: red;"></i> PDF</span></td>
+                                        <td class="material-subject">Mathematics</td>
+                                        <td><span class="material-status-badge badge badge-success">Published</span></td>
+                                        <td style="text-align: right; padding-right: 1.5rem;">
+                                            <div style="display: inline-flex; gap: 0.4rem; align-items: center;">
+                                                <button class="btn btn-secondary btn-sm" onclick="viewMaterial('Number Systems Formula Sheet', 'Real Numbers & Laws of Exponents', 'Mathematics', 'PDF', 'Published')" title="View Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-eye"></i> View
+                                                </button>
+                                                <button class="btn btn-secondary btn-sm" onclick="openUpdateModal('mat-8', 'Number Systems Formula Sheet', 'Real Numbers & Laws of Exponents', 'Class 9', 'A', 'Mathematics', 'PDF', 'Published')" title="Update Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-pencil-simple"></i> Update
+                                                </button>
+                                                <button class="btn-icon text-muted" title="Archive" onclick="archiveMaterial(this)"><i class="ph ph-archive"></i></button>
+                                                <button class="btn-icon" style="color: var(--status-danger);" title="Delete" onclick="deleteMaterial(this)"><i class="ph ph-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="mat-9" data-type="video" data-class="9-a" data-subject="science" data-status="published">
+                                        <td>
+                                            <div class="material-title" style="font-weight: 500;">Force &amp; Laws of Motion Video</div>
+                                            <div class="material-topic text-muted" style="font-size: 0.8rem;">Inertia, Momentum &amp; Friction</div>
+                                        </td>
+                                        <td><span class="material-type-badge badge" style="background: var(--bg-color); color: var(--text-main);"><i class="ph ph-video" style="color: dodgerblue;"></i> Video</span></td>
+                                        <td class="material-subject">Science</td>
+                                        <td><span class="material-status-badge badge badge-success">Published</span></td>
+                                        <td style="text-align: right; padding-right: 1.5rem;">
+                                            <div style="display: inline-flex; gap: 0.4rem; align-items: center;">
+                                                <button class="btn btn-secondary btn-sm" onclick="viewMaterial('Force & Laws of Motion Video', 'Inertia, Momentum & Friction', 'Science', 'Video', 'Published')" title="View Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-eye"></i> View
+                                                </button>
+                                                <button class="btn btn-secondary btn-sm" onclick="openUpdateModal('mat-9', 'Force & Laws of Motion Video', 'Inertia, Momentum & Friction', 'Class 9', 'A', 'Science', 'Video', 'Published')" title="Update Material" style="padding: 0.3rem 0.65rem; font-size: 0.85rem;">
+                                                    <i class="ph ph-pencil-simple"></i> Update
+                                                </button>
+                                                <button class="btn-icon text-muted" title="Archive" onclick="archiveMaterial(this)"><i class="ph ph-archive"></i></button>
+                                                <button class="btn-icon" style="color: var(--status-danger);" title="Delete" onclick="deleteMaterial(this)"><i class="ph ph-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL 1: UPLOAD MATERIAL INSIDE CLASS -->
+    <div class="modal-overlay" id="uploadMaterialModal">
+        <div class="modal-content" style="max-width: 550px;">
+            <div class="modal-header">
+                <div>
+                    <h3 class="modal-title"><i class="ph ph-upload-simple"></i> Upload Class Material</h3>
+                    <div class="text-muted" style="font-size: 0.85rem;" id="uploadModalTargetLabel">Class 10 - Division A</div>
+                </div>
+                <button class="btn-icon" onclick="closeUploadModal()"><i class="ph ph-x"></i></button>
+            </div>
+            <form id="uploadMaterialForm" onsubmit="handleUploadMaterialSubmit(event)">
+                <input type="hidden" id="uploadModalClass" value="Class 10">
+                <input type="hidden" id="uploadModalDiv" value="A">
+                <div class="modal-body" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Material Title</label>
+                        <input type="text" id="uploadMaterialTitle" class="form-control" placeholder="e.g. Quadratic Equations Summary Sheet" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Chapter / Topic</label>
+                        <input type="text" id="uploadMaterialTopic" class="form-control" placeholder="e.g. Chapter 4 Key Formulas" required>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label">Subject</label>
+                            <select id="uploadMaterialSubject" class="form-control" required>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Science">Science</option>
+                                <option value="English">English</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label">Material Type</label>
+                            <select id="uploadMaterialType" class="form-control" required>
+                                <option value="PDF">PDF</option>
+                                <option value="Video">Video</option>
+                                <option value="PPT">PPT</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Status</label>
+                        <select id="uploadMaterialStatus" class="form-control">
+                            <option value="Published">Published immediately</option>
+                            <option value="Draft">Save as Draft</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Select File</label>
+                        <input type="file" class="form-control" style="padding-top: 0.45rem;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeUploadModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="ph ph-check"></i> Upload Material</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: UPDATE MATERIAL INSIDE CLASS -->
+    <div class="modal-overlay" id="updateMaterialModal">
+        <div class="modal-content" style="max-width: 550px;">
+            <div class="modal-header">
+                <div>
+                    <h3 class="modal-title"><i class="ph ph-pencil-simple"></i> Update Class Material</h3>
+                    <div class="text-muted" style="font-size: 0.85rem;" id="updateModalClassTarget">Class 10 - Division A</div>
+                </div>
+                <button class="btn-icon" onclick="closeUpdateModal()"><i class="ph ph-x"></i></button>
+            </div>
+            <form id="updateMaterialForm" onsubmit="handleUpdateMaterialSubmit(event)">
+                <input type="hidden" id="updateMaterialId" value="">
+                <div class="modal-body" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Material Title</label>
+                        <input type="text" id="updateMaterialTitle" class="form-control" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Chapter / Topic</label>
+                        <input type="text" id="updateMaterialTopic" class="form-control" required>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label">Subject</label>
+                            <select id="updateMaterialSubject" class="form-control" required>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Science">Science</option>
+                                <option value="English">English</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label">Material Type</label>
+                            <select id="updateMaterialType" class="form-control" required>
+                                <option value="PDF">PDF</option>
+                                <option value="Video">Video</option>
+                                <option value="PPT">PPT</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Status</label>
+                        <select id="updateMaterialStatus" class="form-control">
+                            <option value="Published">Published</option>
+                            <option value="Draft">Draft</option>
+                            <option value="Archived">Archived</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Replace File (Optional)</label>
+                        <input type="file" class="form-control" style="padding-top: 0.45rem;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeUpdateModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="ph ph-check"></i> Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: VIEW / PREVIEW MATERIAL -->
+    <div class="modal-overlay" id="viewMaterialModal">
+        <div class="modal-content" style="max-width: 550px;">
+            <div class="modal-header">
+                <div>
+                    <h3 class="modal-title" id="viewModalTitle">Material Preview</h3>
+                    <div class="text-muted" style="font-size: 0.85rem;" id="viewModalTopic">Topic details</div>
+                </div>
+                <button class="btn-icon" onclick="closeViewModal()"><i class="ph ph-x"></i></button>
+            </div>
+            <div class="modal-body">
+                <div style="background: var(--bg-color); border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: 2rem; text-align: center; margin-bottom: 1.25rem;">
+                    <i id="viewModalIcon" class="ph ph-file-pdf" style="font-size: 3.5rem; color: var(--primary-color); display: block; margin-bottom: 0.5rem;"></i>
+                    <div style="font-weight: 500; font-size: 1rem; color: var(--text-main);" id="viewModalMeta">PDF Document</div>
+                    <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; margin-bottom: 0;">Ready for students in the Digital Library</p>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="badge badge-success"><i class="ph ph-check-circle"></i> Verified &amp; Active</span>
+                    <a href="../student/resource-viewer.html" class="btn btn-secondary btn-sm"><i class="ph ph-arrow-square-out"></i> Open Full Viewer</a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeViewModal()">Close</button>
+                <button type="button" class="btn btn-primary" onclick="TeacherCore.showToast('Downloading resource file...', 'info'); closeViewModal();"><i class="ph ph-download-simple"></i> Download File</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

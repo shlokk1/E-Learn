@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - EduPortal</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css"> <!-- For modals/toasts base -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/teacher-core.js"></script>
+    <script src="../../assets/js/teacher-layout.js"></script>
+</head>
+<body data-teacher-page="dashboard">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <div class="page-header">
+                    <h1 style="font-size: 1.75rem; margin-bottom: 0.5rem;">Welcome back, Teacher!</h1>
+                    <p class="text-muted">Here is what needs your attention today.</p>
+                </div>
+
+                <div class="grid-dashboard">
+                    <!-- Left Column: Main Dashboard Content -->
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        
+                        <!-- Summary Cards -->
+                        <div class="grid-cards">
+                            <div class="card" style="border-top: 4px solid var(--status-warning);">
+                                <h3 class="text-muted" style="font-size: 0.85rem; text-transform: uppercase;">Awaiting Review</h3>
+                                <div style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin: 0.5rem 0;">12</div>
+                                <a href="doubt-review.html" style="font-size: 0.85rem; font-weight: 500; text-decoration: none; color: var(--primary-color);">Review Now &rarr;</a>
+                            </div>
+                            
+                            <div class="card" style="border-top: 4px solid var(--primary-color);">
+                                <h3 class="text-muted" style="font-size: 0.85rem; text-transform: uppercase;">Awaiting Answer</h3>
+                                <div style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin: 0.5rem 0;">7</div>
+                                <a href="my-doubts.html" style="font-size: 0.85rem; font-weight: 500; text-decoration: none; color: var(--primary-color);">Answer Now &rarr;</a>
+                            </div>
+
+                            <div class="card" style="border-top: 4px solid var(--status-info);">
+                                <h3 class="text-muted" style="font-size: 0.85rem; text-transform: uppercase;">Active Discussions</h3>
+                                <div style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin: 0.5rem 0;">5</div>
+                                <span class="text-muted" style="font-size: 0.85rem;">Follow-ups pending</span>
+                            </div>
+
+                            <div class="card" style="border-top: 4px solid var(--status-danger);">
+                                <h3 class="text-muted" style="font-size: 0.85rem; text-transform: uppercase;">Community Flags</h3>
+                                <div style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin: 0.5rem 0;">3</div>
+                                <a href="moderation.html" style="font-size: 0.85rem; font-weight: 500; text-decoration: none; color: var(--primary-color);">Moderate &rarr;</a>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">My Recent Activity</h3>
+                            </div>
+                            <div class="card-body">
+                                <ul style="list-style: none; padding: 0; margin: 0;">
+                                    <li style="padding: 1rem 0; border-bottom: 1px solid var(--border-color); display: flex; gap: 1rem;">
+                                        <i class="ph ph-chat-circle text-muted" style="font-size: 1.25rem;"></i>
+                                        <div>
+                                            <div style="font-weight: 500;">Answered Mathematics doubt</div>
+                                            <div class="text-muted" style="font-size: 0.85rem;">For Student A • 10 minutes ago</div>
+                                        </div>
+                                    </li>
+                                    <li style="padding: 1rem 0; border-bottom: 1px solid var(--border-color); display: flex; gap: 1rem;">
+                                        <i class="ph ph-check-circle" style="color: var(--status-success); font-size: 1.25rem;"></i>
+                                        <div>
+                                            <div style="font-weight: 500;">Approved Physics doubt</div>
+                                            <div class="text-muted" style="font-size: 0.85rem;">For Student B • 25 minutes ago</div>
+                                        </div>
+                                    </li>
+                                    <li style="padding: 1rem 0; display: flex; gap: 1rem;">
+                                        <i class="ph ph-file-pdf" style="color: var(--primary-color); font-size: 1.25rem;"></i>
+                                        <div>
+                                            <div style="font-weight: 500;">Uploaded Class 10 Science Notes</div>
+                                            <div class="text-muted" style="font-size: 0.85rem;">Digital Library • 1 hour ago</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Right Column: Pending Actions & Context -->
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div class="card" style="background-color: var(--sidebar-bg); color: #fff;">
+                            <h3 style="margin-top: 0; margin-bottom: 1rem; color: #fff;">Pending Actions</h3>
+                            
+                            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <div>
+                                        <div style="font-weight: 600;">12 Doubts</div>
+                                        <div style="font-size: 0.85rem; color: var(--sidebar-text);">Awaiting review</div>
+                                    </div>
+                                    <a href="doubt-review.html" class="btn btn-secondary" style="color: #fff; border-color: rgba(255,255,255,0.3); padding: 0.4rem 0.75rem;">Review</a>
+                                </div>
+                                
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <div>
+                                        <div style="font-weight: 600;">7 Doubts</div>
+                                        <div style="font-size: 0.85rem; color: var(--sidebar-text);">Approved, need answers</div>
+                                    </div>
+                                    <a href="my-doubts.html" class="btn btn-secondary" style="color: #fff; border-color: rgba(255,255,255,0.3); padding: 0.4rem 0.75rem;">Answer</a>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div style="font-weight: 600;">3 Posts</div>
+                                        <div style="font-size: 0.85rem; color: var(--sidebar-text);">Community flags</div>
+                                    </div>
+                                    <a href="moderation.html" class="btn btn-secondary" style="color: #fff; border-color: rgba(255,255,255,0.3); padding: 0.4rem 0.75rem;">Moderate</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Upcoming 1:1 Sessions -->
+                        <div class="card mb-4" id="dashboard-teacher-upcoming">
+                            <h3 class="card-title" style="margin-bottom: 1rem;">Upcoming 1:1 Sessions</h3>
+                            <div id="teacher-upcoming-content">
+                                <script>
+                                    function renderTeacherDashboardUpcoming() {
+                                        const sessions = MOCK_DATA.getSessions();
+                                        const upcoming = sessions.filter(s => (s.status === 'Booked' || s.status === 'Upcoming'));
+                                        const container = document.getElementById('teacher-upcoming-content');
+                                        if(upcoming.length > 0) {
+                                            const next = upcoming[0];
+                                            container.innerHTML = `
+                                                <p style="margin: 0 0 1rem 0; font-weight: 500;">Today's Sessions: ${upcoming.length}</p>
+                                                <div style="background: var(--bg-color); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+                                                    <div style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.5rem;">Next Session</div>
+                                                    <div style="font-weight: 600;">${next.startTime} - ${next.endTime}</div>
+                                                    <div style="font-size: 0.9rem;">${next.studentName || 'Student'} &middot; ${next.subject}</div>
+                                                </div>
+                                                <a href="sessions.html" class="btn btn-primary w-100" style="justify-content: center;">View Sessions</a>
+                                            `;
+                                        } else {
+                                            container.innerHTML = '<p class="text-muted" style="font-size: 0.9rem;">No upcoming sessions.</p><a href="sessions.html" class="btn btn-secondary w-100" style="justify-content: center; margin-top:1rem;">Manage Availability</a>';
+                                        }
+                                    }
+                                    document.addEventListener('DOMContentLoaded', renderTeacherDashboardUpcoming);
+                                    window.addEventListener('storage', function(e) {
+                                        if (e.key === 'mockSessions') {
+                                            renderTeacherDashboardUpcoming();
+                                        }
+                                    });
+                                    window.addEventListener('storage-local', renderTeacherDashboardUpcoming);
+                                </script>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="card">
+                            <h3 class="card-title" style="margin-bottom: 1rem;">Quick Actions</h3>
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                <a href="upload-material.html" class="btn btn-secondary" style="justify-content: flex-start;"><i class="ph ph-upload-simple"></i> Upload Material</a>
+                                <a href="create-announcement.html" class="btn btn-secondary" style="justify-content: flex-start;"><i class="ph ph-megaphone"></i> New Announcement</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

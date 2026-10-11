@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - EduPortal</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/admin-core.js"></script>
+    <script src="../../assets/js/admin-layout.js"></script>
+</head>
+<body data-admin-page="dashboard">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                
+                <!-- Summary Cards -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div class="card" style="padding: 1.25rem;">
+                        <div class="text-muted" style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Students</div>
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--text-main);">1,248</div>
+                    </div>
+                    <div class="card" style="padding: 1.25rem;">
+                        <div class="text-muted" style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Active Teachers</div>
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--text-main);">56</div>
+                    </div>
+                    <div class="card" style="padding: 1.25rem; border-left: 4px solid var(--status-success);">
+                        <div class="text-muted" style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Active Classes</div>
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--status-success);">12</div>
+                    </div>
+                    <div class="card" style="padding: 1.25rem; border-left: 4px solid var(--status-info);">
+                        <div class="text-muted" style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Doubts Review</div>
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--status-info);">24</div>
+                    </div>
+                </div>
+
+                <div class="grid-dashboard">
+                    <!-- Left Column: Recent Activity -->
+                    <div>
+                        <div class="card">
+                            <div class="card-header"><h3 class="card-title">Recent Activity</h3></div>
+                            <div class="card-body">
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="padding: 1rem 0; border-bottom: 1px solid var(--border-color); display: flex; gap: 1rem;">
+                                        <i class="ph ph-check-circle" style="color: var(--status-success); font-size: 1.5rem;"></i>
+                                        <div><strong>Teacher account approved</strong><div class="text-muted" style="font-size:0.85rem;">5 minutes ago</div></div>
+                                    </li>
+                                    <li style="padding: 1rem 0; border-bottom: 1px solid var(--border-color); display: flex; gap: 1rem;">
+                                        <i class="ph ph-books" style="color: var(--primary-color); font-size: 1.5rem;"></i>
+                                        <div><strong>New Mathematics textbook uploaded</strong><div class="text-muted" style="font-size:0.85rem;">20 minutes ago</div></div>
+                                    </li>
+                                    <li style="padding: 1rem 0; display: flex; gap: 1rem;">
+                                        <i class="ph ph-flag" style="color: var(--status-danger); font-size: 1.5rem;"></i>
+                                        <div><strong>Community post flagged</strong><div class="text-muted" style="font-size:0.85rem;">35 minutes ago</div></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel -->
+                    <div>
+                        <!-- 1:1 Session Overview -->
+                        <div class="card mb-4" id="dashboard-admin-sessions">
+                            <div class="card-header"><h3 class="card-title">1:1 Session Overview</h3></div>
+                            <div class="card-body">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span class="text-muted">Upcoming</span>
+                                    <strong id="admin-dash-upcoming">0</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span class="text-muted">Completed</span>
+                                    <strong id="admin-dash-completed">0</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem;">
+                                    <span class="text-muted">Active Teachers</span>
+                                    <strong id="admin-dash-teachers">0</strong>
+                                </div>
+                                <a href="sessions.html" class="btn btn-primary w-100" style="justify-content: center;">Monitor Sessions</a>
+                                <script>
+                                    function renderAdminDashboardSessions() {
+                                        const sessions = MOCK_DATA.getSessions();
+                                        const upcoming = sessions.filter(s => s.status === 'Booked' || s.status === 'Upcoming' || s.status === 'In Progress').length;
+                                        const completed = sessions.filter(s => s.status === 'Completed').length;
+                                        const teachers = new Set(sessions.map(s => s.teacherName)).size;
+
+                                        document.getElementById('admin-dash-upcoming').textContent = upcoming;
+                                        document.getElementById('admin-dash-completed').textContent = completed;
+                                        document.getElementById('admin-dash-teachers').textContent = teachers;
+                                    }
+                                    document.addEventListener('DOMContentLoaded', renderAdminDashboardSessions);
+                                    window.addEventListener('storage', function(e) {
+                                        if (e.key === 'mockSessions') {
+                                            renderAdminDashboardSessions();
+                                        }
+                                    });
+                                    window.addEventListener('storage-local', renderAdminDashboardSessions);
+                                </script>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header"><h3 class="card-title">Quick Actions</h3></div>
+                            <div class="card-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                                <a href="add-student.html" class="btn btn-secondary" style="font-size:0.85rem;"><i class="ph ph-user-plus"></i> Add Student</a>
+                                <a href="add-teacher.html" class="btn btn-secondary" style="font-size:0.85rem;"><i class="ph ph-user-plus"></i> Add Teacher</a>
+                                <a href="resource-upload.html" class="btn btn-secondary" style="font-size:0.85rem;"><i class="ph ph-upload-simple"></i> Upload File</a>
+                                <a href="create-announcement.html" class="btn btn-secondary" style="font-size:0.85rem;"><i class="ph ph-megaphone"></i> Announce</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Library - EduPortal</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/student.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/mock-data.js"></script>
+    <script src="../../assets/js/student.js"></script>
+</head>
+<body data-page="library">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <div class="mb-4">
+                    <h1>Digital Library</h1>
+                    <p class="text-muted">Access official textbooks, guide books, notes, and practice materials for Class 10.</p>
+                </div>
+
+                <!-- Filters -->
+                <div class="card mb-4">
+                    <div class="card-body" style="padding: 1rem 1.5rem;">
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <div class="form-group" style="margin-bottom: 0; flex: 1; min-width: 200px;">
+                                <input type="text" id="librarySearchInput" class="form-control" placeholder="Search resources by title, topic...">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0; flex: 1; min-width: 150px;">
+                                <select id="librarySubjectFilter" class="form-control">
+                                    <option value="all">All Subjects</option>
+                                    <option value="mathematics">Mathematics</option>
+                                    <option value="science">Science</option>
+                                    <option value="english">English</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0; flex: 1; min-width: 150px;">
+                                <select id="libraryTypeFilter" class="form-control">
+                                    <option value="all">All Material Types</option>
+                                    <option value="textbook">Textbook</option>
+                                    <option value="guide book">Guide Book</option>
+                                    <option value="teacher notes">Teacher Notes</option>
+                                    <option value="presentation">Presentation (PPT)</option>
+                                    <option value="practice paper">Practice Paper</option>
+                                </select>
+                            </div>
+                            <button id="librarySearchBtn" class="btn btn-primary"><i class="ph ph-magnifying-glass"></i> Search</button>
+                            <button id="libraryResetBtn" class="btn btn-secondary" style="display: none;"><i class="ph ph-arrow-counter-clockwise"></i> Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid -->
+                <div class="library-grid" id="libraryGrid">
+                    
+                    <a href="resource-viewer.html" class="resource-card" data-subject="mathematics" data-type="textbook">
+                        <i class="ph ph-book-bookmark resource-icon"></i>
+                        <span class="badge badge-info mb-2">Textbook</span>
+                        <h4 style="color: var(--text-main);">Mathematics NCERT Part 1</h4>
+                        <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0;">Mathematics &middot; Full Book</p>
+                    </a>
+
+                    <a href="resource-viewer.html" class="resource-card" data-subject="science" data-type="teacher notes">
+                        <i class="ph ph-file-text resource-icon"></i>
+                        <span class="badge badge-warning mb-2">Teacher Notes</span>
+                        <h4 style="color: var(--text-main);">Chemical Reactions Notes</h4>
+                        <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0;">Science &middot; Chapter 1</p>
+                    </a>
+
+                    <a href="resource-viewer.html" class="resource-card" data-subject="science" data-type="presentation">
+                        <i class="ph ph-presentation-chart resource-icon"></i>
+                        <span class="badge badge-success mb-2">Presentation</span>
+                        <h4 style="color: var(--text-main);">Life Processes Slides</h4>
+                        <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0;">Science &middot; Chapter 6</p>
+                    </a>
+
+                    <a href="resource-viewer.html" class="resource-card" data-subject="english" data-type="practice paper">
+                        <i class="ph ph-exam resource-icon"></i>
+                        <span class="badge badge-danger mb-2">Practice Paper</span>
+                        <h4 style="color: var(--text-main);">Grammar Exercises</h4>
+                        <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0;">English &middot; Grammar</p>
+                    </a>
+
+                    <a href="resource-viewer.html" class="resource-card" data-subject="mathematics" data-type="guide book">
+                        <i class="ph ph-books resource-icon"></i>
+                        <span class="badge badge-primary mb-2">Guide Book</span>
+                        <h4 style="color: var(--text-main);">Class 10 RD Sharma Exemplar</h4>
+                        <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0;">Mathematics &middot; Solutions</p>
+                    </a>
+
+                    <a href="resource-viewer.html" class="resource-card" data-subject="english" data-type="textbook">
+                        <i class="ph ph-book-open resource-icon"></i>
+                        <span class="badge badge-info mb-2">Textbook</span>
+                        <h4 style="color: var(--text-main);">First Flight English Reader</h4>
+                        <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0;">English &middot; NCERT Textbook</p>
+                    </a>
+
+                </div>
+
+                <div id="libraryEmptyState" class="card" style="display: none; text-align: center; padding: 3rem 1.5rem; margin-top: 1rem;">
+                    <i class="ph ph-magnifying-glass" style="font-size: 2.5rem; color: var(--text-muted); margin-bottom: 0.75rem; display: inline-block;"></i>
+                    <h3 style="color: var(--text-main); margin-bottom: 0.5rem; font-size: 1.25rem;">No resources found</h3>
+                    <p class="text-muted" style="margin-bottom: 1.25rem; font-size: 0.95rem;">Try adjusting your search terms or filter criteria.</p>
+                    <button class="btn btn-secondary" onclick="resetLibraryFilters()"><i class="ph ph-arrow-counter-clockwise"></i> Clear Filters</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

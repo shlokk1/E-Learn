@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Subject - EduPortal Admin</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/admin-core.js"></script>
+    <script src="../../assets/js/admin-layout.js"></script>
+</head>
+<body data-admin-page="subjects">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                <a href="subjects.html" class="btn btn-secondary mb-4" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;"><i class="ph ph-arrow-left"></i> Back to Subjects</a>
+                
+                <h1 class="mb-4" id="pageHeading">Add Subject</h1>
+                
+                <div class="card" style="max-width: 650px;">
+                    <div class="card-body">
+                        <form id="addSubjectForm" onsubmit="handleSubjectSubmit(event)">
+                            <div class="form-group">
+                                <label class="form-label" for="subjectClass">Target Class / Grade <span style="color: var(--status-danger)">*</span></label>
+                                <select id="subjectClass" class="form-control" required onchange="suggestSubjectCode()">
+                                    <option value="10" selected>Class 10</option>
+                                    <option value="9">Class 9</option>
+                                    <option value="8">Class 8</option>
+                                    <option value="7">Class 7</option>
+                                    <option value="6">Class 6</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="subjectName">Subject Name <span style="color: var(--status-danger)">*</span></label>
+                                <input type="text" id="subjectName" class="form-control" placeholder="e.g. Mathematics" required oninput="suggestSubjectCode()">
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label" for="subjectCode">Subject Code <span style="color: var(--status-danger)">*</span></label>
+                                    <input type="text" id="subjectCode" class="form-control" placeholder="e.g. MATH-10" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="subjectStatus">Status</label>
+                                    <select id="subjectStatus" class="form-control">
+                                        <option value="Active" selected>Active</option>
+                                        <option value="Inactive">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
+                                <a href="subjects.html" class="btn btn-secondary">Cancel</a>
+                                <button type="submit" class="btn btn-primary" id="submitBtn"><i class="ph ph-plus"></i> Add Subject</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let editSubjectId = null;
+
+        const DEFAULT_SUBJECTS = [
+            { id: 'sub_1', class: '10', name: 'Mathematics', code: 'MATH-10', status: 'Active' },
+            { id: 'sub_2', class: '10', name: 'Science', code: 'SCI-10', status: 'Active' },
+            { id: 'sub_3', class: '10', name: 'English Literature', code: 'ENG-10', status: 'Active' },
+            { id: 'sub_4', class: '10', name: 'Social Science', code: 'SOC-10', status: 'Active' },
+            { id: 'sub_5', class: '10', name: 'Hindi Course A', code: 'HIN-10', status: 'Active' },
+            { id: 'sub_6', class: '9', name: 'Mathematics', code: 'MATH-9', status: 'Active' },
+            { id: 'sub_7', class: '9', name: 'Science', code: 'SCI-9', status: 'Active' },
+            { id: 'sub_8', class: '9', name: 'English Language', code: 'ENG-9', status: 'Active' },
+            { id: 'sub_9', class: '9', name: 'Social Studies', code: 'SOC-9', status: 'Active' },
+            { id: 'sub_10', class: '8', name: 'General Science', code: 'SCI-8', status: 'Active' },
+            { id: 'sub_11', class: '8', name: 'Basic Mathematics', code: 'MATH-8', status: 'Active' },
+            { id: 'sub_12', class: '8', name: 'English Grammar', code: 'ENG-8', status: 'Active' }
+        ];
+
+        function getStoredSubjects() {
+            const saved = localStorage.getItem('adminSubjectsData');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                } catch(e) {}
+            }
+            localStorage.setItem('adminSubjectsData', JSON.stringify(DEFAULT_SUBJECTS));
+            return DEFAULT_SUBJECTS;
+        }
+
+        function suggestSubjectCode() {
+            if (editSubjectId) return; // Don't auto-overwrite when editing
+            const name = document.getElementById('subjectName').value.trim();
+            const cls = document.getElementById('subjectClass').value;
+            const codeInput = document.getElementById('subjectCode');
+
+            if (name) {
+                const prefix = name.replace(/[^a-zA-Z]/g, '').slice(0, 4).toUpperCase();
+                codeInput.value = `${prefix}-${cls}`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const targetClass = params.get('class');
+            const editId = params.get('edit') || params.get('id');
+
+            if (targetClass && !editId) {
+                // If adding for a specific class, pre-select it
+                const select = document.getElementById('subjectClass');
+                // Check if class option exists, else add it
+                let exists = Array.from(select.options).some(o => o.value === targetClass);
+                if (!exists) {
+                    const opt = document.createElement('option');
+                    opt.value = targetClass;
+                    opt.textContent = `Class ${targetClass}`;
+                    select.appendChild(opt);
+                }
+                select.value = targetClass;
+            }
+
+            if (editId) {
+                editSubjectId = editId;
+                const subjects = getStoredSubjects();
+                const sub = subjects.find(s => String(s.id) === String(editId));
+
+                if (sub) {
+                    document.title = 'Edit Subject - EduPortal Admin';
+                    document.getElementById('pageHeading').textContent = 'Edit Subject';
+                    document.getElementById('subjectClass').value = sub.class;
+                    document.getElementById('subjectName').value = sub.name;
+                    document.getElementById('subjectCode').value = sub.code;
+                    document.getElementById('subjectStatus').value = sub.status;
+                    document.getElementById('submitBtn').innerHTML = '<i class="ph ph-check"></i> Save Changes';
+                }
+            }
+        });
+
+        function handleSubjectSubmit(event) {
+            event.preventDefault();
+            const cls = document.getElementById('subjectClass').value;
+            const name = document.getElementById('subjectName').value.trim();
+            const code = document.getElementById('subjectCode').value.trim().toUpperCase();
+            const status = document.getElementById('subjectStatus').value;
+
+            const subjects = getStoredSubjects();
+
+            if (editSubjectId) {
+                const index = subjects.findIndex(s => String(s.id) === String(editSubjectId));
+                if (index > -1) {
+                    subjects[index] = {
+                        ...subjects[index],
+                        class: cls,
+                        name,
+                        code,
+                        status
+                    };
+                }
+                localStorage.setItem('adminSubjectsData', JSON.stringify(subjects));
+                AdminCore.showToast(`Updated subject "${name}"`, 'success');
+            } else {
+                const newSubject = {
+                    id: 'sub_' + Date.now(),
+                    class: cls,
+                    name,
+                    code,
+                    status
+                };
+                subjects.push(newSubject);
+                localStorage.setItem('adminSubjectsData', JSON.stringify(subjects));
+                AdminCore.showToast(`Added "${name}" to Class ${cls}!`, 'success');
+            }
+
+            setTimeout(() => {
+                window.location.href = 'subjects.html';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

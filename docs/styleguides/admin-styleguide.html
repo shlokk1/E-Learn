@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Design System - Phase 1</title>
+    
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    
+    <!-- Admin Specific -->
+    <link rel="stylesheet" href="../../assets/css/admin-tables.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css">
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/admin-core.js"></script>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- Admin Distinct Sidebar -->
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar">
+            <div class="app-sidebar-header">
+                <i class="ph ph-shield-check"></i>
+                <span>Admin Portal</span>
+            </div>
+            <nav class="app-sidebar-nav">
+                <a href="#" class="nav-item active"><i class="ph ph-squares-four"></i> Dashboard</a>
+                <a href="#" class="nav-item"><i class="ph ph-users"></i> Students</a>
+                <a href="#" class="nav-item"><i class="ph ph-chalkboard-teacher"></i> Teachers</a>
+                <a href="#" class="nav-item"><i class="ph ph-books"></i> Digital Library</a>
+            </nav>
+        </aside>
+
+        <main class="app-main">
+            <header class="app-header">
+                <div class="header-left">
+                    <h2 style="margin: 0; font-size: 1.15rem; color: var(--text-main);">Phase 1 Styleguide</h2>
+                </div>
+                <div class="header-right">
+                    <button class="btn-icon theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+                        <i class="ph ph-moon"></i>
+                    </button>
+                    <a href="#" class="btn-icon"><i class="ph ph-bell"></i></a>
+                </div>
+            </header>
+
+            <div class="app-content">
+                <div class="page-header">
+                    <h1>Admin Components</h1>
+                    <p class="text-muted">Verifying the Data Tables, Modals, Toasts, and Admin aesthetics.</p>
+                </div>
+
+                <!-- Modals & Toasts -->
+                <section class="mb-4">
+                    <h2>Interactions</h2>
+                    <div class="card">
+                        <div class="card-body" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <button class="btn btn-primary" onclick="AdminCore.showModal('demoModal')">Show Confirmation Modal</button>
+                            <button class="btn btn-secondary" onclick="AdminCore.showToast('Resource uploaded successfully!', 'success')">Show Success Toast</button>
+                            <button class="btn btn-danger" onclick="AdminCore.showToast('Failed to connect to server.', 'error')">Show Error Toast</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Data Tables -->
+                <section>
+                    <h2>Data Table</h2>
+                    <div class="table-container">
+                        <div class="table-header-bar">
+                            <div class="form-group" style="margin: 0;">
+                                <input type="text" class="form-control" placeholder="Search students..." style="width: 250px;">
+                            </div>
+                            <div class="table-filters">
+                                <select class="form-control">
+                                    <option>All Classes</option>
+                                    <option>Class 9</option>
+                                    <option>Class 10</option>
+                                </select>
+                                <button class="btn btn-secondary"><i class="ph ph-funnel"></i> Filter</button>
+                            </div>
+                        </div>
+                        
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Class</th>
+                                    <th>Division</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Rahul Sharma</strong><br><span class="text-muted" style="font-size:0.85rem">rahul@example.com</span></td>
+                                    <td>10</td>
+                                    <td>A</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon" title="View Details"><i class="ph ph-eye"></i></button>
+                                            <button class="btn-icon" title="Edit"><i class="ph ph-pencil-simple"></i></button>
+                                            <button class="btn-icon" title="Deactivate" style="color: var(--status-danger);"><i class="ph ph-prohibit"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Anjali Verma</strong><br><span class="text-muted" style="font-size:0.85rem">anjali@example.com</span></td>
+                                    <td>9</td>
+                                    <td>B</td>
+                                    <td><span class="badge badge-danger">Inactive</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon" title="View Details"><i class="ph ph-eye"></i></button>
+                                            <button class="btn-icon" title="Edit"><i class="ph ph-pencil-simple"></i></button>
+                                            <button class="btn-icon" title="Activate" style="color: var(--status-success);"><i class="ph ph-check-circle"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="pagination">
+                            <span class="text-muted" style="font-size: 0.85rem;">Showing 1 to 2 of 24 entries</span>
+                            <div class="pagination-controls">
+                                <button class="page-btn">Previous</button>
+                                <button class="page-btn active">1</button>
+                                <button class="page-btn">2</button>
+                                <button class="page-btn">3</button>
+                                <button class="page-btn">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Demo Modal -->
+    <div class="modal-overlay" id="demoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Deactivate Student</h3>
+                <button class="btn-icon" data-close-modal><i class="ph ph-x"></i></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to deactivate <strong>Rahul Sharma</strong>? This will prevent the student from logging into the portal and participating in the community.</p>
+                <div class="form-group mt-3" style="margin-bottom:0;">
+                    <label class="form-label">Reason for deactivation (Optional)</label>
+                    <textarea class="form-control" style="min-height: 80px;"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close-modal>Cancel</button>
+                <button class="btn btn-danger" onclick="AdminCore.closeModal('demoModal'); AdminCore.showToast('Student deactivated successfully.', 'success');">Confirm Deactivation</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

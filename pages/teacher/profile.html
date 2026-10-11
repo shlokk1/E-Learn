@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Teacher Portal</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/teacher-core.js"></script>
+    <script src="../../assets/js/teacher-layout.js"></script>
+</head>
+<body data-teacher-page="profile">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <div class="mb-4">
+                    <h1>Teacher Profile</h1>
+                    <p class="text-muted">Manage your academic profile and credentials.</p>
+                </div>
+
+                <div class="grid-dashboard">
+                    <div class="card">
+                        <div style="display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 2rem;">
+                            <div style="width: 100px; height: 100px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+                                T
+                            </div>
+                            <div>
+                                <h2 style="margin: 0 0 0.25rem 0;">Teacher / Mentor</h2>
+                                <p class="text-muted" style="margin: 0 0 1rem 0;">teacher@eduportal.com</p>
+                                <span class="badge badge-success"><i class="ph ph-check-circle"></i> Verified Educator</span>
+                            </div>
+                        </div>
+
+                        <form onsubmit="event.preventDefault(); TeacherCore.showToast('Profile updated!', 'success');">
+                            <div class="form-group">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" value="Teacher / Mentor">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" value="teacher@eduportal.com" disabled>
+                                <div class="text-muted" style="font-size: 0.8rem; margin-top: 0.25rem;">Contact admin to change email.</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Bio</label>
+                                <textarea class="form-control" style="min-height: 80px;">Dedicated educator with a focus on Mathematics and Science.</textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+
+                    <div>
+                        <div class="card mb-4">
+                            <h3 class="card-title">Assigned Roles</h3>
+                            <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-main);">
+                                <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--border-color);"><i class="ph ph-chalkboard-teacher text-muted"></i> Role: <strong>Teacher</strong></li>
+                                <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--border-color);"><i class="ph ph-book text-muted"></i> Subject: <strong>Mathematics, Science</strong></li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Assigned Classes</h3>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                <span class="badge badge-info">Class 10 - A</span>
+                                <span class="badge badge-info">Class 10 - B</span>
+                                <span class="badge badge-info">Class 9 - A</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

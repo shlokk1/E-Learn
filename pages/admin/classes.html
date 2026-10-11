@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes & Divisions - EduPortal Admin</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/admin-core.js"></script>
+    <script src="../../assets/js/admin-layout.js"></script>
+    <style>
+        .class-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .division-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .division-item:last-child {
+            border-bottom: none;
+        }
+        .division-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .division-actions .btn-icon {
+            padding: 0.35rem;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body data-admin-page="classes">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                <div class="mb-4" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <h1>Classes & Divisions</h1>
+                        <p class="text-muted">Manage the academic structure, classes, and division allocations.</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="openAddClassModal()"><i class="ph ph-plus"></i> Add Class</button>
+                </div>
+
+                <div class="grid-cards" id="classesContainer">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Class Modal (Add & Edit) -->
+    <div class="modal-overlay" id="classModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="classModalTitle">Add New Class</h3>
+                <button type="button" class="btn-icon" onclick="AdminCore.closeModal('classModal')"><i class="ph ph-x"></i></button>
+            </div>
+            <form id="classForm" onsubmit="handleClassSubmit(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="editClassId">
+                    <div class="form-group">
+                        <label class="form-label" for="classNameInput">Class / Grade Name <span style="color: var(--status-danger)">*</span></label>
+                        <input type="text" id="classNameInput" class="form-control" placeholder="e.g. Class 10 or Grade 8" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="AdminCore.closeModal('classModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="classSubmitBtn"><i class="ph ph-check"></i> Save Class</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Division Modal (Add & Edit) -->
+    <div class="modal-overlay" id="divisionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="divisionModalTitle">Add Division</h3>
+                <button type="button" class="btn-icon" onclick="AdminCore.closeModal('divisionModal')"><i class="ph ph-x"></i></button>
+            </div>
+            <form id="divisionForm" onsubmit="handleDivisionSubmit(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="targetClassId">
+                    <input type="hidden" id="editDivisionId">
+                    <div class="form-group">
+                        <label class="form-label" for="divisionNameInput">Division / Section Name <span style="color: var(--status-danger)">*</span></label>
+                        <input type="text" id="divisionNameInput" class="form-control" placeholder="e.g. Division A or Section B" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="divisionStudentsInput">Enrolled Students Count</label>
+                        <input type="number" id="divisionStudentsInput" class="form-control" min="0" max="200" placeholder="e.g. 40" value="0">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="AdminCore.closeModal('divisionModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="divisionSubmitBtn"><i class="ph ph-check"></i> Save Division</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const DEFAULT_CLASSES = [
+            {
+                id: 'cls_10',
+                name: 'Class 10',
+                divisions: [
+                    { id: 'div_10_a', name: 'Division A', studentsCount: 42 },
+                    { id: 'div_10_b', name: 'Division B', studentsCount: 38 },
+                    { id: 'div_10_c', name: 'Division C', studentsCount: 40 }
+                ]
+            },
+            {
+                id: 'cls_9',
+                name: 'Class 9',
+                divisions: [
+                    { id: 'div_9_a', name: 'Division A', studentsCount: 45 },
+                    { id: 'div_9_b', name: 'Division B', studentsCount: 42 }
+                ]
+            }
+        ];
+
+        function getStoredClasses() {
+            const saved = localStorage.getItem('adminClassesData');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                } catch(e) {}
+            }
+            localStorage.setItem('adminClassesData', JSON.stringify(DEFAULT_CLASSES));
+            return DEFAULT_CLASSES;
+        }
+
+        function saveClassesData(data) {
+            localStorage.setItem('adminClassesData', JSON.stringify(data));
+            renderClasses();
+        }
+
+        function renderClasses() {
+            const classes = getStoredClasses();
+            const container = document.getElementById('classesContainer');
+
+            if (!classes || classes.length === 0) {
+                container.innerHTML = `
+                    <div class="card" style="grid-column: 1 / -1; padding: 3rem; text-align: center; color: var(--text-muted);">
+                        <i class="ph ph-buildings" style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;"></i>
+                        <h3>No Classes Configured</h3>
+                        <p class="text-muted">Get started by creating your first academic class.</p>
+                        <button class="btn btn-primary mt-3" onclick="openAddClassModal()"><i class="ph ph-plus"></i> Add Class</button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = classes.map(cls => {
+                const totalStudents = (cls.divisions || []).reduce((sum, d) => sum + (parseInt(d.studentsCount) || 0), 0);
+                const divisionsList = (cls.divisions && cls.divisions.length > 0) 
+                    ? cls.divisions.map(div => `
+                        <li class="division-item">
+                            <div>
+                                <span style="font-weight: 500;">${div.name}</span>
+                                <span class="text-muted" style="margin-left: 0.75rem; font-size: 0.85rem;">${div.studentsCount || 0} Students</span>
+                            </div>
+                            <div class="division-actions">
+                                <button class="btn-icon" onclick="openEditDivisionModal('${cls.id}', '${div.id}')" title="Edit Division">
+                                    <i class="ph ph-pencil-simple"></i>
+                                </button>
+                                <button class="btn-icon" onclick="deleteDivision('${cls.id}', '${div.id}', '${div.name.replace(/'/g, "\\'")}')" title="Delete Division" style="color: var(--status-danger);">
+                                    <i class="ph ph-trash"></i>
+                                </button>
+                            </div>
+                        </li>
+                    `).join('')
+                    : `<li style="padding: 1rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;">No divisions added yet.</li>`;
+
+                return `
+                    <div class="card">
+                        <div class="class-card-header">
+                            <div>
+                                <h3 class="card-title" style="margin: 0; font-size: 1.15rem;">${cls.name}</h3>
+                                <span class="badge badge-info" style="font-size: 0.7rem; margin-top: 0.25rem;">${totalStudents} Students Total</span>
+                            </div>
+                            <div style="display: flex; gap: 0.25rem;">
+                                <button class="btn-icon" onclick="openEditClassModal('${cls.id}')" title="Edit Class">
+                                    <i class="ph ph-pencil-simple"></i>
+                                </button>
+                                <button class="btn-icon" onclick="deleteClass('${cls.id}', '${cls.name.replace(/'/g, "\\'")}')" title="Delete Class" style="color: var(--status-danger);">
+                                    <i class="ph ph-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <ul style="list-style: none; padding: 0; margin-bottom: 1rem;">
+                                ${divisionsList}
+                            </ul>
+                            <button class="btn btn-secondary" style="width: 100%;" onclick="openAddDivisionModal('${cls.id}', '${cls.name.replace(/'/g, "\\'")}')">
+                                <i class="ph ph-plus"></i> Add Division
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // --- Class Modal Handlers ---
+        function openAddClassModal() {
+            document.getElementById('editClassId').value = '';
+            document.getElementById('classNameInput').value = '';
+            document.getElementById('classModalTitle').textContent = 'Add New Class';
+            document.getElementById('classSubmitBtn').innerHTML = '<i class="ph ph-check"></i> Add Class';
+            AdminCore.showModal('classModal');
+            setTimeout(() => document.getElementById('classNameInput').focus(), 100);
+        }
+
+        function openEditClassModal(classId) {
+            const classes = getStoredClasses();
+            const cls = classes.find(c => c.id === classId);
+            if (!cls) return;
+
+            document.getElementById('editClassId').value = classId;
+            document.getElementById('classNameInput').value = cls.name;
+            document.getElementById('classModalTitle').textContent = 'Edit Class';
+            document.getElementById('classSubmitBtn').innerHTML = '<i class="ph ph-check"></i> Save Changes';
+            AdminCore.showModal('classModal');
+            setTimeout(() => document.getElementById('classNameInput').focus(), 100);
+        }
+
+        function handleClassSubmit(e) {
+            e.preventDefault();
+            const classId = document.getElementById('editClassId').value;
+            const name = document.getElementById('classNameInput').value.trim();
+            if (!name) return;
+
+            const classes = getStoredClasses();
+
+            if (classId) {
+                // Edit existing class
+                const index = classes.findIndex(c => c.id === classId);
+                if (index > -1) {
+                    classes[index].name = name;
+                    AdminCore.showToast(`Updated to "${name}"`, 'success');
+                }
+            } else {
+                // Add new class
+                const newId = 'cls_' + Date.now();
+                classes.push({
+                    id: newId,
+                    name: name,
+                    divisions: []
+                });
+                AdminCore.showToast(`Class "${name}" created successfully!`, 'success');
+            }
+
+            saveClassesData(classes);
+            AdminCore.closeModal('classModal');
+        }
+
+        function deleteClass(classId, className) {
+            if (!confirm(`Are you sure you want to delete ${className} and all its divisions?`)) return;
+            let classes = getStoredClasses();
+            classes = classes.filter(c => c.id !== classId);
+            saveClassesData(classes);
+            AdminCore.showToast(`Deleted ${className}`, 'info');
+        }
+
+        // --- Division Modal Handlers ---
+        function openAddDivisionModal(classId, className) {
+            const classes = getStoredClasses();
+            const cls = classes.find(c => c.id === classId);
+            const titleName = className || (cls ? cls.name : 'Class');
+
+            document.getElementById('targetClassId').value = classId;
+            document.getElementById('editDivisionId').value = '';
+            document.getElementById('divisionNameInput').value = '';
+            document.getElementById('divisionStudentsInput').value = '0';
+            document.getElementById('divisionModalTitle').textContent = `Add Division to ${titleName}`;
+            document.getElementById('divisionSubmitBtn').innerHTML = '<i class="ph ph-check"></i> Add Division';
+            AdminCore.showModal('divisionModal');
+            setTimeout(() => document.getElementById('divisionNameInput').focus(), 100);
+        }
+
+        function openEditDivisionModal(classId, divisionId) {
+            const classes = getStoredClasses();
+            const cls = classes.find(c => c.id === classId);
+            if (!cls) return;
+            const div = (cls.divisions || []).find(d => d.id === divisionId);
+            if (!div) return;
+
+            document.getElementById('targetClassId').value = classId;
+            document.getElementById('editDivisionId').value = divisionId;
+            document.getElementById('divisionNameInput').value = div.name;
+            document.getElementById('divisionStudentsInput').value = div.studentsCount || 0;
+            document.getElementById('divisionModalTitle').textContent = `Edit Division (${cls.name})`;
+            document.getElementById('divisionSubmitBtn').innerHTML = '<i class="ph ph-check"></i> Save Changes';
+            AdminCore.showModal('divisionModal');
+            setTimeout(() => document.getElementById('divisionNameInput').focus(), 100);
+        }
+
+        function handleDivisionSubmit(e) {
+            e.preventDefault();
+            const classId = document.getElementById('targetClassId').value;
+            const divisionId = document.getElementById('editDivisionId').value;
+            const name = document.getElementById('divisionNameInput').value.trim();
+            const count = parseInt(document.getElementById('divisionStudentsInput').value, 10) || 0;
+
+            if (!name || !classId) return;
+
+            const classes = getStoredClasses();
+            const cls = classes.find(c => c.id === classId);
+            if (!cls) return;
+            if (!cls.divisions) cls.divisions = [];
+
+            if (divisionId) {
+                // Edit existing division
+                const divIndex = cls.divisions.findIndex(d => d.id === divisionId);
+                if (divIndex > -1) {
+                    cls.divisions[divIndex].name = name;
+                    cls.divisions[divIndex].studentsCount = count;
+                    AdminCore.showToast(`Updated "${name}"`, 'success');
+                }
+            } else {
+                // Add new division
+                const newDivId = 'div_' + Date.now();
+                cls.divisions.push({
+                    id: newDivId,
+                    name: name,
+                    studentsCount: count
+                });
+                AdminCore.showToast(`Added "${name}" to ${cls.name}`, 'success');
+            }
+
+            saveClassesData(classes);
+            AdminCore.closeModal('divisionModal');
+        }
+
+        function deleteDivision(classId, divisionId, divisionName) {
+            if (!confirm(`Are you sure you want to remove ${divisionName}?`)) return;
+            const classes = getStoredClasses();
+            const cls = classes.find(c => c.id === classId);
+            if (!cls || !cls.divisions) return;
+
+            cls.divisions = cls.divisions.filter(d => d.id !== divisionId);
+            saveClassesData(classes);
+            AdminCore.showToast(`Removed ${divisionName}`, 'info');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderClasses();
+        });
+    </script>
+</body>
+</html>

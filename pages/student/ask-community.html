@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask Community Question - EduPortal</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/student.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/mock-data.js"></script>
+    <script src="../../assets/js/student.js"></script>
+</head>
+<body data-page="ask-community">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <div class="mb-4">
+                    <a href="community.html" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.85rem; margin-bottom: 1rem;">
+                        <i class="ph ph-arrow-left"></i> Back to Community
+                    </a>
+                    <h1>Ask Community Question</h1>
+                    <p class="text-muted">Start a peer discussion, ask a conceptual question, or share study tips with your classmates.</p>
+                </div>
+
+                <div class="card" style="max-width: 800px;">
+                    <div class="card-body">
+                        <form id="askCommunityForm" onsubmit="handleAskCommunitySubmit(event)">
+                            <div class="grid-2-col mb-3" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label">Subject / Category</label>
+                                    <select id="askSubject" class="form-control" required>
+                                        <option value="">Select Topic</option>
+                                        <option value="Mathematics">Mathematics</option>
+                                        <option value="Science">Science</option>
+                                        <option value="English">English</option>
+                                        <option value="General Discussion">General Discussion</option>
+                                        <option value="Exam Preparation">Exam Preparation</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Topic / Tags</label>
+                                    <input type="text" id="askTopic" class="form-control" placeholder="e.g. Algebra, Newton's Laws" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Question Title</label>
+                                <input type="text" id="askTitle" class="form-control" placeholder="e.g. How can I understand quadratic equations easily?" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Detailed Description</label>
+                                <textarea id="askDesc" class="form-control" placeholder="Describe your doubt or question in detail. Mention what you've tried and what specific part is confusing..." style="min-height: 140px;" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Optional Reference (Book, Chapter, Page)</label>
+                                <input type="text" class="form-control" placeholder="e.g. Class 10 NCERT Science, Chapter 3">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Attachment (Optional screenshot or diagram)</label>
+                                <input type="file" class="form-control" accept="image/*,.pdf">
+                            </div>
+
+                            <div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 1.5rem;">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="ph ph-paper-plane-right"></i> Post to Community
+                                </button>
+                                <a href="community.html" class="btn btn-secondary">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

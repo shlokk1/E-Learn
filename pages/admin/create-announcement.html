@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Create Notice - EduPortal Admin</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/admin-core.js"></script>
+    <script src="../../assets/js/admin-layout.js"></script>
+</head>
+<body data-admin-page="announcements">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                <a href="announcements.html" class="btn btn-secondary mb-4" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;"><i class="ph ph-arrow-left"></i> Back to Announcements</a>
+                
+                <h1 class="mb-4" id="pageHeading">Create Notice</h1>
+                
+                <div class="card" style="max-width: 800px;">
+                    <div class="card-body">
+                        <form id="announcementForm" onsubmit="handleFormSubmit(event)">
+                            <div class="form-group">
+                                <label class="form-label" for="noticeTitle">Notice Title <span style="color: var(--status-danger)">*</span></label>
+                                <input type="text" id="noticeTitle" class="form-control" placeholder="e.g. Math Unit Test Schedule, Holiday Notice" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="noticeContent">Message Content <span style="color: var(--status-danger)">*</span></label>
+                                <textarea id="noticeContent" class="form-control" style="min-height: 150px;" placeholder="Provide complete notice details, schedule, and guidelines for students and teachers..." required></textarea>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;" class="mb-3">
+                                <div class="form-group">
+                                    <label class="form-label" for="noticeAudience">Target Audience <span style="color: var(--status-danger)">*</span></label>
+                                    <select id="noticeAudience" class="form-control" required>
+                                        <option value="All Students & Teachers">All Students & Teachers</option>
+                                        <option value="Class 10 Only">Class 10 Only</option>
+                                        <option value="Class 9 Only">Class 9 Only</option>
+                                        <option value="Teachers Only">Teachers Only</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="noticeStatus">Publishing Status <span style="color: var(--status-danger)">*</span></label>
+                                    <select id="noticeStatus" class="form-control" required>
+                                        <option value="Published">Published</option>
+                                        <option value="Draft">Draft</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem;">
+                                <a href="announcements.html" class="btn btn-secondary">Cancel</a>
+                                <button type="button" class="btn btn-secondary" id="draftBtn" onclick="saveAsDraft()"><i class="ph ph-file-text"></i> Save as Draft</button>
+                                <button type="submit" class="btn btn-primary" id="submitBtn"><i class="ph ph-paper-plane-tilt"></i> Publish Notice</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const DEFAULT_ANNOUNCEMENTS = [
+            {
+                id: 'ann_1',
+                title: 'Math Unit Test Schedule',
+                content: 'The upcoming unit test for Class 10 Mathematics has been scheduled for next Monday. The syllabus includes Chapter 1 to 3. Please refer to the digital library for practice papers.',
+                audience: 'Class 10 Only',
+                date: 'Aug 18, 2026',
+                status: 'Published'
+            },
+            {
+                id: 'ann_2',
+                title: 'Holiday Notice - Diwali',
+                content: 'The school will remain closed from Oct 24 to Oct 28 for Diwali break. Wishing everyone a happy and safe festival of lights!',
+                audience: 'All Students & Teachers',
+                date: 'Aug 15, 2026',
+                status: 'Published'
+            }
+        ];
+
+        function getAnnouncements() {
+            const stored = localStorage.getItem('mockAnnouncements');
+            if (stored) {
+                try { return JSON.parse(stored); } catch (e) {}
+            }
+            localStorage.setItem('mockAnnouncements', JSON.stringify(DEFAULT_ANNOUNCEMENTS));
+            return DEFAULT_ANNOUNCEMENTS;
+        }
+
+        function saveAnnouncements(list) {
+            localStorage.setItem('mockAnnouncements', JSON.stringify(list));
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const editId = urlParams.get('edit') || urlParams.get('id');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (editId) {
+                const announcements = getAnnouncements();
+                const item = announcements.find(a => a.id === editId);
+                if (item) {
+                    document.getElementById('pageTitle').textContent = 'Edit Notice - EduPortal Admin';
+                    document.getElementById('pageHeading').textContent = 'Edit Notice';
+                    document.getElementById('noticeTitle').value = item.title;
+                    document.getElementById('noticeContent').value = item.content;
+                    document.getElementById('noticeAudience').value = item.audience;
+                    document.getElementById('noticeStatus').value = item.status || 'Published';
+                    
+                    const submitBtn = document.getElementById('submitBtn');
+                    submitBtn.innerHTML = '<i class="ph ph-check"></i> Update Notice';
+                }
+            }
+        });
+
+        function handleFormSubmit(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            const title = document.getElementById('noticeTitle').value.trim();
+            const content = document.getElementById('noticeContent').value.trim();
+            const audience = document.getElementById('noticeAudience').value;
+            const status = document.getElementById('noticeStatus').value;
+
+            if (!title || !content) {
+                AdminCore.showToast('Please fill in all required fields.', 'warning');
+                return;
+            }
+
+            const list = getAnnouncements();
+            if (editId) {
+                const idx = list.findIndex(a => a.id === editId);
+                if (idx > -1) {
+                    list[idx].title = title;
+                    list[idx].content = content;
+                    list[idx].audience = audience;
+                    list[idx].status = status;
+                    saveAnnouncements(list);
+                    AdminCore.showToast('Notice updated successfully!', 'success');
+                }
+            } else {
+                const newNotice = {
+                    id: 'ann_' + Date.now(),
+                    title: title,
+                    content: content,
+                    audience: audience,
+                    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+                    status: status
+                };
+                list.unshift(newNotice);
+                saveAnnouncements(list);
+                AdminCore.showToast('Notice created successfully!', 'success');
+            }
+
+            setTimeout(() => {
+                window.location.href = 'announcements.html';
+            }, 1000);
+        }
+
+        function saveAsDraft() {
+            document.getElementById('noticeStatus').value = 'Draft';
+            const form = document.getElementById('announcementForm');
+            if (form.checkValidity()) {
+                handleFormSubmit(new Event('submit'));
+            } else {
+                form.reportValidity();
+            }
+        }
+    </script>
+</body>
+</html>

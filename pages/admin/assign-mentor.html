@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Mentor - EduPortal Admin</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/mock-data.js"></script>
+    <script src="../../assets/js/admin-core.js"></script>
+    <script src="../../assets/js/admin-layout.js"></script>
+    <style>
+        .doubt-summary-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1.75rem;
+        }
+        .meta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: rgba(99, 102, 241, 0.08);
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body data-admin-page="doubts">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                <a href="doubts.html" class="btn btn-secondary mb-4" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;">
+                    <i class="ph ph-arrow-left"></i> Back to Doubt Management
+                </a>
+
+                <div class="mb-4">
+                    <h1 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 0.25rem;">Assign Mentor to Doubt</h1>
+                    <p class="text-muted" style="margin: 0;">Allocate a verified mentor or faculty member to resolve this student query.</p>
+                </div>
+
+                <div class="card" style="max-width: 800px;">
+                    <div class="card-body">
+                        <!-- Doubt Summary Details -->
+                        <div class="doubt-summary-card">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+                                <div>
+                                    <span class="meta-pill" id="doubtSubjectPill"><i class="ph ph-book"></i> Mathematics</span>
+                                    <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 0.5rem;" id="doubtIdDisplay">Doubt #D-1041</span>
+                                </div>
+                                <span class="badge badge-warning" id="doubtStatusBadge">Under Review</span>
+                            </div>
+
+                            <h3 id="doubtTitle" style="margin: 0.5rem 0; font-size: 1.15rem; color: var(--text-main);">"How do I solve 2x + 5 = 15?"</h3>
+                            <p id="doubtQuestionText" style="margin: 0.5rem 0 1rem 0; color: var(--text-main); line-height: 1.6; font-size: 0.95rem;">
+                                Student is requesting step-by-step guidance on algebra problem isolation.
+                            </p>
+
+                            <div style="display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 0.75rem; flex-wrap: wrap;">
+                                <div><i class="ph ph-user"></i> Student: <strong id="doubtStudent" style="color: var(--text-main);">Rahul Sharma</strong></div>
+                                <div><i class="ph ph-buildings"></i> Class: <strong id="doubtClass" style="color: var(--text-main);">Class 10 - Div A</strong></div>
+                                <div><i class="ph ph-clock"></i> <span id="doubtTimeAgo">Submitted 3 hours ago</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Assignment Form -->
+                        <form id="assignMentorForm" onsubmit="handleAssignSubmit(event)">
+                            <div class="form-group mb-3">
+                                <label class="form-label" for="mentorSelect">Select Mentor / Teacher <span style="color: var(--status-danger)">*</span></label>
+                                <select id="mentorSelect" class="form-control" required>
+                                    <option value="">-- Choose a Qualified Mentor --</option>
+                                    <option value="Mr. Amit Kumar">Mr. Amit Kumar (Mathematics - Class 9, 10)</option>
+                                    <option value="Mrs. Sunita Rao">Mrs. Sunita Rao (Science - Class 10)</option>
+                                    <option value="Mr. Rajesh Sharma">Mr. Rajesh Sharma (English - Class 9, 10)</option>
+                                    <option value="Mrs. Gupta">Mrs. Gupta (Science Specialist)</option>
+                                    <option value="Mr. Sharma">Mr. Sharma (Senior Math Faculty)</option>
+                                </select>
+                                <small class="text-muted" style="display: block; margin-top: 0.35rem;">Mentors recommended based on subject expertise and current active load.</small>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;" class="mb-3">
+                                <div class="form-group">
+                                    <label class="form-label" for="priorityLevel">Resolution Priority</label>
+                                    <select id="priorityLevel" class="form-control">
+                                        <option value="Normal">Normal</option>
+                                        <option value="High">High</option>
+                                        <option value="Urgent">Urgent (>24h Pending)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="targetTurnaround">Expected Resolution Time</label>
+                                    <select id="targetTurnaround" class="form-control">
+                                        <option value="2 hours">Within 2 hours</option>
+                                        <option value="Today" selected>By end of today</option>
+                                        <option value="24 hours">Within 24 hours</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label class="form-label" for="adminNotes">Special Instructions / Admin Notes (Optional)</label>
+                                <textarea id="adminNotes" class="form-control" placeholder="Add specific guidance or request 1:1 session recommendation for the student..." style="min-height: 90px;"></textarea>
+                            </div>
+
+                            <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+                                <a href="doubts.html" class="btn btn-secondary">Cancel</a>
+                                <button type="submit" class="btn btn-primary" id="submitAssignBtn">
+                                    <i class="ph ph-user-check"></i> Assign Mentor & Dispatch
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const DEFAULT_DOUBTS = [
+            {
+                id: 'D-1041',
+                student: 'Rahul Sharma',
+                class: '10',
+                division: 'A',
+                subject: 'Mathematics',
+                topic: 'Algebra',
+                question: 'How do I solve 2x + 5 = 15? Why do we subtract 5 first instead of dividing by 2?',
+                status: 'Under Review',
+                timeAgo: 'Submitted 3 hours ago',
+                assignedTo: null
+            },
+            {
+                id: 'D-1042',
+                student: 'Priya Singh',
+                class: '10',
+                division: 'A',
+                subject: 'Science',
+                topic: 'Physics',
+                question: 'Why does velocity change in circular motion even when the speed remains constant?',
+                status: 'Unassigned',
+                timeAgo: 'Waiting 48h',
+                assignedTo: null
+            },
+            {
+                id: 'D-1043',
+                student: 'Amit Verma',
+                class: '10',
+                division: 'B',
+                subject: 'Mathematics',
+                topic: 'Quadratic Equations',
+                question: 'Why does the quadratic formula work for every quadratic equation?',
+                status: 'In Progress',
+                timeAgo: 'Yesterday',
+                assignedTo: 'Mr. Amit Kumar'
+            },
+            {
+                id: 'D-1044',
+                student: 'Sneha Kulkarni',
+                class: '9',
+                division: 'A',
+                subject: 'English',
+                topic: 'Grammar',
+                question: 'What is the correct structure for formal letters in Board Exams?',
+                status: 'Resolved',
+                timeAgo: 'Today at 11:30 AM',
+                assignedTo: 'Mr. Rajesh Sharma'
+            }
+        ];
+
+        function getDoubtsList() {
+            const saved = localStorage.getItem('adminDoubts');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                } catch(e) {}
+            }
+            localStorage.setItem('adminDoubts', JSON.stringify(DEFAULT_DOUBTS));
+            return DEFAULT_DOUBTS;
+        }
+
+        function saveDoubtsList(list) {
+            localStorage.setItem('adminDoubts', JSON.stringify(list));
+        }
+
+        // Get query parameter for doubt ID
+        const urlParams = new URLSearchParams(window.location.search);
+        const doubtId = urlParams.get('id') || 'D-1041';
+        let currentDoubt = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const list = getDoubtsList();
+            currentDoubt = list.find(d => d.id === doubtId) || list[0];
+
+            if (currentDoubt) {
+                document.getElementById('doubtIdDisplay').textContent = `Doubt #${currentDoubt.id}`;
+                document.getElementById('doubtSubjectPill').innerHTML = `<i class="ph ph-book"></i> ${currentDoubt.subject} &bull; ${currentDoubt.topic || ''}`;
+                document.getElementById('doubtTitle').textContent = `"${currentDoubt.question.substring(0, 50)}..."`;
+                document.getElementById('doubtQuestionText').textContent = currentDoubt.question;
+                document.getElementById('doubtStudent').textContent = currentDoubt.student;
+                document.getElementById('doubtClass').textContent = `Class ${currentDoubt.class} - Div ${currentDoubt.division}`;
+                document.getElementById('doubtTimeAgo').textContent = currentDoubt.timeAgo || 'Recently submitted';
+
+                const statusBadge = document.getElementById('doubtStatusBadge');
+                if (currentDoubt.status === 'Unassigned') {
+                    statusBadge.className = 'badge badge-danger';
+                    statusBadge.textContent = 'Unassigned';
+                } else if (currentDoubt.status === 'In Progress') {
+                    statusBadge.className = 'badge badge-warning';
+                    statusBadge.textContent = 'In Progress';
+                } else {
+                    statusBadge.className = 'badge badge-info';
+                    statusBadge.textContent = currentDoubt.status;
+                }
+
+                // If already assigned, pre-select that mentor
+                if (currentDoubt.assignedTo) {
+                    const mentorSelect = document.getElementById('mentorSelect');
+                    for (let opt of mentorSelect.options) {
+                        if (opt.value === currentDoubt.assignedTo) {
+                            opt.selected = true;
+                            break;
+                        }
+                    }
+                    document.getElementById('submitAssignBtn').innerHTML = '<i class="ph ph-arrows-clockwise"></i> Reassign Mentor';
+                }
+            }
+        });
+
+        function handleAssignSubmit(e) {
+            e.preventDefault();
+            const selectedMentor = document.getElementById('mentorSelect').value;
+            const priority = document.getElementById('priorityLevel').value;
+            const notes = document.getElementById('adminNotes').value.trim();
+
+            if (!selectedMentor) {
+                AdminCore.showToast('Please select a mentor to assign.', 'warning');
+                return;
+            }
+
+            const list = getDoubtsList();
+            const idx = list.findIndex(d => d.id === currentDoubt.id);
+            if (idx > -1) {
+                list[idx].assignedTo = selectedMentor;
+                list[idx].status = 'In Progress';
+                list[idx].priority = priority;
+                list[idx].adminNotes = notes;
+                saveDoubtsList(list);
+
+                if (typeof MOCK_DATA !== 'undefined' && MOCK_DATA.addNotification) {
+                    MOCK_DATA.addNotification(`Doubt assigned to you: "${currentDoubt.question.substring(0, 40)}..." from ${currentDoubt.student}`, 'TEACHER');
+                }
+
+                AdminCore.showToast(`Doubt #${currentDoubt.id} assigned to ${selectedMentor}!`, 'success');
+                setTimeout(() => {
+                    window.location.href = 'doubts.html';
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>

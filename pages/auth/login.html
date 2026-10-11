@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Meta Data -->
+    <meta name="description" content="EduPortal is a comprehensive Learning Management System connecting students, teachers, and admins.">
+    <meta name="keywords" content="EduPortal, LMS, Education, E-Learning, Student Portal, Teacher Portal">
+    <meta name="author" content="EduPortal Team">
+    <meta name="theme-color" content="#4f46e5">
+    <meta property="og:title" content="EduPortal - Next Gen Learning">
+    <meta property="og:description" content="Empowering education with modern tools for students and educators.">
+    <title>Login - EduPortal</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/auth.css">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- JS -->
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+</head>
+<body>
+
+    <div class="auth-page" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: var(--bg-color);">
+        <!-- Home Link with border -->
+        <div style="position: absolute; top: 1.5rem; left: 1.5rem; z-index: 10;">
+            <a href="../../index.html" class="top-nav-btn">
+                <i class="ph ph-arrow-left"></i> Back to Home
+            </a>
+        </div>
+
+        <!-- Theme Toggle -->
+        <div class="auth-theme-toggle" style="z-index: 10;">
+            <button class="btn-icon theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+                <i class="ph ph-moon"></i>
+            </button>
+        </div>
+
+        <div class="slider-container" id="slider-container">
+            <div class="form-container sign-up-container">
+                <form id="registerForm">
+                    <h1>Create Account</h1>
+                    <span style="margin: 15px 0;">Use your email for registration</span>
+                    <input type="text" id="regName" class="form-control" placeholder="Name" required />
+                    <input type="email" id="regEmail" class="form-control" placeholder="Email" required />
+                    <div class="password-container">
+                        <input type="password" id="regPassword" class="form-control" placeholder="Password" required />
+                        <i class="ph ph-eye" onclick="togglePassword('regPassword', this)"></i>
+                    </div>
+                    <select id="regRole" class="form-control" style="margin-top: 8px; margin-bottom: 15px;" required>
+                        <option value="student">Student</option>
+                        <option value="mentor">Teacher / Mentor</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                    <!-- Hidden fields for compatibility with auth.js -->
+                    <input type="hidden" id="regClass" value="10">
+                    <input type="hidden" id="regDiv" value="A">
+                    
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+            
+            <div class="form-container sign-in-container">
+                <form id="loginForm">
+                    <h1>Sign In</h1>
+                    <span style="margin: 15px 0;">Use your email password</span>
+                    <input type="email" id="email" class="form-control" placeholder="Email" required />
+                    <div class="password-container">
+                        <input type="password" id="password" class="form-control" placeholder="Password" required />
+                        <i class="ph ph-eye" onclick="togglePassword('password', this)"></i>
+                    </div>
+                    <select id="role" class="form-control" style="margin-top: 8px; margin-bottom: 10px;" required>
+                        <option value="student">Student</option>
+                        <option value="mentor">Teacher / Mentor</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                    <a href="javascript:void(0)" onclick="alert('Password reset instructions have been sent to your registered email address.');">Forgot Your Password?</a>
+                    <button type="submit">Sign In</button>
+                </form>
+            </div>
+            
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>Welcome Back!</h1>
+                        <p>To keep connected with us please login with your personal info</p>
+                        <button class="ghost" id="signIn" onclick="goToLogin(event)">Sign In</button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>Hello, Friend!</h1>
+                        <p>Register with your personal details to use all of site features</p>
+                        <button class="ghost" id="signUp" onclick="goToRegister(event)">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(inputId, icon) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('ph-eye');
+                icon.classList.add('ph-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('ph-eye-slash');
+                icon.classList.add('ph-eye');
+            }
+        }
+
+        function goToRegister(e) {
+            if (e) e.preventDefault();
+            const container = document.getElementById('slider-container');
+            container.classList.add('right-panel-active');
+            try {
+                history.pushState({ panel: 'register' }, 'Sign Up - EduPortal', 'register.html');
+                document.title = 'Sign Up - EduPortal';
+            } catch (err) {}
+        }
+
+        function goToLogin(e) {
+            if (e) e.preventDefault();
+            const container = document.getElementById('slider-container');
+            container.classList.remove('right-panel-active');
+            try {
+                history.pushState({ panel: 'login' }, 'Login - EduPortal', 'login.html');
+                document.title = 'Login - EduPortal';
+            } catch (err) {}
+        }
+
+        window.addEventListener('popstate', () => {
+            const container = document.getElementById('slider-container');
+            if (window.location.pathname.endsWith('register.html') || window.location.hash === '#signup') {
+                container.classList.add('right-panel-active');
+                document.title = 'Sign Up - EduPortal';
+            } else {
+                container.classList.remove('right-panel-active');
+                document.title = 'Login - EduPortal';
+            }
+        });
+    </script>
+</body>
+</html>

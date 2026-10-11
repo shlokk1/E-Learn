@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doubt Review - Teacher Portal</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/admin-tables.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/teacher-core.js"></script>
+    <script src="../../assets/js/teacher-layout.js"></script>
+</head>
+<body data-teacher-page="doubt-review">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <div class="mb-4">
+                    <h1>Doubt Review Queue</h1>
+                    <p class="text-muted">Review incoming student doubts before they are assigned for answering.</p>
+                </div>
+
+                <div class="card mb-4" style="padding: 1rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px;">
+                        <input type="text" id="doubtSearchInput" class="form-control" placeholder="Search doubts by student, topic, keyword...">
+                    </div>
+                    <select id="doubtClassFilter" class="form-control" style="width: auto;">
+                        <option value="all">All Classes</option>
+                        <option value="class 9">Class 9</option>
+                        <option value="class 10">Class 10</option>
+                    </select>
+                    <select id="doubtSubjectFilter" class="form-control" style="width: auto;">
+                        <option value="all">All Subjects</option>
+                        <option value="mathematics">Mathematics</option>
+                        <option value="science">Science</option>
+                        <option value="biology">Biology</option>
+                        <option value="english">English</option>
+                    </select>
+                    <select id="doubtStatusFilter" class="form-control" style="width: auto;">
+                        <option value="all">All Statuses</option>
+                        <option value="under review">Under Review</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                    <button id="doubtResetBtn" class="btn btn-secondary" style="display: none; padding: 0.55rem 0.9rem; font-size: 0.85rem;"><i class="ph ph-arrow-counter-clockwise"></i> Reset</button>
+                </div>
+
+                <div class="table-container card" style="padding: 0;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Subject</th>
+                                <th>Topic</th>
+                                <th>Submitted</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Pending Queue Doubts -->
+                            <tr data-class="class 10-a" data-subject="mathematics" data-status="under review">
+                                <td><div style="font-weight: 500;">Student A</div><div class="text-muted" style="font-size: 0.8rem;">Class 10-A</div></td>
+                                <td>Mathematics</td>
+                                <td>Algebra: Linear Equations in Two Variables</td>
+                                <td>10 mins ago</td>
+                                <td><span class="badge badge-warning">Under Review</span></td>
+                                <td><a href="doubt-details.html" class="btn btn-primary" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">Review</a></td>
+                            </tr>
+                            <tr data-class="class 10-b" data-subject="science" data-status="under review">
+                                <td><div style="font-weight: 500;">Student B</div><div class="text-muted" style="font-size: 0.8rem;">Class 10-B</div></td>
+                                <td>Science</td>
+                                <td>Physics: Newton's Motion Laws</td>
+                                <td>1 hr ago</td>
+                                <td><span class="badge badge-warning">Under Review</span></td>
+                                <td><a href="doubt-details.html" class="btn btn-primary" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">Review</a></td>
+                            </tr>
+                            <tr data-class="class 9-a" data-subject="biology" data-status="under review">
+                                <td><div style="font-weight: 500;">Student C</div><div class="text-muted" style="font-size: 0.8rem;">Class 9-A</div></td>
+                                <td>Biology</td>
+                                <td>Plant Cells & Chloroplast Structure</td>
+                                <td>3 hrs ago</td>
+                                <td><span class="badge badge-warning">Under Review</span></td>
+                                <td><a href="doubt-details.html" class="btn btn-primary" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">Review</a></td>
+                            </tr>
+                            <tr data-class="class 10-a" data-subject="english" data-status="under review">
+                                <td><div style="font-weight: 500;">Student E</div><div class="text-muted" style="font-size: 0.8rem;">Class 10-A</div></td>
+                                <td>English</td>
+                                <td>Formal Letter Format & Salutations</td>
+                                <td>4 hrs ago</td>
+                                <td><span class="badge badge-warning">Under Review</span></td>
+                                <td><a href="doubt-details.html" class="btn btn-primary" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">Review</a></td>
+                            </tr>
+                            <tr data-class="class 9-b" data-subject="science" data-status="under review">
+                                <td><div style="font-weight: 500;">Student F</div><div class="text-muted" style="font-size: 0.8rem;">Class 9-B</div></td>
+                                <td>Science</td>
+                                <td>Chemical Reactions: Law of Conservation of Mass</td>
+                                <td>5 hrs ago</td>
+                                <td><span class="badge badge-warning">Under Review</span></td>
+                                <td><a href="doubt-details.html" class="btn btn-primary" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">Review</a></td>
+                            </tr>
+
+                            <!-- Bottom of Queue: Rejected Doubts -->
+                            <tr class="table-section-divider" style="background: var(--bg-color);">
+                                <td colspan="6" style="padding: 0.75rem 1rem; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); border-top: 2px solid var(--border-color);">
+                                    <i class="ph ph-x-circle" style="color: var(--status-danger); margin-right: 0.35rem; font-size: 1rem; vertical-align: -1px;"></i> Rejected Doubts Archive (Bottom of Queue)
+                                </td>
+                            </tr>
+                            <tr data-class="class 10-b" data-subject="mathematics" data-status="rejected">
+                                <td><div style="font-weight: 500;">Student G</div><div class="text-muted" style="font-size: 0.8rem;">Class 10-B</div></td>
+                                <td>Mathematics</td>
+                                <td>Solve all 15 textbook exercises for me</td>
+                                <td>Yesterday</td>
+                                <td><span class="badge badge-danger">Rejected</span></td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="viewRejectionReason('Student G', 'Class 10-B', 'Mathematics', 'Inappropriate / Homework Dump', 'Please attempt the homework problems individually and submit doubts on specific steps.')" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">
+                                        <i class="ph ph-info"></i> Reason
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr data-class="class 9-a" data-subject="science" data-status="rejected">
+                                <td><div style="font-weight: 500;">Student M</div><div class="text-muted" style="font-size: 0.8rem;">Class 9-A</div></td>
+                                <td>Science</td>
+                                <td>test doubt question 12345</td>
+                                <td>2 days ago</td>
+                                <td><span class="badge badge-danger">Rejected</span></td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="viewRejectionReason('Student M', 'Class 9-A', 'Science', 'Irrelevant / Spam', 'Submitted question contained only test characters and no academic inquiry.')" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">
+                                        <i class="ph ph-info"></i> Reason
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr data-class="class 10-a" data-subject="english" data-status="rejected">
+                                <td><div style="font-weight: 500;">Student N</div><div class="text-muted" style="font-size: 0.8rem;">Class 10-A</div></td>
+                                <td>English</td>
+                                <td>Where can I download movie subtitles?</td>
+                                <td>3 days ago</td>
+                                <td><span class="badge badge-danger">Rejected</span></td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="viewRejectionReason('Student N', 'Class 10-A', 'English', 'Outside Academic Scope', 'Doubt review queue is strictly reserved for curriculum-related academic questions.')" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">
+                                        <i class="ph ph-info"></i> Reason
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Rejection Reason Modal -->
+    <div class="modal-overlay" id="rejectionReasonModal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <div>
+                    <h3 class="modal-title" style="color: var(--status-danger);"><i class="ph ph-x-circle"></i> Rejected Doubt Details</h3>
+                    <div class="text-muted" style="font-size: 0.85rem;" id="rejectModalStudentInfo">Student Information</div>
+                </div>
+                <button class="btn-icon" onclick="closeRejectionReasonModal()"><i class="ph ph-x"></i></button>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 1rem;">
+                    <label class="form-label text-muted" style="font-size: 0.8rem; text-transform: uppercase;">Subject</label>
+                    <div style="font-weight: 500;" id="rejectModalSubject">-</div>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label class="form-label text-muted" style="font-size: 0.8rem; text-transform: uppercase;">Rejection Category</label>
+                    <div><span class="badge badge-danger" id="rejectModalCategory" style="font-size: 0.85rem;">-</span></div>
+                </div>
+                <div style="background: var(--bg-color); padding: 1rem; border-radius: var(--border-radius); border: 1px solid var(--border-color);">
+                    <label class="form-label text-muted" style="font-size: 0.8rem; text-transform: uppercase;">Teacher Feedback to Student</label>
+                    <p style="margin: 0; font-size: 0.9rem; color: var(--text-main); line-height: 1.5;" id="rejectModalFeedback">-</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeRejectionReasonModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

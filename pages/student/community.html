@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Community - EduPortal</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/student.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/mock-data.js"></script>
+    <script src="../../assets/js/student.js"></script>
+</head>
+<body data-page="community">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <div>
+                        <h1>Student Community</h1>
+                        <p class="text-muted">Discuss topics, ask questions, and help your peers.</p>
+                    </div>
+                    <a href="ask-community.html" class="btn btn-primary"><i class="ph ph-chat-text"></i> Ask Community Question</a>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body" style="padding: 1rem 1.5rem;">
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <div class="form-group" style="margin-bottom: 0; flex: 2; min-width: 220px;">
+                                <input type="text" id="communitySearchInput" class="form-control" placeholder="Search discussions by topic, question, or keyword...">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0; flex: 1; min-width: 160px;">
+                                <select id="communityTopicFilter" class="form-control">
+                                    <option value="all">All Topics</option>
+                                    <option value="mathematics">Mathematics</option>
+                                    <option value="science">Science</option>
+                                    <option value="english">English</option>
+                                </select>
+                            </div>
+                            <button id="communitySearchBtn" class="btn btn-primary"><i class="ph ph-magnifying-glass"></i> Search</button>
+                            <button id="communityResetBtn" class="btn btn-secondary" style="display: none;"><i class="ph ph-arrow-counter-clockwise"></i> Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body" id="communityDiscussionsList">
+                        
+                        <a href="discussion.html?id=disc-1" class="list-card" style="display: block; text-decoration: none; color: inherit;" data-topic="mathematics">
+                            <div class="list-card-header">
+                                <div>
+                                    <h4 style="color: var(--primary-color);">How can I understand quadratic equations easily?</h4>
+                                    <p class="text-muted mt-1" style="font-size: 0.9rem;">I'm struggling with the quadratic formula. Does anyone have a trick to memorize it?</p>
+                                    <div class="mt-2" style="font-size: 0.85rem; color: var(--text-muted);">
+                                        <span style="margin-right: 1rem;"><i class="ph ph-chat-circle"></i> 2 Replies</span>
+                                        <span><i class="ph ph-thumbs-up"></i> 12 Helpful</span>
+                                    </div>
+                                </div>
+                                <span class="badge badge-info">Mathematics</span>
+                            </div>
+                        </a>
+
+                        <a href="discussion.html?id=disc-2" class="list-card" style="display: block; text-decoration: none; color: inherit;" data-topic="science">
+                            <div class="list-card-header">
+                                <div>
+                                    <h4 style="color: var(--primary-color);">Can someone explain Newton's third law?</h4>
+                                    <p class="text-muted mt-1" style="font-size: 0.9rem;">With a real life example if possible!</p>
+                                    <div class="mt-2" style="font-size: 0.85rem; color: var(--text-muted);">
+                                        <span style="margin-right: 1rem;"><i class="ph ph-chat-circle"></i> 1 Reply</span>
+                                        <span><i class="ph ph-thumbs-up"></i> 8 Helpful</span>
+                                    </div>
+                                </div>
+                                <span class="badge badge-success">Science</span>
+                            </div>
+                        </a>
+
+                        <a href="discussion.html?id=disc-3" class="list-card" style="display: block; text-decoration: none; color: inherit;" data-topic="english">
+                            <div class="list-card-header">
+                                <div>
+                                    <h4 style="color: var(--primary-color);">Tips for writing formal letters in Board Exams?</h4>
+                                    <p class="text-muted mt-1" style="font-size: 0.9rem;">What is the latest CBSE format for letter to editor and complaint letter?</p>
+                                    <div class="mt-2" style="font-size: 0.85rem; color: var(--text-muted);">
+                                        <span style="margin-right: 1rem;"><i class="ph ph-chat-circle"></i> 1 Reply</span>
+                                        <span><i class="ph ph-thumbs-up"></i> 15 Helpful</span>
+                                    </div>
+                                </div>
+                                <span class="badge badge-warning">English</span>
+                            </div>
+                        </a>
+
+                        <a href="discussion.html?id=disc-4" class="list-card" style="display: block; text-decoration: none; color: inherit;" data-topic="science">
+                            <div class="list-card-header">
+                                <div>
+                                    <h4 style="color: var(--primary-color);">Best way to prepare for Class 10 Chemistry Practicals?</h4>
+                                    <p class="text-muted mt-1" style="font-size: 0.9rem;">Any tips for the acid-base indicator and salt analysis questions?</p>
+                                    <div class="mt-2" style="font-size: 0.85rem; color: var(--text-muted);">
+                                        <span style="margin-right: 1rem;"><i class="ph ph-chat-circle"></i> 0 Replies</span>
+                                        <span><i class="ph ph-thumbs-up"></i> 7 Helpful</span>
+                                    </div>
+                                </div>
+                                <span class="badge badge-success">Science</span>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="communityEmptyState" class="card" style="display: none; text-align: center; padding: 3rem 1.5rem; margin-top: 1rem;">
+                    <i class="ph ph-chat-slash" style="font-size: 2.5rem; color: var(--text-muted); margin-bottom: 0.75rem; display: inline-block;"></i>
+                    <h3 style="color: var(--text-main); margin-bottom: 0.5rem; font-size: 1.25rem;">No discussions found</h3>
+                    <p class="text-muted" style="margin-bottom: 1.25rem; font-size: 0.95rem;">Try adjusting your keywords or topic filter.</p>
+                    <button class="btn btn-secondary" onclick="resetCommunityFilters()"><i class="ph ph-arrow-counter-clockwise"></i> Clear Filters</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

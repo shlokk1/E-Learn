@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students - Teacher Portal</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/admin-tables.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/teacher-core.js"></script>
+    <script src="../../assets/js/teacher-layout.js"></script>
+</head>
+<body data-teacher-page="students">
+    <div class="app-container">
+        <aside class="app-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            
+            <div class="app-content">
+                <div class="mb-4">
+                    <h1>My Students</h1>
+                    <p class="text-muted">View students in your assigned classes and divisions.</p>
+                </div>
+
+                <div class="card mb-4" style="padding: 1rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px;">
+                        <input type="text" id="studentSearchInput" class="form-control" placeholder="Search students by name, email, roll no...">
+                    </div>
+                    <select id="studentClassFilter" class="form-control" style="width: auto;">
+                        <option value="all">All Divisions</option>
+                        <option value="10-a">Class 10 - Division A</option>
+                        <option value="10-b">Class 10 - Division B</option>
+                    </select>
+                    <button id="studentResetBtn" class="btn btn-secondary" style="display: none; padding: 0.55rem 0.9rem; font-size: 0.85rem;"><i class="ph ph-arrow-counter-clockwise"></i> Reset</button>
+                </div>
+
+                <div class="table-container card" style="padding: 0;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Class & Division</th>
+                                <th>Doubts Asked</th>
+                                <th>Resolved</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-class="10-a">
+                                <td><div style="font-weight: 500;">Student A</div><div class="text-muted" style="font-size: 0.8rem;">student.a@example.com</div></td>
+                                <td>Class 10 - Div A</td>
+                                <td>8</td>
+                                <td>7</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td><a href="student-details.html" class="btn btn-secondary" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">View Profile</a></td>
+                            </tr>
+                            <tr data-class="10-b">
+                                <td><div style="font-weight: 500;">Student B</div><div class="text-muted" style="font-size: 0.8rem;">student.b@example.com</div></td>
+                                <td>Class 10 - Div B</td>
+                                <td>5</td>
+                                <td>5</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td><a href="student-details.html" class="btn btn-secondary" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">View Profile</a></td>
+                            </tr>
+                            <tr data-class="10-a">
+                                <td><div style="font-weight: 500;">Student C</div><div class="text-muted" style="font-size: 0.8rem;">student.c@example.com</div></td>
+                                <td>Class 10 - Div A</td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td><a href="student-details.html" class="btn btn-secondary" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">View Profile</a></td>
+                            </tr>
+                            <tr data-class="10-b">
+                                <td><div style="font-weight: 500;">Student D</div><div class="text-muted" style="font-size: 0.8rem;">student.d@example.com</div></td>
+                                <td>Class 10 - Div B</td>
+                                <td>6</td>
+                                <td>4</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td><a href="student-details.html" class="btn btn-secondary" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">View Profile</a></td>
+                            </tr>
+                            <tr data-class="10-a">
+                                <td><div style="font-weight: 500;">Student E</div><div class="text-muted" style="font-size: 0.8rem;">student.e@example.com</div></td>
+                                <td>Class 10 - Div A</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td><a href="student-details.html" class="btn btn-secondary" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">View Profile</a></td>
+                            </tr>
+                            <tr data-class="10-b">
+                                <td><div style="font-weight: 500;">Student F</div><div class="text-muted" style="font-size: 0.8rem;">student.f@example.com</div></td>
+                                <td>Class 10 - Div B</td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td><a href="student-details.html" class="btn btn-secondary" style="padding: 0.3rem 0.75rem; font-size: 0.85rem;">View Profile</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

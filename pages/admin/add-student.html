@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Add Student - EduPortal Admin</title>
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/admin-components.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/admin-core.js"></script>
+    <script src="../../assets/js/admin-layout.js"></script>
+</head>
+<body data-admin-page="students">
+    <div class="app-container">
+        <aside class="app-sidebar admin-sidebar" id="app-sidebar"></aside>
+        <main class="app-main">
+            <header class="app-header" id="app-header"></header>
+            <div class="app-content">
+                <a href="students.html" class="btn btn-secondary mb-4" style="padding: 0.3rem 0.6rem; font-size: 0.85rem;"><i class="ph ph-arrow-left"></i> Back to Students</a>
+                
+                <h1 class="mb-4" id="pageHeading">Add Student</h1>
+                
+                <div class="card" style="max-width: 650px;">
+                    <div class="card-body">
+                        <form id="addStudentForm" onsubmit="handleAddStudent(event)">
+                            <div class="form-group">
+                                <label class="form-label" for="studentName">Full Name <span style="color: var(--status-danger)">*</span></label>
+                                <input type="text" id="studentName" class="form-control" placeholder="e.g. Rahul Sharma" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="studentEmail">Email Address <span style="color: var(--status-danger)">*</span></label>
+                                <input type="email" id="studentEmail" class="form-control" placeholder="e.g. rahul@example.com" required>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label" for="studentClass">Class <span style="color: var(--status-danger)">*</span></label>
+                                    <select id="studentClass" class="form-control" required>
+                                        <option value="10" selected>Class 10</option>
+                                        <option value="9">Class 9</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="studentDivision">Division <span style="color: var(--status-danger)">*</span></label>
+                                    <select id="studentDivision" class="form-control" required>
+                                        <option value="A" selected>Division A</option>
+                                        <option value="B">Division B</option>
+                                        <option value="C">Division C</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label" for="studentPhone">Phone Number</label>
+                                    <input type="tel" id="studentPhone" class="form-control" placeholder="e.g. +91 98765 43210">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="studentStatus">Status</label>
+                                    <select id="studentStatus" class="form-control">
+                                        <option value="Active" selected>Active</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Inactive">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
+                                <a href="students.html" class="btn btn-secondary">Cancel</a>
+                                <button type="submit" class="btn btn-primary" id="submitBtn"><i class="ph ph-plus"></i> Add Student</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const editId = urlParams.get('edit') || urlParams.get('id');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (editId) {
+                const saved = localStorage.getItem('adminRegisteredStudents');
+                let students = [];
+                if (saved) {
+                    try { students = JSON.parse(saved); } catch(e) {}
+                }
+                const student = students.find(s => String(s.id) === String(editId));
+                if (student) {
+                    document.getElementById('pageTitle').textContent = `Edit ${student.name} - EduPortal Admin`;
+                    document.getElementById('pageHeading').textContent = `Edit Student: ${student.name}`;
+                    document.getElementById('studentName').value = student.name || '';
+                    document.getElementById('studentEmail').value = student.email || '';
+                    if (student.class) document.getElementById('studentClass').value = String(student.class);
+                    if (student.division) document.getElementById('studentDivision').value = student.division;
+                    if (student.phone && student.phone !== '-') document.getElementById('studentPhone').value = student.phone;
+                    if (student.status) document.getElementById('studentStatus').value = student.status;
+
+                    const submitBtn = document.getElementById('submitBtn');
+                    if (submitBtn) {
+                        submitBtn.innerHTML = '<i class="ph ph-check"></i> Update Student';
+                    }
+                }
+            }
+        });
+
+        function handleAddStudent(event) {
+            event.preventDefault();
+            const name = document.getElementById('studentName').value.trim();
+            const email = document.getElementById('studentEmail').value.trim();
+            const studentClass = document.getElementById('studentClass').value;
+            const division = document.getElementById('studentDivision').value;
+            const phone = document.getElementById('studentPhone').value.trim();
+            const status = document.getElementById('studentStatus').value;
+
+            const saved = localStorage.getItem('adminRegisteredStudents');
+            let students = [];
+            if (saved) {
+                try { students = JSON.parse(saved); } catch(e) {}
+            }
+            if (!Array.isArray(students) || students.length === 0) {
+                students = [
+                    { id: '1', name: 'Rahul Sharma', email: 'rahul@example.com', class: '10', division: 'A', status: 'Active', phone: '+91 98765 00001', date: 'Aug 1, 2026' },
+                    { id: '2', name: 'Priya Singh', email: 'priya@example.com', class: '10', division: 'A', status: 'Active', phone: '+91 98765 00002', date: 'Aug 1, 2026' },
+                    { id: '3', name: 'Amit Verma', email: 'amit.v@example.com', class: '10', division: 'B', status: 'Active', phone: '+91 98765 00003', date: 'Aug 1, 2026' },
+                    { id: '4', name: 'Sneha Kulkarni', email: 'sneha.k@example.com', class: '9', division: 'A', status: 'Inactive', phone: '+91 98765 00004', date: 'Aug 1, 2026' }
+                ];
+            }
+
+            if (editId) {
+                const idx = students.findIndex(s => String(s.id) === String(editId));
+                if (idx > -1) {
+                    students[idx].name = name;
+                    students[idx].email = email;
+                    students[idx].class = studentClass;
+                    students[idx].division = division;
+                    students[idx].phone = phone || '-';
+                    students[idx].status = status;
+                    localStorage.setItem('adminRegisteredStudents', JSON.stringify(students));
+                    AdminCore.showToast('Student profile updated successfully!', 'success');
+                }
+            } else {
+                const newStudent = {
+                    id: 'std_' + Date.now(),
+                    name,
+                    email,
+                    class: studentClass,
+                    division,
+                    phone: phone || '-',
+                    status,
+                    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                };
+                students.unshift(newStudent);
+                localStorage.setItem('adminRegisteredStudents', JSON.stringify(students));
+                AdminCore.showToast('Student added successfully!', 'success');
+            }
+
+            setTimeout(() => {
+                window.location.href = 'students.html';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
